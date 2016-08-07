@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 if(isset($this->session->userdata['logged_in'])){
-          $this->load->view('dashboard');
+          redirect("welcome/dashboard");
         }   
  include 'header.php'; 
 ?>

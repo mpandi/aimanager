@@ -56,6 +56,8 @@ public function add_user() {
 		} 
 	 else {
 		$data['error_message'] = $result;
+        $data['add_username'] = $this->input->post('username');
+        $data['add_email'] = $this->input->post('email');
 		$this->load->view('register', $data);
 		  }
 		}

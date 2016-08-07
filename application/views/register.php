@@ -78,10 +78,10 @@ else {
                           } 
                           echo validation_errors();?>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="Email" required="" value=""/>
+                            <input type="email" class="form-control" name="email" placeholder="Email" required="" value="<?php echo isset($add_email)?$add_email:'';?>"/>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="username" placeholder="Username" required="" value=""/>
+                            <input type="text" class="form-control" name="username" placeholder="Username" required="" value="<?php echo isset($add_username)?$add_username:'';?>"/>
                         </div>
                         <div class="form-group">
                             <select name="type" style="width: 100%;">
