@@ -7,16 +7,6 @@ if(isset($this->session->userdata['logged_in'])){
 ?>
 <body>
     
-    <!--begin loader -->
-    <div id="loader">
-        <div class="sk-three-bounce">
-            <div class="sk-child sk-bounce1"></div>
-            <div class="sk-child sk-bounce2"></div>
-            <div class="sk-child sk-bounce3"></div>
-        </div>
-    </div>
-    <!--end loader -->
-    
     <!--begin header -->
     <header class="header">
         <!--begin nav -->

@@ -52,39 +52,12 @@ h6 {
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom:20px;
-  color: #454545;
+  color: white;
 }
-
-h1 {
-	font-size: 42px;
-}
-
-h2 {
-	font-size: 34px;
-}
-
-h3 {
-	font-size: 28px;
-}
-
-h4 {
-	font-size: 24px;
-}
-
-h5 {
-	font-size: 20px;
-}
-
-h6 {
-	font-size: 18px;
-}
-
 h2.section-title{
 	font-size:36px;
 	margin:0 0 15px 0;
 }
-
 h2.section-title.grey{
 	color:#ddd;
 }
@@ -621,7 +594,6 @@ ul.footer_social li a i:hover {
 	padding:75px 0;
 	background-color: #34b1c4;
 }
-
 h1.home-title{
 	font-size:36px;
 	line-height:44px;
@@ -629,7 +601,13 @@ h1.home-title{
 	color:#fff;
 	font-family: 'Roboto', sans-serif;
 }
-
+h3.home-title{
+	font-size:36px;
+	line-height:44px;
+	font-weight:700;
+	color:#fff;
+	font-family: 'Roboto', sans-serif;
+}
 p.home-subtitle{
 	font-size:19px;
 	line-height:32px;

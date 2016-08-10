@@ -71,18 +71,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Load JS here for greater good =============================-->
     <script src="<?php echo base_url(); ?>js/jquery-1.11.3.min.js"></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>js/jquery.magnific-popup.min.js"></script>
     <script src="<?php echo base_url(); ?>js/jquery.nav.js"></script>
-    <script src="<?php echo base_url(); ?>js/jquery.scrollTo-min.js"></script>
     <script src="<?php echo base_url(); ?>js/SmoothScroll.js"></script>
     <script src="<?php echo base_url(); ?>js/wow.js"></script>
-    
-	<!-- begin layerslider script-->
-    <script src="<?php echo base_url(); ?>layerslider/js/greensock.js"></script>
-    <script src="<?php echo base_url(); ?>layerslider/js/layerslider.transitions.js"></script>
-    <script src="<?php echo base_url(); ?>layerslider/js/layerslider.kreaturamedia.jquery.js"></script>
-    
+    <script src="<?php echo base_url(); ?>js/sweetalert.min.js"></script>	
     <!-- begin custom script-->
-    <script src="<?php echo base_url(); ?>js/custom.js"></script>
-    <script src="<?php echo base_url(); ?>s/plugins.js"></script>   
+    <script src="<?php echo base_url(); ?>js/custom.js"></script> 
 </body></html>

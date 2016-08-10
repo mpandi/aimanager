@@ -23,9 +23,9 @@ else {
                     <ul class="nav navbar-nav navbar-right">			      
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
-                        <li><a href="<?php echo base_url(); ?>welcome/users" class="active">Users</a></li>
+                        <li><a href="<?php echo base_url(); ?>welcome/users">Users</a></li>
                          <?php } ?>
-                        <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
+                         <li><a href="<?php echo base_url(); ?>customers/" class="active">Customers</a></li>
                         <li><a href="<?php echo base_url(); ?>services/">Services</a></li>
                         <li><a href="<?php echo base_url(); ?>welcome/dashboard">My Account</a></li>
                         <li><a href="<?php echo base_url(); ?>welcome/logout">Logout</a></li>
@@ -46,12 +46,12 @@ else {
             <div class="row margin-bottom-30">
                 <!--begin col-md-6-->
                 <div class="col-md-4 padding-top-20">                                
-                    <h1 class="home-title wow fadeIn" data-wow-delay="0.5s">Users</h1>                   
+                    <h3 class="home-title" data-wow-delay="0.5s">Customers</h3>                   
                     <p class="home-subtitle wow fadeIn" data-wow-delay="1s">
-                       View all users, their emails, levels and account statuses.<br/>
+                       View all customers, their emails, levels and account statuses.<br/>
                         Also add or remove users.
                     </p>
-                    <a href="registration" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">Add User</a>                             
+                    <a href="add_customer" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">Add Customer</a>                             
                 </div>
                 <!--end col-md-6-->     
                 <!--begin col-md-6-->
@@ -68,37 +68,37 @@ else {
                         else{ 
                            $flashdata = $this->session->flashdata('success_register');
                            $flashdelete = $this->session->flashdata('success_delete');
-                            if(isset($flashdata) || $flashdelete){
+                           $flashnocu = $this->session->flashdata('nonexistent');
+                           $flashupdate = $this->session->flashdata('success_update');
+                            if(isset($flashdata) || $flashdelete || $flashnocu || $flashupdate){
                               echo "<div class='alert alert-success'>";
                               echo $flashdata;
                               echo $flashdelete;
+                              echo $flashnocu;
+                              echo $flashupdate;
                               echo "</div>";
                              } ?>
                        <table id="example" class="table table-striped responsive-utilities jambo_table">
                         <thead>
                             <tr class="headings">                                              
-                                <th><strong>Delete</strong></th>
-                                <th><strong>Username</strong></th>
-                                <th>Email</th>
-                                <th>Acc Status </th>
+                                <th><strong>Action</strong></th>
+                                <th><strong>Customer</strong></th>
+                                <th><strong>Address</strong></th>
+                                <th>Billing Contact</th>
+                                <th>Technical Contact</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($user_data as $value){
+                        <?php foreach ($customers_data as $value){
                                   $id = $value['id'];?>
                                     <tr class="even pointer">
-                                      <td class=" "> <a href="delete_user/<?php echo $id;?>" title="Delete user" id="delete_event"><i class="fa fa-trash-o"></i></a></td>
-                                      <td class=" "><?php echo $value['username'];?></td>
-                                      <td><?php echo $value['email'];?></td>
-                                      <td class=" "><?php 
-                                      if($value['status']=='0'){
-                                         echo "<span style=\"color: red; \">Inactive</span>";
-                                         }
-                                      elseif($value['level']=='2'){
-                                         echo "<span style=\"color: #8FC412; \">Regular User</span>";
-                                         }
-                                      elseif($value['level']=='3') echo "<span style=\"color: black; \">Operator</span>";
-                                      ?></td>
+                                      <td class=" "> 
+                                        <a href="delete_customer/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
+                                        <a href="update_customer/<?php echo $id;?>" title="update" style="padding-left: 5px;"><i class="fa fa-pencil" style="color: green;"></i></a></td>
+                                      <td class=" "><?php echo $value['name_'];?></td>
+                                      <td><?php echo $value['address'];?></td>
+                                      <td class=" "><?php echo $value['billing_contact'];?></td>
+                                      <td class=" "><?php echo $value['technical_contact'];?></td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>

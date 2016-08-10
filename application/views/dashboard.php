@@ -25,8 +25,8 @@ else {
                         <?php if($level == 1){ ?>
                         <li><a href="users">Users</a></li>
                          <?php } ?>
-                        <li><a href="customers">Customers</a></li>
-                        <li><a href="<?php echo base_url(); ?>">Services</a></li>
+                        <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
+                        <li><a href="<?php echo base_url(); ?>services/">Services</a></li>
                         <li><a href="dashboard" class="active">My Account</a></li>
                         <li><a href="logout">Logout</a></li>
                     </ul>
