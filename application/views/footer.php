@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     
                     <!--begin copyright -->
                     <div class="copyright">
-                        <p>Copyright &COPY; 2015 Customer Manageement System. Designed by <a href="http://www.alemobet.net" style="color: green;">Alemobet Innovations</a></p>
+                        <p>Copyright &COPY; 2015 Customer Management System. Designed by <a href="http://www.alemobet.net" style="color: green;">Alemobet Innovations</a></p>
                         
                     </div>
                     <!--end copyright -->
