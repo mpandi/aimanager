@@ -28,8 +28,10 @@ public function add_customer(){
 public function add() {
 		$this->form_validation->set_rules('customer_name', 'Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('billing_contact', 'Billing', 'trim|required|xss_clean');
- 	    $this->form_validation->set_rules('technical_contact', 'Technical', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('billing_contact_name', 'Billing Name', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('billing_contact_phone', 'Billing Phone', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('technical_contact_name', 'Technical Name', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('technical_contact_phone', 'Technical Phone', 'trim|required|xss_clean');
 	 if($this->form_validation->run() == FALSE) {
 		  $this->load->view('add_customer');
 		} 
@@ -37,8 +39,10 @@ public function add() {
 		$data = array(
 		'name_' => $this->input->post('customer_name'),
 		'address' => $this->input->post('address'),
-		'billing_contact' => $this->input->post('billing_contact'),
-        'technical_contact' => $this->input->post('technical_contact'),
+		'billing_contact_name' => $this->input->post('billing_contact_name'),
+        'billing_contact_phone' => $this->input->post('billing_contact_phone'),
+        'technical_contact_name' => $this->input->post('technical_contact_name'),
+        'technical_contact_phone' => $this->input->post('technical_contact_phone'),
         'created' => date('Y-m-d H:i:s')
 		);
 		$result = $this->customers_database->registration_insert($data);
@@ -50,8 +54,10 @@ public function add() {
 		$data['error_message'] = $result;
         $data['add_name'] = $this->input->post('customer_name');
         $data['add_address'] = $this->input->post('address');
-        $data['billing_contact'] = $this->input->post('billing_contact');
-        $data['technical_contact'] = $this->input->post('technical_contact');
+        $data['billing_contact_name'] = $this->input->post('billing_contact_name');
+        $data['billing_contact_phone'] = $this->input->post('billing_contact_phone');
+        $data['technical_contact_name'] = $this->input->post('technical_contact_name');
+        $data['technical_contact_phone'] = $this->input->post('technical_contact_phone');
 		$this->load->view('add_customer', $data);
 		  }
 		}
@@ -90,8 +96,10 @@ public function update_customer($id){
 public function update(){ 
         $this->form_validation->set_rules('customer_name', 'Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('billing_contact', 'Billing', 'trim|required|xss_clean');
- 	    $this->form_validation->set_rules('technical_contact', 'Technical', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('billing_contact_name', 'Billing Name', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('billing_contact_phone', 'Billing Phone', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('technical_contact_name', 'Technical Name', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('technical_contact_phone', 'Technical Phone', 'trim|required|xss_clean');
      if($this->form_validation->run() == FALSE) {
 		  $this->load->view('update_customer');
 		} 
@@ -100,8 +108,10 @@ public function update(){
 		$data = array(
 		'name_' => $this->input->post('customer_name'),
 		'address' => $this->input->post('address'),
-		'billing_contact' => $this->input->post('billing_contact'),
-        'technical_contact' => $this->input->post('technical_contact')
+		'billing_contact_name' => $this->input->post('billing_contact_name'),
+        'billing_contact_phone' => $this->input->post('billing_contact_phone'),
+        'technical_contact_name' => $this->input->post('technical_contact_name'),
+        'technical_contact_phone' => $this->input->post('technical_contact_phone')
 		);
 		$result = $this->customers_database->update($id,$data);
 	  if($result){
@@ -112,8 +122,10 @@ public function update(){
 		$data['error_message'] = "Update failed ...";
         $data['add_name'] = $this->input->post('customer_name');
         $data['add_address'] = $this->input->post('address');
-        $data['billing_contact'] = $this->input->post('billing_contact');
-        $data['technical_contact'] = $this->input->post('technical_contact');
+        $data['billing_contact_name'] = $this->input->post('billing_contact_name');
+        $data['billing_contact_phone'] = $this->input->post('billing_contact_phone');
+        $data['technical_contact_name'] = $this->input->post('technical_contact_name');
+        $data['technical_contact_phone'] = $this->input->post('technical_contact_phone');
 		$this->load->view('update_customer', $data);
 		  }
 		}

@@ -47,7 +47,7 @@ include 'header.php';
                         good &amp; feel good - without a lot of efforts - so you can<br>
                         always get on with the things that truly matter.
                     </p>
-                    <a href="#" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">Discover More!</a>
+                    <a href="#" class="btn scrool wow fadeIn" data-wow-delay="1.75s">Discover More!</a>
                                 
                 </div>
                 <!--end col-md-6-->

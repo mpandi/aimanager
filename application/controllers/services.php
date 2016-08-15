@@ -42,6 +42,11 @@ public function add() {
 		$this->form_validation->set_rules('service_type', 'Type', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('billing_cycle', 'Billing', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('network', 'Network', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('ips', 'IPS', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('cpemac', 'CPE MAC', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('apconnected', 'AP CONNECTED', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('code', 'Code', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('cpegraph', 'Graph', 'trim|required|xss_clean');
 	 if($this->form_validation->run() == FALSE) {
 		  $this->load->view('add_service');
 		} 
@@ -52,6 +57,11 @@ public function add() {
 		'billing_cycle' => $this->input->post('billing_cycle'),
         'network_details' => $this->input->post('network'),
         'service_type' => $this->input->post('service_type'),
+        'ip_addresses' => $this->input->post('ips'),
+        'cpe_mac' => $this->input->post('cpemac'),
+        'ap_connected' => $this->input->post('apconnected'),
+        'execution_code' => $this->input->post('code'),
+        'cpe_graph' => $this->input->post('cpegraph'),
         'created' => date('Y-m-d H:i:s')
 		);
 		$result = $this->services_database->registration_insert($data);
@@ -63,6 +73,11 @@ public function add() {
 		$data['error_message'] = $result;
         $data['add_location'] = $this->input->post('location');
         $data['add_network'] = $this->input->post('network');
+        $data['add_ips'] = $this->input->post('ips');
+        $data['add_graph'] = $this->input->post('cpegraph');
+        $data['add_code'] = $this->input->post('code');
+        $data['add_cpemac'] = $this->input->post('cpemac');
+        $data['add_apconnected'] = $this->input->post('apconnected');
 		$this->load->view('add_service', $data);
 		  }
 		}
@@ -104,6 +119,11 @@ public function update(){
 		$this->form_validation->set_rules('service_type', 'Type', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('billing_cycle', 'Billing', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('network', 'Network', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('ips', 'IPS', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('cpemac', 'CPE MAC', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('apconnected', 'AP CONNECTED', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('code', 'Code', 'trim|required|xss_clean');
+ 	    $this->form_validation->set_rules('cpegraph', 'Graph', 'trim|required|xss_clean');
 	 if($this->form_validation->run() == FALSE) {
 		  $this->load->view('add_service');
 		} 
@@ -114,7 +134,13 @@ public function update(){
 		'customer_id' => $this->input->post('customer'),
 		'billing_cycle' => $this->input->post('billing_cycle'),
         'network_details' => $this->input->post('network'),
-        'service_type' => $this->input->post('service_type')
+        'service_type' => $this->input->post('service_type'),
+        'ip_addresses' => $this->input->post('ips'),
+        'cpe_mac' => $this->input->post('cpemac'),
+        'ap_connected' => $this->input->post('apconnected'),
+        'execution_code' => $this->input->post('code'),
+        'cpe_graph' => $this->input->post('cpegraph'),
+        'grace_period' => $this->input->post('graceperiod')
 		);
 		$result = $this->services_database->update($id,$data);
 	  if($result) {

@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-if (isset($this->session->userdata['logged_in'])) {
+if (isset($this->session->userdata['logged_in'])){
     $username = $this->session->userdata['logged_in']['username'];
     $email = $this->session->userdata['logged_in']['email'];
     $password = $this->session->userdata['logged_in']['password'];
@@ -57,11 +57,11 @@ else {
                     <h1 class="home-title wow fadeIn" data-wow-delay="0.5s">Customer Management System</h1>
                     
                     <p class="home-subtitle wow fadeIn" data-wow-delay="1s">
-                        Design &amp; style should always work toward making you look<br>
-                        good &amp; feel good - without a lot of efforts - so you can<br>
+                        Design &amp; style should always work toward making you look<br/>
+                        good &amp; feel good - without a lot of efforts - so you can<br/>
                         always get on with the things that truly matter.
                     </p>
-                    <a href="#" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">Discover More!</a>
+                    <a href="#" class="btn scrool wow fadeIn">Discover More!</a>
                                 
                 </div>
                 <!--end col-md-6-->
@@ -82,12 +82,14 @@ else {
                                     echo $success_message;
                                     echo "</div>";
                                  }  ?>
-                            <label class="control-label">Email Address</label>
-                            <div class="form-group"><input type="email" name="email" value="<?php echo $email; ?>" required="" class="form-control" placeholder="Enter Email"/></div>              
-                            <label class="control-label">Username</label>
-                            <div class="form-group"><input type="text" name="username" class="form-control" value="<?php echo $username; ?>" readonly=""placeholder="Enter Preferred Username"/></div>
-                            <label class="control-label">Password</label>
                             <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" name="email" value="<?php echo $email; ?>" required="" class="form-control" placeholder="Enter Email"/></div>  
+                            <div class="form-group">            
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" value="<?php echo $username; ?>" readonly=""placeholder="Enter Preferred Username"/></div>
+                            <div class="form-group">
+                            <label>Password</label>
                                <input type="password" name="password" class="form-control" value="<?php echo $password;?>" required="" placeholder="Choose a Password"/></div>
                            <div class="form-group"><input type="submit" name="update" class="btn btn-info" value="Update"/></div>
                    <?php echo form_close(); ?>

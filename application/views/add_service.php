@@ -51,8 +51,8 @@ else {
             
                 <!--begin col-md-6-->
                 <div class="col-md-6 padding-top-20">                                
-                    <h1 class="home-title wow fadeIn" data-wow-delay="0.5s">Add Service</h1>                   
-                    <p class="home-subtitle wow fadeIn" data-wow-delay="1s">
+                    <h1 class="home-title wow fadeIn">Add Service</h1>                   
+                    <p class="home-subtitle wow fadeIn">
                        View all services, their emails, levels and account statuses.<br/>
                         Also add or remove services.
                     </p>
@@ -105,6 +105,21 @@ else {
                         </div>
                        <div class="form-group">
                             <input type="text" class="form-control" name="network" placeholder="Network Details" required="" value="<?php echo isset($add_network)?$add_network:'';?>"/>
+                       </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="ips" placeholder="IP Addresses" required="" value="<?php echo isset($add_ips)?$add_ips:'';?>"/>
+                        </div>
+                         <div class="form-group">
+                            <input type="text" class="form-control" name="cpemac" placeholder="CPE MAC" required="" value="<?php echo isset($add_cpemac)?$add_cpemac:'';?>"/>
+                        </div>
+                         <div class="form-group">
+                            <input type="text" class="form-control" name="apconnected" placeholder="AP CONNECTED" required="" value="<?php echo isset($add_apconnected)?$add_apconnected:'';?>"/>
+                        </div>
+                         <div class="form-group">
+                            <input type="text" class="form-control" name="code" placeholder="Code to Execute" value="<?php echo isset($add_code)?$add_code:'';?>"/>
+                        </div>
+                         <div class="form-group">
+                            <input type="text" class="form-control" name="cpegraph" placeholder="CPE Graph" value="<?php echo isset($add_graph)?$add_graph:'';?>"/>
                         </div>
                         <div class="form-group">                       
                             <input type="submit" class="btn btn-success" name="add" value="Add Service" />

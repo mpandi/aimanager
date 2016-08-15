@@ -8,6 +8,7 @@
     <title>AI MANAGER</title>   
     <!-- Loading Bootstrap -->
     <link href="<?php echo base_url(); ?>css/bootstrap.css" rel="stylesheet" type="text/css"/>
+     <link href="<?php echo base_url(); ?>css/bootstrap-responsive.css" rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css"/>
     <!-- Loading Template CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/theme.css"/>

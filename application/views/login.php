@@ -50,7 +50,7 @@ if(isset($this->session->userdata['logged_in'])){
                         good &amp; feel good - without a lot of efforts - so you can<br/>
                         always get on with the things that truly matter.
                     </p>
-                    <a href="#" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">Discover More!</a>
+                    <a href="#" class="btn scrool wow fadeIn">Discover More!</a>
                                 
                 </div>
                 <!--end col-md-6-->
@@ -72,13 +72,14 @@ if(isset($this->session->userdata['logged_in'])){
                             echo "</div>";
                           } ?>
                         <div class="form-group">
+                             <label>Username: </label>
                             <input type="text" class="form-control" name="username" placeholder="Username" required="" value=""/>
                         </div>
                        <div class="form-group">
+                             <label>Password: </label>
                             <input type="password" class="form-control" name="password" placeholder="Password" required="" value=""/>
                         </div>
-                        <div class="form-group">                       
-                            
+                        <div class="form-group">                                          
                               <input type="submit" class="btn btn-success" name="login" value="Log in" />
                         </div>
                         <div class="clearfix"></div>

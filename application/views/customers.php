@@ -25,7 +25,13 @@ else {
                         <?php if($level == 1){ ?>
                         <li><a href="<?php echo base_url(); ?>welcome/users">Users</a></li>
                          <?php } ?>
-                         <li><a href="<?php echo base_url(); ?>customers/" class="active">Customers</a></li>
+                         <li>
+                            <a href="<?php echo base_url(); ?>customers/" class="active dropdown-toggle" data-toggle="dropdown">Customers
+                            <span class="caret" style="margin-top: 0px;"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="add_customer">Add Customer</a></li>
+                            </ul>
+                         </li>
                         <li><a href="<?php echo base_url(); ?>services/">Services</a></li>
                         <li><a href="<?php echo base_url(); ?>welcome/dashboard">My Account</a></li>
                         <li><a href="<?php echo base_url(); ?>welcome/logout">Logout</a></li>
@@ -43,19 +49,8 @@ else {
         <!--begin container-->
         <div class="container"> 
             <!--begin row-->
-            <div class="row margin-bottom-30">
-                <!--begin col-md-6-->
-                <div class="col-md-4 padding-top-20">                                
-                    <h3 class="home-title" data-wow-delay="0.5s">Customers</h3>                   
-                    <p class="home-subtitle wow fadeIn" data-wow-delay="1s">
-                       View all customers, their emails, levels and account statuses.<br/>
-                        Also add or remove users.
-                    </p>
-                    <a href="add_customer" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">Add Customer</a>                             
-                </div>
-                <!--end col-md-6-->     
-                <!--begin col-md-6-->
-                <div class="col-md-8 wow slideInRight" data-wow-delay="2.25s">
+            <div class="row margin-bottom-20">
+                <div class="row wow slideInRight">
                    <section class="login_content" style="padding:5px;">
                    <?php 
                    $flashfail = $this->session->flashdata('fail_delete');
@@ -81,11 +76,13 @@ else {
                        <table id="example" class="table table-striped responsive-utilities jambo_table">
                         <thead>
                             <tr class="headings">                                              
-                                <th><strong>Action</strong></th>
-                                <th><strong>Customer</strong></th>
-                                <th><strong>Address</strong></th>
-                                <th>Billing Contact</th>
-                                <th>Technical Contact</th>
+                                <th>Action</th>
+                                <th>Customer</th>
+                                <th>Address</th>
+                                <th>Billing Contact Name</th>
+                                <th>Billing Contact Phone</th>
+                                <th>Technical Contact Name</th>
+                                <th>Technical Contact phone</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,8 +94,10 @@ else {
                                         <a href="update_customer/<?php echo $id;?>" title="update" style="padding-left: 5px;"><i class="fa fa-pencil" style="color: green;"></i></a></td>
                                       <td class=" "><?php echo $value['name_'];?></td>
                                       <td><?php echo $value['address'];?></td>
-                                      <td class=" "><?php echo $value['billing_contact'];?></td>
-                                      <td class=" "><?php echo $value['technical_contact'];?></td>
+                                      <td class=" "><?php echo $value['billing_contact_name'];?></td>
+                                      <td class=" "><?php echo $value['billing_contact_phone'];?></td>
+                                      <td class=" "><?php echo $value['technical_contact_name'];?></td>
+                                      <td class=" "><?php echo $value['technical_contact_phone'];?></td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>

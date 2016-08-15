@@ -17,7 +17,7 @@ else {
         <!--begin nav -->
         <nav class="navbar navbar-default navbar-fixed-top">          
             <!--begin container -->
-            <div class="container">              
+            <div class="container-fluid">              
                 <div>
                     <ul class="nav navbar-nav navbar-right">                  
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
@@ -44,24 +44,17 @@ else {
     <section id="home_wrapper" class="home-wrapper">
 
         <!--begin container-->
-        <div class="container"> 
-
-            <!--begin row-->
-            <div class="row margin-bottom-30">
-            
+        <div class="container-fluid"> 
                 <!--begin col-md-6-->
-                <div class="col-md-6 padding-top-20">                                
-                    <h1 class="home-title wow fadeIn" data-wow-delay="0.5s">Add Service</h1>                   
-                    <p class="home-subtitle wow fadeIn" data-wow-delay="1s">
+                <div class="col-md-6 padding-top-10">                                
+                    <h1 class="home-title wow fadeIn">Add Service</h1>                   
+                    <p class="home-subtitle wow fadeIn">
                        View all services, their emails, levels and account statuses.<br/>
                         Also add or remove services.
                     </p>
-                    <a href="<?php echo base_url(); ?>services/" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">View Services</a>                             
+                    <a href="<?php echo base_url(); ?>services/" class="btn scrool wow fadeIn">View Services</a>                             
                 </div>
-                <!--end col-md-6-->
-            
-                <!--begin col-md-6-->
-                <div class="col-md-6 wow slideInRight" data-wow-delay="2.25s">
+                <div class="col-md-6 wow slideInRight">
                    <section class="login_content" style="padding:5px;">
                       <div class="eh">Update Service </div>
                        <?php $attributes = array('class'=>'form-horizontal login_d');
@@ -78,6 +71,7 @@ else {
                           } 
                           echo validation_errors();?>
                         <div class="form-group">
+                        <label>Customer Name: </label>
                             <input type="hidden" name="service_id" value="<?php echo $service_data[0]['id'];?>"/>
                             <select name="customer" style="width: 100%;">
                                 <option value="<?php echo $service_data[0]['id'];?>" selected=""><?php echo $this->customers_database->get_customer($service_data[0]['customer_id']);?></option>
@@ -89,9 +83,11 @@ else {
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="location" placeholder="Location" required="" value="<?php echo isset($add_location)?$add_location:$service_data[0]['location'];?>"/>
+                        <label>Service Location: </label>
+                            <input type="text" name="location" class="form-control" placeholder="Location" required="" value="<?php echo isset($add_location)?$add_location:$service_data[0]['location'];?>"/>
                         </div>
                         <div class="form-group">
+                         <label>Service Type: </label>
                             <select name="service_type" style="width: 100%;">
                                 <option value="<?php echo $service_data[0]['service_type'];?>" selected="">..Service Type..</option>
                                 <option value="1">Internet</option>
@@ -99,6 +95,7 @@ else {
                             </select>
                         </div>
                          <div class="form-group">
+                         <label>Billing Cycle: </label>
                             <select name="billing_cycle" style="width: 100%;">
                                 <option value="<?php echo $service_data[0]['billing_cycle'];?>" selected="">..Billing Cycle..</option>
                                 <option value="1">Monthly</option>
@@ -107,15 +104,40 @@ else {
                             </select>
                         </div>
                        <div class="form-group">
-                            <input type="text" class="form-control" name="network" placeholder="Network Details" required="" value="<?php echo isset($add_network)?$add_network:$service_data[0]['network_details'];?>"/>
+                       <label>Network Details: </label>
+                            <input type="text" name="network" class="form-control" placeholder="Network Details" required="" value="<?php echo isset($add_network)?$add_network:$service_data[0]['network_details'];?>"/>
+                        </div>
+                        <div class="form-group">
+                           <label>IP Addresses: </label>
+                            <input type="text" name="ips" class="form-control" placeholder="IP Addresses" required="" value="<?php echo isset($add_ips)?$add_ips:$service_data[0]['ip_addresses'];?>"/>
+                        </div>
+                         <div class="form-group">
+                          <label>CPE MAC: </label>
+                            <input type="text" name="cpemac" placeholder="CPE MAC" class="form-control" required="" value="<?php echo isset($add_cpemac)?$add_cpemac:$service_data[0]['cpe_mac'];?>"/>
+                        </div>
+                         <div class="form-group">
+                          <label>AP CONNECTED: </label>
+                            <input type="text" name="apconnected" class="form-control" placeholder="AP CONNECTED" required="" value="<?php echo isset($add_apconnected)?$add_apconnected:$service_data[0]['ap_connected'];?>"/>
+                        </div>
+                        <div class="form-group">
+                          <label>Grace Period: </label>
+                            <input type="number" name="graceperiod" class="form-control" placeholder="Grace Period" value="<?php echo isset($add_graceperiod)?$add_graceperiod:$service_data[0]['grace_period'];?>"/>
+                        </div>
+                         <div class="form-group">
+                          <label>CODE: </label>
+                            <input type="text" name="code" class="form-control" placeholder="Code to Execute" value="<?php echo isset($add_code)?$add_code:$service_data[0]['execution_code'];?>"/>
+                        </div>
+                         <div class="form-group">
+                         <label>Graph Details: </label>
+                            <input type="text" class="form-control" name="cpegraph" placeholder="CPE Graph" value="<?php echo isset($add_graph)?$add_graph:$service_data[0]['cpe_graph'];?>"/>
                         </div>
                         <div class="form-group">                       
-                            <input type="submit" class="btn btn-success" name="add" value="Add Service" />
+                            <input type="submit" class="btn btn-success" name="add" value="Update" />
                         </div> 
                    </div>
                    <?php echo form_close(); ?>
                 </section>
-                </div>
+               
                 <!--end col-md-6-->    
             </div>
             <!--end row-->

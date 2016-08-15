@@ -47,10 +47,10 @@ else {
         <div class="container"> 
 
             <!--begin row-->
-            <div class="row margin-bottom-30">
+            <div class="row margin-bottom-10">
             
                 <!--begin col-md-6-->
-                <div class="col-md-6 padding-top-20">                                
+                <div class="col-md-6 padding-top-10">                                
                     <h3 class="home-title" data-wow-delay="0.5s">Add Customer</h3>                   
                     <p class="home-subtitle wow fadeIn" data-wow-delay="1s">
                        View all customers, their emails, levels and account statuses.<br/>
@@ -61,7 +61,7 @@ else {
                 <!--end col-md-6-->
             
                 <!--begin col-md-6-->
-                <div class="col-md-6 wow slideInRight" data-wow-delay="2.25s">
+                <div class="col-md-6 wow slideInRight">
                    <section class="login_content" style="padding:5px;">
                       <div class="eh">Add Customer </div>
                        <?php $attributes = array('class'=>'form-horizontal login_d');
@@ -83,11 +83,18 @@ else {
                         <div class="form-group">
                             <input type="text" class="form-control" name="address" placeholder="Address" required="" value="<?php echo isset($add_address)?$add_address:'';?>"/>
                         </div>
+                        
                         <div class="form-group">
-                            <input type="text" class="form-control" name="billing_contact" placeholder="Billing Contact" required="" value="<?php echo isset($billing_contact)?$billing_contact:'';?>"/>
-                        </div>                        
+                            <input type="text" class="form-control" name="billing_contact_name" placeholder="Billing Contact Name" required="" value="<?php echo isset($billing_contact_name)?$billing_contact_name:'';?>"/>
+                        </div> 
+                        <div class="form-group">
+                            <input type="telephone" class="form-control" name="billing_contact_phone" placeholder="Billing Contact Phone" required="" value="<?php echo isset($billing_contact_phone)?$billing_contact_phone:'';?>"/>
+                        </div>                       
                        <div class="form-group">
-                            <input type="text" class="form-control" name="technical_contact" placeholder="Technical Contact" required="" value="<?php echo isset($billing_contact)?$billing_contact:'';?>"/>
+                            <input type="text" class="form-control" name="technical_contact_name" placeholder="Technical Contact Name" required="" value="<?php echo isset($technical_contact_name)?$technical_contact_name:'';?>"/>
+                        </div>
+                         <div class="form-group">
+                            <input type="telephone" class="form-control" name="technical_contact_phone" placeholder="Technical Contact Phone" required="" value="<?php echo isset($technical_contact_phone)?$technical_contact_phone:'';?>"/>
                         </div>
                         <div class="form-group">                       
                             <input type="submit" class="btn btn-success" name="add" value="Add Customer" />
