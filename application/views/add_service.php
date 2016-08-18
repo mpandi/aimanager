@@ -8,7 +8,7 @@ if (isset($this->session->userdata['logged_in'])) {
  include "header.php";
  } 
 else {
-  redirect('welcome/login', 'refresh');
+  redirect('login/', 'refresh');
  }
 ?>
 <body>    
@@ -22,12 +22,12 @@ else {
                     <ul class="nav navbar-nav navbar-right">                  
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
-                        <li><a href="<?php echo base_url(); ?>welcome/users">Users</a></li>
+                        <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
                          <?php } ?>
                         <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
                         <li><a href="<?php echo base_url(); ?>services/" class="active">Services</a></li>
-                        <li><a href="<?php echo base_url(); ?>welcome/dashboard">My Account</a></li>
-                        <li><a href="<?php echo base_url(); ?>welcome/logout">Logout</a></li>
+                        <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
                     </ul>
                 </div>
                 <!--end navbar -->                      
@@ -56,7 +56,7 @@ else {
                        View all services, their emails, levels and account statuses.<br/>
                         Also add or remove services.
                     </p>
-                    <a href="<?php echo base_url(); ?>services/" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">View Services</a>                             
+                    <a href="<?php echo base_url(); ?>services/" class="btn">View Services</a>                             
                 </div>
                 <!--end col-md-6-->
             
@@ -77,7 +77,7 @@ else {
                             echo "</div>";
                           } 
                           echo validation_errors();?>
-                        <div class="form-group">
+                        <div class="form-group" style="padding-top: 5px;">
                             <select name="customer" style="width: 100%;">
                                 <option value="" selected="">..Customer..</option>
                                 <?php foreach ($customers_data as $value){ ?>
@@ -85,17 +85,17 @@ else {
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="padding-top: 5px;">
                             <input type="text" class="form-control" name="location" placeholder="Location" required="" value="<?php echo isset($add_location)?$add_location:'';?>"/>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="padding-top: 5px;">
                             <select name="service_type" style="width: 100%;">
                                 <option value="" selected="">..Service Type..</option>
                                 <option value="1">Internet</option>
                                 <option value="2">VPN</option>
                             </select>
                         </div>
-                         <div class="form-group">
+                         <div class="form-group" style="padding-top: 5px;">
                             <select name="billing_cycle" style="width: 100%;">
                                 <option value="" selected="">..Billing Cycle..</option>
                                 <option value="1">Monthly</option>
@@ -103,22 +103,22 @@ else {
                                 <option value="12">Annual</option>
                             </select>
                         </div>
-                       <div class="form-group">
-                            <input type="text" class="form-control" name="network" placeholder="Network Details" required="" value="<?php echo isset($add_network)?$add_network:'';?>"/>
+                       <div class="form-group" style="padding-top: 5px;">
+                            <input type="text" class="form-control" name="startdate" id="datepicker" placeholder="Billing Start Date" required="" value="<?php echo isset($add_billing_start_date)?$add_billing_start_date:'';?>"/>
                        </div>
-                        <div class="form-group">
+                        <div class="form-group" style="padding-top: 5px;">
                             <input type="text" class="form-control" name="ips" placeholder="IP Addresses" required="" value="<?php echo isset($add_ips)?$add_ips:'';?>"/>
                         </div>
-                         <div class="form-group">
+                         <div class="form-group" style="padding-top: 5px;">
                             <input type="text" class="form-control" name="cpemac" placeholder="CPE MAC" required="" value="<?php echo isset($add_cpemac)?$add_cpemac:'';?>"/>
                         </div>
-                         <div class="form-group">
+                         <div class="form-group" style="padding-top: 5px;">
                             <input type="text" class="form-control" name="apconnected" placeholder="AP CONNECTED" required="" value="<?php echo isset($add_apconnected)?$add_apconnected:'';?>"/>
                         </div>
-                         <div class="form-group">
+                         <div class="form-group" style="padding-top: 5px;">
                             <input type="text" class="form-control" name="code" placeholder="Code to Execute" value="<?php echo isset($add_code)?$add_code:'';?>"/>
                         </div>
-                         <div class="form-group">
+                         <div class="form-group" style="padding-top: 5px;">
                             <input type="text" class="form-control" name="cpegraph" placeholder="CPE Graph" value="<?php echo isset($add_graph)?$add_graph:'';?>"/>
                         </div>
                         <div class="form-group">                       

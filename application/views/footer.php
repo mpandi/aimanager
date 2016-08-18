@@ -71,8 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Load JS here for greater good =============================-->
     <script src="<?php echo base_url(); ?>js/jquery-1.11.3.min.js"></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>js/jquery.nav.js"></script>
-    <script src="<?php echo base_url(); ?>js/SmoothScroll.js"></script>
+    <script src="<?php echo base_url(); ?>js/jquery-ui.js"></script>
     <script src="<?php echo base_url(); ?>js/wow.js"></script>
     <script src="<?php echo base_url(); ?>js/sweetalert.min.js"></script>	
     <!-- begin custom script-->

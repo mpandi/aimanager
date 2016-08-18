@@ -8,7 +8,7 @@ if (isset($this->session->userdata['logged_in'])) {
  include "header.php";
  } 
 else {
-  redirect('welcome/login', 'refresh');
+  redirect('login/', 'refresh');
  }
 ?>
 <body>    
@@ -22,12 +22,12 @@ else {
                     <ul class="nav navbar-nav navbar-right">                  
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
-                        <li><a href="<?php echo base_url(); ?>welcome/users">Users</a></li>
+                        <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
                          <?php } ?>
                         <li><a href="<?php echo base_url(); ?>customers/" class="active">Customers</a></li>
                         <li><a href="<?php echo base_url(); ?>services/">Services</a></li>
-                        <li><a href="<?php echo base_url(); ?>welcome/dashboard">My Account</a></li>
-                        <li><a href="<?php echo base_url(); ?>welcome/logout">Logout</a></li>
+                        <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
                     </ul>
                 </div>
                 <!--end navbar -->                      
@@ -56,7 +56,7 @@ else {
                        View all customers, their emails, levels and account statuses.<br/>
                         Also add or remove services.
                     </p>
-                    <a href="<?php echo base_url(); ?>customers/" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">Customers</a>                             
+                    <a href="<?php echo base_url(); ?>customers/" class="btn scrool wow fadeIn" data-wow-delay="1.75s">Customers</a>                             
                 </div>
                 <!--end col-md-6-->
             
@@ -77,23 +77,23 @@ else {
                             echo "</div>";
                           } 
                           echo validation_errors();?>
-                        <div class="form-group">
+                        <div class="form-group" style="padding-top: 10px;">
                             <input type="text" class="form-control" name="customer_name" placeholder="Name" required="" value="<?php echo isset($add_name)?$add_name:'';?>"/>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="padding-top: 10px;">
                             <input type="text" class="form-control" name="address" placeholder="Address" required="" value="<?php echo isset($add_address)?$add_address:'';?>"/>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group" style="padding-top: 10px;">
                             <input type="text" class="form-control" name="billing_contact_name" placeholder="Billing Contact Name" required="" value="<?php echo isset($billing_contact_name)?$billing_contact_name:'';?>"/>
                         </div> 
-                        <div class="form-group">
+                        <div class="form-group" style="padding-top: 10px;">
                             <input type="telephone" class="form-control" name="billing_contact_phone" placeholder="Billing Contact Phone" required="" value="<?php echo isset($billing_contact_phone)?$billing_contact_phone:'';?>"/>
                         </div>                       
-                       <div class="form-group">
+                       <div class="form-group" style="padding-top: 10px;">
                             <input type="text" class="form-control" name="technical_contact_name" placeholder="Technical Contact Name" required="" value="<?php echo isset($technical_contact_name)?$technical_contact_name:'';?>"/>
                         </div>
-                         <div class="form-group">
+                         <div class="form-group" style="padding-top: 10px;">
                             <input type="telephone" class="form-control" name="technical_contact_phone" placeholder="Technical Contact Phone" required="" value="<?php echo isset($technical_contact_phone)?$technical_contact_phone:'';?>"/>
                         </div>
                         <div class="form-group">                       

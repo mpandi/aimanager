@@ -8,7 +8,7 @@ if (isset($this->session->userdata['logged_in'])) {
  include "header.php";
  } 
 else {
-  redirect('welcome/login', 'refresh');
+  redirect('login/', 'refresh');
  }
 ?>
 <body>    
@@ -22,12 +22,12 @@ else {
                     <ul class="nav navbar-nav navbar-right">                  
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
-                        <li><a href="<?php echo base_url(); ?>welcome/users">Users</a></li>
+                        <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
                          <?php } ?>
                         <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
                         <li><a href="<?php echo base_url(); ?>services/" class="active">Services</a></li>
-                        <li><a href="<?php echo base_url(); ?>welcome/dashboard">My Account</a></li>
-                        <li><a href="<?php echo base_url(); ?>welcome/logout">Logout</a></li>
+                        <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
                     </ul>
                 </div>
                 <!--end navbar -->                      
@@ -104,8 +104,8 @@ else {
                             </select>
                         </div>
                        <div class="form-group">
-                       <label>Network Details: </label>
-                            <input type="text" name="network" class="form-control" placeholder="Network Details" required="" value="<?php echo isset($add_network)?$add_network:$service_data[0]['network_details'];?>"/>
+                       <label>Billing Start Date: </label>
+                            <input type="text" name="startdate" class="form-control" placeholder="Billing Start Date" required="" id="datepicker"value="<?php echo isset($add_start_date)?$add_start_date:$service_data[0]['created'];?>"/>
                         </div>
                         <div class="form-group">
                            <label>IP Addresses: </label>

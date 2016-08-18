@@ -8,7 +8,7 @@ if (isset($this->session->userdata['logged_in'])){
  include "header.php";
  } 
 else {
-  redirect('welcome/login', 'refresh');
+  redirect('login/', 'refresh');
  }
 ?>
 <body>     
@@ -23,12 +23,12 @@ else {
                     <ul class="nav navbar-nav navbar-right">			      
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
-                        <li><a href="users">Users</a></li>
+                        <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
                          <?php } ?>
                         <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
                         <li><a href="<?php echo base_url(); ?>services/">Services</a></li>
                         <li><a href="dashboard" class="active">My Account</a></li>
-                        <li><a href="logout">Logout</a></li>
+                        <li><a href="logout/">Logout</a></li>
                     </ul>
                 </div>
                 <!--end navbar -->
@@ -71,7 +71,7 @@ else {
                    <section class="login_content" style="padding:5px;">
                       <div class="eh">My Account</div>
                        <?php $attributes = array('class'=>'form-horizontal login_d');
-                        echo form_open('welcome/update',$attributes); 
+                        echo form_open('home/update',$attributes); 
                             if(isset($error_message)){
                                     echo "<div class='alert alert-danger'>";
                                     echo $error_message;

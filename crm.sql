@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2016 at 08:04 PM
+-- Generation Time: Aug 18, 2016 at 04:43 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -75,7 +75,8 @@ CREATE TABLE `services` (
 INSERT INTO `services` (`id`, `location`, `customer_id`, `billing_cycle`, `network_details`, `service_type`, `ip_addresses`, `cpe_mac`, `ap_connected`, `execution_code`, `cpe_graph`, `grace_period`, `created`) VALUES
 (7, 'kikuyu area', 14, '12', 'network 4', '2', '12.445.6677.', 'sewfrg', 'vfbtyuio', 'shelldsdfr rgfe4g', 'httpsd', 15, '2016-08-10 21:30:21'),
 (11, 'csdgr fbeb', 13, '1', 'qaxcvbng', '1', '', '', '', '', '', 0, '2016-08-11 01:09:03'),
-(12, 'here', 14, '4', 'details', '1', '34.556.778.999', '43.6576.97780.kuk8.', 'none', 'shell', 'http://graph', 0, '2016-08-15 15:31:09');
+(12, 'here', 14, '4', 'details', '1', '34.556.778.999', '43.6576.97780.kuk8.', 'none', 'shell', 'http://graph', 0, '2016-08-15 15:31:09'),
+(13, 'sfrthyumi', 13, '4', '', '1', '343.65.676.878.99', 'gnyum', 'dvrtbnyumi', 'dvt5ynumi,o', 'gtyh6u7ik8ol345', 0, '2016-08-30 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `created`, `lastlogin`, `status`, `level`) VALUES
-(1, 'admin', 'pandimoses@yahoo.com', 'a029d0df84eb5549c641e04a9ef389e5', '0000-00-00 00:00:00', '2016-05-05 18:24:06', 2, 1),
+(1, 'admin', 'moses@yahoo.com', 'a029d0df84eb5549c641e04a9ef389e5', '0000-00-00 00:00:00', '2016-05-05 18:24:06', 2, 1),
 (33, 'musa', 'musa@gmail.com', 'moses', '0000-00-00 00:00:00', '2016-05-08 20:44:19', 1, 2),
 (34, 'derguitgit', 'moses@yahoo.com', 'cvtrtyhyuju', '2016-05-05 17:42:13', '0000-00-00 00:00:00', 1, 3);
 
@@ -138,7 +139,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `users`
 --

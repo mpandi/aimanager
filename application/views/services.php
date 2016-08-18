@@ -10,7 +10,7 @@ if(isset($this->session->userdata['logged_in'])) {
  include "header.php";
  } 
 else {
-  redirect('welcome/login', 'refresh');
+  redirect('login/', 'refresh');
  }
 ?>
 <body>     
@@ -25,7 +25,7 @@ else {
                     <ul class="nav navbar-nav navbar-right">			      
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
-                        <li><a href="<?php echo base_url(); ?>welcome/users">Users</a></li>
+                        <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
                          <?php } ?>
                         <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
                          <li>
@@ -35,8 +35,8 @@ else {
                               <li><a href="add_service">Add Service</a></li>
                             </ul>
                          </li>
-                        <li><a href="<?php echo base_url(); ?>welcome/dashboard">My Account</a></li>
-                        <li><a href="<?php echo base_url(); ?>welcome/logout">Logout</a></li>
+                        <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
                     </ul>
                 </div>
                 <!--end navbar -->                      
@@ -76,7 +76,7 @@ else {
                                 <div class="span1">Service Location</div>
                                 <div class="span1">Service Type</div>
                                 <div class="span1">Billing Cycle</div>
-                                <div class="span1">Network Details</div>
+                                <div class="span1">Billing Start Date</div>
                                 <div class="span1">IP Addresses</div>
                                 <div class="span1">CPE MAC</div>
                                 <div class="span1">AP CONNECTED</div>
@@ -88,6 +88,7 @@ else {
                             if($i%2 == 0) $style="background-color:#eee;";
                                   else $style="background-color:#fff;";
                                   $id = $value['id'];
+                                  $start_date = date('Y-d-m',strtotime($value['created']));
                                   $rem = strtotime($value['created'])+($value['billing_cycle']*30*86400)+($value['grace_period']*86400)-time();
                                   $rema = floor($rem/86400);
                                   $width = floor(($rema/365)*100).'%';
@@ -126,7 +127,7 @@ else {
                                          }
                                       else echo "<span style=\"color: #8FC412; \">Annual</span>";
                                       ?></div>
-                                      <div class="span1"><?php echo $value['network_details'];?></div>
+                                      <div class="span1"><?php echo $start_date;?></div>
                                       <div class="span1"><?php echo $value['ip_addresses'];?></div>
                                       <div class="span1"><?php echo $value['cpe_mac'];?></div>
                                       <div class="span1"><?php echo $value['ap_connected'];?></div>

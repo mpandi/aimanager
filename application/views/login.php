@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 if(isset($this->session->userdata['logged_in'])){
-          redirect("welcome/dashboard");
+          redirect("home/dashboard");
         }   
  include 'header.php'; 
 ?>
@@ -16,7 +16,7 @@ if(isset($this->session->userdata['logged_in'])){
             <div class="container">              
                 <div>
                     <ul class="nav navbar-nav navbar-right">			      
-                        <li><a href="index">Home</a></li>
+                        <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <li><a href="login" class="active">Login</a></li>
                     </ul>
                 </div>
@@ -60,7 +60,7 @@ if(isset($this->session->userdata['logged_in'])){
                    <section class="login_content" style="padding:5px;">
                       <div class="eh">Login </div>
                        <?php $attributes = array('class'=>'form-horizontal login_d');
-                        echo form_open('welcome/dashboard',$attributes);
+                        echo form_open('home/dashboard',$attributes);
                         if(isset($error_message)){
                             echo "<div class='alert alert-danger'>";
                             echo $error_message;

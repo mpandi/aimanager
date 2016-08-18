@@ -1,23 +1,3 @@
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime()+(exdays*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + "; " + expires;
-}
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
 $(document).ready(function(){
 	$('a#delete_event').click(function(e){
 	     var host = $(this).attr('href');
@@ -33,50 +13,8 @@ $(document).ready(function(){
                 }
             );
 	});	
-$('form#forgotform').submit(function(){
-		var email = $('input#email').val(),
-            captchaResponse = $('#g-recaptcha-response').val(),
-            msg = "",
-			errormsg = $('#errormsg');
-            if(captchaResponse == ''){
-                swal({   
-                    title: "Error!",text: "Captcha Field empty",   
-                    type: "error",   
-                    confirmButtonText: "OK" 
-                });
-                return false;
-              }  
-			errormsg.show();
-			$.ajax({
-			type : 'POST',
-			dataType : 'json',
-			data: {
-				action: 'forgot',
-				email: encrypt(email)
-			},
-			url  : '../../login/query.php',
-			success: function(responseText){
-			  errormsg.hide();
-				 if(responseText.response == 'fail_captcha'){
-					msg = "Captcha Mismatched!"; 
-                swal({   
-                    title: "Error!",text: msg,   
-                    type: "error",   
-                    confirmButtonText: "OK" 
-                    });
-                }
-                else{
-                    $('input#forgot').attr("disabled","disabled");
-                    swal({   
-                        title: "Success!",text: "Password reset email has been sent. Click the link in the email.",   
-                        type: "success",   
-                        confirmButtonText: "OK" 
-                        });
-				  }
-			  }
-            });
-		return false;
-	});
+ $("#datepicker").datepicker({dateFormat: 'yy-mm-dd',
+                             minDate: 0});
 $('form#resetpassform').submit(function(){
 		var r = $('#r').val(),
 			password = $('#password').val(),
