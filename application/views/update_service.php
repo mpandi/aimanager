@@ -7,7 +7,7 @@ if (isset($this->session->userdata['logged_in'])) {
     $level = $this->session->userdata['logged_in']['user_level'];
  include "header.php";
  }
-elseif($level != '1'){
+elseif($level != 1){
     redirect('services/', 'refresh');
  } 
 else {

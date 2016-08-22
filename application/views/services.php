@@ -100,7 +100,9 @@ else {
                             ?>
                             <div class="row-fluid" style="<?php echo $style; ?>">                                  
                                       <div class="span1"> 
+                                       <?php if($level == 1){ ?>
                                         <a href="delete_service/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
+                                       <?php } ?>
                                         <a href="view_service/<?php echo $id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
                                       </div>
                                       <div class="span2"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
