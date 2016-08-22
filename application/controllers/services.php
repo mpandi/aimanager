@@ -112,6 +112,21 @@ public function update_service($id){
 		  }
 		}
 	}
+public function view_service($id){ 
+     if(!isset($id)) {
+		  redirect("services/");
+		} 
+	 else {
+		$data['service_data'] = $this->services_database->fetch_service($id);
+	    if($data['service_data'] != false) {
+          $this->load->view('view_service', $data);
+		} 
+	  else {
+		$this->session->set_flashdata('nonexistent','Nothing found ...');
+        redirect("services/");
+		  }
+		}
+	}
 public function update(){ 
         $this->form_validation->set_rules('customer', 'Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('location', 'Location', 'trim|required|xss_clean');

@@ -72,23 +72,18 @@ else {
                              } } ?>
                        <div class="row-fluid">                                                                                         
                                 <div class="span1"><strong>Delete</strong></div>
-                                <div class="span1"><strong>Customer</strong></div>
-                                <div class="span1">Service Location</div>
+                                <div class="span2"><strong>Customer</strong></div>
+                                <div class="span2">Service Location</div>
                                 <div class="span1">Service Type</div>
                                 <div class="span1">Billing Cycle</div>
-                                <div class="span1">Billing Start Date</div>
-                                <div class="span1">IP Addresses</div>
-                                <div class="span1">CPE MAC</div>
-                                <div class="span1">AP CONNECTED</div>
-                                <div class="span1">CPE Graph</div>
-                                <div class="span1">Code To Execute</div>
-                                <div class="span1">Remainder</div>
+                                <div class="span2">Billing Start Date</div>
+                                <div class="span3">Remaining days</div>
                             </div>                                                
                         <?php foreach ($services_data as $value){ 
                             if($i%2 == 0) $style="background-color:#eee;";
                                   else $style="background-color:#fff;";
                                   $id = $value['id'];
-                                  $start_date = date('Y-d-m',strtotime($value['created']));
+                                  $start_date = $value['created'];
                                   $rem = strtotime($value['created'])+($value['billing_cycle']*30*86400)+($value['grace_period']*86400)-time();
                                   $rema = floor($rem/86400);
                                   $width = floor(($rema/365)*100).'%';
@@ -106,18 +101,19 @@ else {
                             <div class="row-fluid" style="<?php echo $style; ?>">                                  
                                       <div class="span1"> 
                                         <a href="delete_service/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
-                                        <a href="update_service/<?php echo $id;?>" title="update" style="padding-left: 5px;"><i class="fa fa-pencil" style="color: green;"></i></a>
+                                        <a href="view_service/<?php echo $id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
                                       </div>
-                                      <div class="span1"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
-                                      <div class="span1"><?php echo $value['location'];?></div>
-                                      <div class="span1"><?php 
-                                      if($value['service_type']=='1'){
+                                      <div class="span2"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
+                                      <div class="span2"><?php echo $value['location'];?></div>
+                                      <div class="span1">
+                                      <?php if($value['service_type']=='1'){
                                          echo "<span style=\"color: #8FC412; \">Internet</span>";
                                          }
-                                      elseif($value['service_type']=='2'){
+                                            elseif($value['service_type']=='2'){
                                          echo "<span style=\"color: black; \">VPN</span>";
                                          }
-                                      ?></div>
+                                      ?>
+                                      </div>
                                       <div class="span1"><?php 
                                       if($value['billing_cycle']=='1'){
                                          echo "<span style=\"color: #8FC412; \">Monthly</span>";
@@ -127,13 +123,8 @@ else {
                                          }
                                       else echo "<span style=\"color: #8FC412; \">Annual</span>";
                                       ?></div>
-                                      <div class="span1"><?php echo $start_date;?></div>
-                                      <div class="span1"><?php echo $value['ip_addresses'];?></div>
-                                      <div class="span1"><?php echo $value['cpe_mac'];?></div>
-                                      <div class="span1"><?php echo $value['ap_connected'];?></div>
-                                      <div class="span1"><?php echo $value['cpe_graph'];?></div>
-                                      <div class="span1"><?php echo $value['execution_code'];?></div>
-                                      <div class="span1" style="padding-top: 5px;"><div id="battery"><div class="battery-level <?php echo $level;?>" style="width: <?php echo $width;?>;">
+                                      <div class="span2"><?php echo $start_date;?></div>
+                                      <div class="span3" style="padding-top: 5px;"><div id="battery"><div class="battery-level <?php echo $level;?>" style="width: <?php echo $width;?>;">
                                       <span style="padding-bottom: 2px; color: black;"><?php echo $rema;?></span></div></div></div>
                                    </div>
                                     <?php $i++; }  ?>
