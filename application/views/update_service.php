@@ -6,6 +6,9 @@ if (isset($this->session->userdata['logged_in'])) {
     $password = $this->session->userdata['logged_in']['password'];
     $level = $this->session->userdata['logged_in']['user_level'];
  include "header.php";
+ }
+elseif($level != '1'){
+    redirect('services/', 'refresh');
  } 
 else {
   redirect('login/', 'refresh');
