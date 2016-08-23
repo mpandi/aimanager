@@ -44,7 +44,6 @@ public function add() {
         $this->form_validation->set_rules('ips', 'IPS', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('cpemac', 'CPE MAC', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('apconnected', 'AP CONNECTED', 'trim|required|xss_clean');
- 	    $this->form_validation->set_rules('code', 'Code', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('cpegraph', 'Graph', 'trim|required|xss_clean');
 	 if($this->form_validation->run() == FALSE) {
 		  $this->load->view('add_service');
@@ -59,7 +58,6 @@ public function add() {
         'ip_addresses' => $this->input->post('ips'),
         'cpe_mac' => $this->input->post('cpemac'),
         'ap_connected' => $this->input->post('apconnected'),
-        'execution_code' => $this->input->post('code'),
         'cpe_graph' => $this->input->post('cpegraph'),
         'created' => $this->input->post('startdate'),
         'expiry_date' => $this->input->post('expirydate')
@@ -75,7 +73,7 @@ public function add() {
         $data['add_billing_start_date'] = $this->input->post('startdate');
         $data['add_ips'] = $this->input->post('ips');
         $data['add_graph'] = $this->input->post('cpegraph');
-        $data['add_code'] = $this->input->post('code');
+        $data['add_billing_expiry_date'] = $this->input->post('expirydate');
         $data['add_cpemac'] = $this->input->post('cpemac');
         $data['add_apconnected'] = $this->input->post('apconnected');
 		$this->load->view('add_service', $data);
@@ -136,7 +134,6 @@ public function update(){
         $this->form_validation->set_rules('ips', 'IPS', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('cpemac', 'CPE MAC', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('apconnected', 'AP CONNECTED', 'trim|required|xss_clean');
- 	    $this->form_validation->set_rules('code', 'Code', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('cpegraph', 'Graph', 'trim|required|xss_clean');
 	 if($this->form_validation->run() == FALSE) {
 		  $this->load->view('add_service');
@@ -151,7 +148,6 @@ public function update(){
         'ip_addresses' => $this->input->post('ips'),
         'cpe_mac' => $this->input->post('cpemac'),
         'ap_connected' => $this->input->post('apconnected'),
-        'execution_code' => $this->input->post('code'),
         'cpe_graph' => $this->input->post('cpegraph'),
         'grace_period' => $this->input->post('graceperiod'),
         'created' => $this->input->post('startdate'),

@@ -64,6 +64,7 @@ else {
                           echo validation_errors();?>  
                       <div class="span5">                    
                         <div class="form-group" style="padding-top: 5px;">
+                         <label>Customer Name: </label>
                             <select name="customer" style="width: 100%;">
                                 <option value="" selected="">..Customer..</option>
                                 <?php foreach ($customers_data as $value){ ?>
@@ -72,9 +73,11 @@ else {
                             </select>
                         </div>
                         <div class="form-group" style="padding-top: 5px;">
+                          <label>Service Location: </label>
                             <input type="text" class="form-control" name="location" placeholder="Location" required="" value="<?php echo isset($add_location)?$add_location:'';?>"/>
                         </div>
                         <div class="form-group" style="padding-top: 5px;">
+                         <label>Service Type: </label>
                             <select name="service_type" style="width: 100%;">
                                 <option value="" selected="">..Service Type..</option>
                                 <option value="1">Internet</option>
@@ -82,6 +85,7 @@ else {
                             </select>
                         </div>
                          <div class="form-group" style="padding-top: 5px;">
+                            <label>Billing Cycle: </label>
                             <select name="billing_cycle" style="width: 100%;">
                                 <option value="" selected="">..Billing Cycle..</option>
                                 <option value="1">Monthly</option>
@@ -90,26 +94,29 @@ else {
                             </select>
                          </div>
                          <div class="form-group" style="padding-top: 5px;">
+                            <label>Billing Start Date: </label>
                             <input type="text" class="form-control" name="startdate" id="datepicker" placeholder="Billing Start Date" required="" value="<?php echo isset($add_billing_start_date)?$add_billing_start_date:'';?>"/>
                          </div>
                          <div class="form-group" style="padding-top: 5px;">
+                           <label>Billing Expiry Date: </label>
                             <input type="text" class="form-control" name="expirydate" id="datepicker2" placeholder="Billing Expiry Date" required="" value="<?php echo isset($add_billing_expiry_date)?$add_billing_expiry_date:'';?>"/>
                          </div>
                       </div>
                       <div class="span6 offset1">
                         <div class="form-group" style="padding-top: 5px;">
+                            <label>IP Addresses: </label>
                             <input type="text" class="form-control" name="ips" placeholder="IP Addresses" required="" value="<?php echo isset($add_ips)?$add_ips:'';?>"/>
                         </div>
                          <div class="form-group" style="padding-top: 5px;">
+                          <label>CPE MAC: </label>
                             <input type="text" class="form-control" name="cpemac" placeholder="CPE MAC" required="" value="<?php echo isset($add_cpemac)?$add_cpemac:'';?>"/>
                         </div>
                          <div class="form-group" style="padding-top: 5px;">
+                            <label>AP CONNECTED: </label>
                             <input type="text" class="form-control" name="apconnected" placeholder="AP CONNECTED" required="" value="<?php echo isset($add_apconnected)?$add_apconnected:'';?>"/>
                         </div>
                          <div class="form-group" style="padding-top: 5px;">
-                            <input type="text" class="form-control" name="code" placeholder="Code to Execute" value="<?php echo isset($add_code)?$add_code:'';?>"/>
-                        </div>
-                         <div class="form-group" style="padding-top: 5px;">
+                            <label>Graph Details: </label>
                             <input type="text" class="form-control" name="cpegraph" placeholder="CPE Graph" value="<?php echo isset($add_graph)?$add_graph:'';?>"/>
                         </div>
                         <div class="form-group">                       

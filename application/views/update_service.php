@@ -126,10 +126,6 @@ else {
                             <input type="number" name="graceperiod" class="form-control" placeholder="Grace Period" value="<?php echo isset($add_graceperiod)?$add_graceperiod:$service_data[0]['grace_period'];?>"/>
                         </div>
                          <div class="form-group">
-                          <label>Code to Execute: </label>
-                            <input type="text" name="code" class="form-control" placeholder="Code to Execute" value="<?php echo isset($add_code)?$add_code:$service_data[0]['execution_code'];?>"/>
-                        </div>
-                         <div class="form-group">
                          <label>Graph Details: </label>
                             <input type="text" class="form-control" name="cpegraph" placeholder="CPE Graph" value="<?php echo isset($add_graph)?$add_graph:$service_data[0]['cpe_graph'];?>"/>
                         </div>
