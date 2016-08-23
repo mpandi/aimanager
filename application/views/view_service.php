@@ -92,13 +92,17 @@ else {
                         <tr>
                          <td><label>Billing Start Date: </label></td>
                          <td><?php echo $service_data[0]['created'];?></td>
-                         </tr>                        
+                         </tr> 
+                        <tr>
+                         <td><label>Billing Expiry Date: </label></td>
+                         <td><?php echo $service_data[0]['expiry_date'];?></td>
+                         </tr>                         
+                       </table>
+                       <table class="span6">
                         <tr>
                            <td><label>IP Addresses: </label></td>
                            <td><?php echo $service_data[0]['ip_addresses'];?></td>
                         </tr>
-                       </table>
-                       <table class="span6">
                         <tr>
                           <td><label>CPE MAC: </label></td>
                           <td><?php echo $service_data[0]['cpe_mac'];?></td>

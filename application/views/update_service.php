@@ -126,7 +126,7 @@ else {
                             <input type="number" name="graceperiod" class="form-control" placeholder="Grace Period" value="<?php echo isset($add_graceperiod)?$add_graceperiod:$service_data[0]['grace_period'];?>"/>
                         </div>
                          <div class="form-group">
-                          <label>CODE: </label>
+                          <label>Code to Execute: </label>
                             <input type="text" name="code" class="form-control" placeholder="Code to Execute" value="<?php echo isset($add_code)?$add_code:$service_data[0]['execution_code'];?>"/>
                         </div>
                          <div class="form-group">

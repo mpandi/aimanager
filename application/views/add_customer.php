@@ -78,22 +78,28 @@ else {
                           } 
                           echo validation_errors();?>
                         <div class="form-group" style="padding-top: 10px;">
+                            <label>Customer Name: </label>
                             <input type="text" class="form-control" name="customer_name" placeholder="Name" required="" value="<?php echo isset($add_name)?$add_name:'';?>"/>
                         </div>
                         <div class="form-group" style="padding-top: 10px;">
+                            <label>Customer Address: </label>
                             <input type="text" class="form-control" name="address" placeholder="Address" required="" value="<?php echo isset($add_address)?$add_address:'';?>"/>
                         </div>
                         
                         <div class="form-group" style="padding-top: 10px;">
+                            <label>Billing Contact Name: </label>
                             <input type="text" class="form-control" name="billing_contact_name" placeholder="Billing Contact Name" required="" value="<?php echo isset($billing_contact_name)?$billing_contact_name:'';?>"/>
                         </div> 
                         <div class="form-group" style="padding-top: 10px;">
+                            <label>Billing Contact Phone: </label>
                             <input type="telephone" class="form-control" name="billing_contact_phone" placeholder="Billing Contact Phone" required="" value="<?php echo isset($billing_contact_phone)?$billing_contact_phone:'';?>"/>
                         </div>                       
                        <div class="form-group" style="padding-top: 10px;">
+                            <label>Technical Contact Name: </label>
                             <input type="text" class="form-control" name="technical_contact_name" placeholder="Technical Contact Name" required="" value="<?php echo isset($technical_contact_name)?$technical_contact_name:'';?>"/>
                         </div>
                          <div class="form-group" style="padding-top: 10px;">
+                          <label>Technical Contact Phone: </label>
                             <input type="telephone" class="form-control" name="technical_contact_phone" placeholder="Technical Contact Phone" required="" value="<?php echo isset($technical_contact_phone)?$technical_contact_phone:'';?>"/>
                         </div>
                         <div class="form-group">                       
