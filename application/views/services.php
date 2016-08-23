@@ -69,7 +69,8 @@ else {
                               echo $flashdelete;
                               echo $flashupdate;
                               echo "</div>";
-                             } } ?>
+                             } } 
+                    if(isset($services_data)){ ?>
                        <div class="row-fluid">                                                                                         
                                 <div class="span1"><strong>Delete</strong></div>
                                 <div class="span2"><strong>Customer</strong></div>
@@ -133,7 +134,7 @@ else {
                                          <div class="span3" style="padding-bottom: 2px; color: black; float: left;"><?php echo $rema;?> days</div></div>
                                       </div>
                                    </div>
-                                    <?php $i++; }  ?>
+                                    <?php $i++; } } ?>
                 </section>
         </div>
         <!--end container-->
