@@ -44,26 +44,11 @@ else {
     <section id="home_wrapper" class="home-wrapper">
 
         <!--begin container-->
-        <div class="container"> 
-
-            <!--begin row-->
-            <div class="row margin-bottom-30">
-            
-                <!--begin col-md-6-->
-                <div class="col-md-6 padding-top-20">                                
-                    <h1 class="home-title wow fadeIn">Add Service</h1>                   
-                    <p class="home-subtitle wow fadeIn">
-                       View all services, their emails, levels and account statuses.<br/>
-                        Also add or remove services.
-                    </p>
-                    <a href="<?php echo base_url(); ?>services/" class="btn">View Services</a>                             
-                </div>
-                <!--end col-md-6-->
-            
-                <!--begin col-md-6-->
-                <div class="col-md-6 wow slideInRight" data-wow-delay="2.25s">
+        <div class="container-fluid"> 
+                <div class="span10 offset2">
                    <section class="login_content" style="padding:5px;">
                       <div class="eh">Add Service </div>
+                      <div class="row-fluid">
                        <?php $attributes = array('class'=>'form-horizontal login_d');
                         echo form_open('services/add',$attributes);
                         if(isset($error_message)){
@@ -76,7 +61,8 @@ else {
                             echo $success_message;
                             echo "</div>";
                           } 
-                          echo validation_errors();?>
+                          echo validation_errors();?>  
+                      <div class="span5">                    
                         <div class="form-group" style="padding-top: 5px;">
                             <select name="customer" style="width: 100%;">
                                 <option value="" selected="">..Customer..</option>
@@ -102,10 +88,15 @@ else {
                                 <option value="4">Quarterly</option>
                                 <option value="12">Annual</option>
                             </select>
-                        </div>
-                       <div class="form-group" style="padding-top: 5px;">
+                         </div>
+                         <div class="form-group" style="padding-top: 5px;">
                             <input type="text" class="form-control" name="startdate" id="datepicker" placeholder="Billing Start Date" required="" value="<?php echo isset($add_billing_start_date)?$add_billing_start_date:'';?>"/>
-                       </div>
+                         </div>
+                         <div class="form-group" style="padding-top: 5px;">
+                            <input type="text" class="form-control" name="expirydate" id="datepicker2" placeholder="Billing Expiry Date" required="" value="<?php echo isset($add_billing_expiry_date)?$add_billing_expiry_date:'';?>"/>
+                         </div>
+                      </div>
+                      <div class="span6 offset1">
                         <div class="form-group" style="padding-top: 5px;">
                             <input type="text" class="form-control" name="ips" placeholder="IP Addresses" required="" value="<?php echo isset($add_ips)?$add_ips:'';?>"/>
                         </div>
@@ -124,11 +115,12 @@ else {
                         <div class="form-group">                       
                             <input type="submit" class="btn btn-success" name="add" value="Add Service" />
                         </div> 
-                   </div>
+                   </div>              
                    <?php echo form_close(); ?>
-                </section>
-                </div>
-                <!--end col-md-6-->    
+                    </div>
+                    </section>  
+                   </div>
+                 </div>             
             </div>
             <!--end row-->
         </div>

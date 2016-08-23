@@ -61,7 +61,8 @@ public function add() {
         'ap_connected' => $this->input->post('apconnected'),
         'execution_code' => $this->input->post('code'),
         'cpe_graph' => $this->input->post('cpegraph'),
-        'created' => $this->input->post('startdate')
+        'created' => $this->input->post('startdate'),
+        'expiry_date' => $this->input->post('expirydate')
 		);
 		$result = $this->services_database->registration_insert($data);
 	  if($result == 'registered') {
@@ -153,7 +154,8 @@ public function update(){
         'execution_code' => $this->input->post('code'),
         'cpe_graph' => $this->input->post('cpegraph'),
         'grace_period' => $this->input->post('graceperiod'),
-        'created' => $this->input->post('startdate')
+        'created' => $this->input->post('startdate'),
+        'expiry_date' => $this->input->post('expirydate')
 		);
 		$result = $this->services_database->update($id,$data);
 	  if($result) {

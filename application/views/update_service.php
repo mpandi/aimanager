@@ -48,18 +48,10 @@ else {
 
         <!--begin container-->
         <div class="container-fluid"> 
-                <!--begin col-md-6-->
-                <div class="col-md-6 padding-top-10">                                
-                    <h1 class="home-title wow fadeIn">Add Service</h1>                   
-                    <p class="home-subtitle wow fadeIn">
-                       View all services, their emails, levels and account statuses.<br/>
-                        Also add or remove services.
-                    </p>
-                    <a href="<?php echo base_url(); ?>services/" class="btn scrool wow fadeIn">View Services</a>                             
-                </div>
-                <div class="col-md-6 wow slideInRight">
+               <div class="span10 offset2">
                    <section class="login_content" style="padding:5px;">
                       <div class="eh">Update Service </div>
+                      <div class="row-fluid">
                        <?php $attributes = array('class'=>'form-horizontal login_d');
                         echo form_open('services/update',$attributes);
                         if(isset($error_message)){
@@ -73,8 +65,9 @@ else {
                             echo "</div>";
                           } 
                           echo validation_errors();?>
-                        <div class="form-group">
-                        <label>Customer Name: </label>
+                        <div class="span5"> 
+                         <div class="form-group">
+                         <label>Customer Name: </label>
                             <input type="hidden" name="service_id" value="<?php echo $service_data[0]['id'];?>"/>
                             <select name="customer" style="width: 100%;">
                                 <option value="<?php echo $service_data[0]['id'];?>" selected=""><?php echo $this->customers_database->get_customer($service_data[0]['customer_id']);?></option>
@@ -111,6 +104,12 @@ else {
                             <input type="text" name="startdate" class="form-control" placeholder="Billing Start Date" required="" id="datepicker"value="<?php echo isset($add_start_date)?$add_start_date:$service_data[0]['created'];?>"/>
                         </div>
                         <div class="form-group">
+                       <label>Billing Expiry Date: </label>
+                            <input type="text" name="expirydate" class="form-control" placeholder="Billing Expiry Date" required="" id="datepicker2"value="<?php echo isset($add_expiry_date)?$add_expiry_date:$service_data[0]['expiry_date'];?>"/>
+                        </div>
+                      </div>
+                      <div class="span6 offset1">
+                        <div class="form-group">
                            <label>IP Addresses: </label>
                             <input type="text" name="ips" class="form-control" placeholder="IP Addresses" required="" value="<?php echo isset($add_ips)?$add_ips:$service_data[0]['ip_addresses'];?>"/>
                         </div>
@@ -138,10 +137,11 @@ else {
                             <input type="submit" class="btn btn-success" name="add" value="Update" />
                         </div> 
                    </div>
-                   <?php echo form_close(); ?>
-                </section>
-               
-                <!--end col-md-6-->    
+                  <?php echo form_close(); ?>
+                    </div>
+                    </section>  
+                   </div>
+                 </div>             
             </div>
             <!--end row-->
         </div>

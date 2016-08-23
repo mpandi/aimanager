@@ -100,9 +100,9 @@ else {
                             ?>
                             <div class="row-fluid" style="<?php echo $style; ?>">                                  
                                       <div class="span1"> 
-                                       <?php if($level == 1){ ?>
+                                       <?php if($this->session->userdata['logged_in']['user_level'] == 1){ ?>
                                         <a href="delete_service/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
-                                       <?php } ?>
+                                        <?php } ?>
                                         <a href="view_service/<?php echo $id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
                                       </div>
                                       <div class="span2"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
@@ -126,8 +126,12 @@ else {
                                       else echo "<span style=\"color: #8FC412; \">Annual</span>";
                                       ?></div>
                                       <div class="span2"><?php echo $start_date;?></div>
-                                      <div class="span3" style="padding-top: 5px;"><div id="battery"><div class="battery-level <?php echo $level;?>" style="width: <?php echo $width;?>;">
-                                      <span style="padding-bottom: 2px; color: black;"><?php echo $rema;?></span></div></div></div>
+                                      <div class="span3" style="padding-top: 5px;">
+                                         <div class="row-fluid">
+                                         <div id="battery" class="span7">
+                                            <div class="battery-level <?php echo $level;?>" style="width: <?php echo $width;?>;"></div></div>
+                                         <div class="span3" style="padding-bottom: 2px; color: black; float: left;"><?php echo $rema;?> days</div></div>
+                                      </div>
                                    </div>
                                     <?php $i++; }  ?>
                 </section>

@@ -13,7 +13,9 @@ $(document).ready(function(){
                 }
             );
 	});	
- $("#datepicker").datepicker({dateFormat: 'yy-mm-dd',
+$("#datepicker").datepicker({dateFormat: 'yy-mm-dd',
+                             minDate: 0});
+$("#datepicker2").datepicker({dateFormat: 'yy-mm-dd',
                              minDate: 0});
 $('form#resetpassform').submit(function(){
 		var r = $('#r').val(),
