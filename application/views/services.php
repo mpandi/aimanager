@@ -90,7 +90,7 @@ else {
                                   $billing_cycle = $value['billing_cycle']*30; //convert into days
                                   $rem = strtotime($value['expiry_date'])+($value['grace_period']*86400)-time();
                                   $rema = floor($rem/86400);
-                                  $width = floor(($rema/10)*100);
+                                  $width = floor(($rema/$billing_cycle)*100);
                                   if($width > '66'){
                                     $level = 'high';                                    
                                   }
@@ -123,7 +123,7 @@ else {
                                       if($value['billing_cycle']=='1'){
                                          echo "<span style=\"color: #8FC412; \">Monthly</span>";
                                          }
-                                      elseif($value['billing_cycle']=='4'){
+                                      elseif($value['billing_cycle']=='3'){
                                          echo "<span style=\"color: black; \">Quarterly</span>";
                                          }
                                       else echo "<span style=\"color: #8FC412; \">Annual</span>";

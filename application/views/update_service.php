@@ -95,7 +95,7 @@ else {
                             <select name="billing_cycle" style="width: 100%;">
                                 <option value="<?php echo $service_data[0]['billing_cycle'];?>" selected="">..Billing Cycle..</option>
                                 <option value="1">Monthly</option>
-                                <option value="4">Quarterly</option>
+                                <option value="3">Quarterly</option>
                                 <option value="12">Annual</option>
                             </select>
                         </div>
