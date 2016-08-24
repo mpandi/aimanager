@@ -51,7 +51,7 @@ else {
                        View all users, their emails, levels and account statuses.<br/>
                         Also add or remove users.
                     </p>
-                    <a href="registration" class="btn scrool wow fadeIn" data-wow-delay="1.75s">Add User</a>                             
+                    <a href="registration" class="btn scrool wow fadeIn">Add User</a>                             
                 </div>
                 <!--end col-md-6-->     
                 <!--begin col-md-6-->

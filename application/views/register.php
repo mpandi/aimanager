@@ -19,15 +19,15 @@ else {
             <!--begin container -->
             <div class="container">              
                 <div>
-                    <ul class="nav navbar-nav navbar-right">			      
+                   <ul class="nav navbar-nav navbar-right">			      
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
-                        <li><a href="users" class="active">Users</a></li>
+                        <li><a href="<?php echo base_url(); ?>users/" class="active">Users</a></li>
                          <?php } ?>
-                        <li><a href="customers">Customers</a></li>
-                        <li><a href="<?php echo base_url(); ?>">Services</a></li>
-                        <li><a href="dashboard">My Account</a></li>
-                        <li><a href="logout">Logout</a></li>
+                        <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
+                        <li><a href="<?php echo base_url(); ?>services/">Services</a></li>
+                        <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
                     </ul>
                 </div>
                 <!--end navbar -->                      
@@ -56,7 +56,7 @@ else {
                        View all users, their emails, levels and account statuses.<br/>
                         Also add or remove users.
                     </p>
-                    <a href="users" class="btn btn-lg btn-white-transparent btn-margin scrool wow fadeIn" data-wow-delay="1.75s">View Users</a>                             
+                    <a href="<?php echo base_url(); ?>users/" class="btn">View Users</a>                             
                 </div>
                 <!--end col-md-6-->
             
@@ -65,7 +65,7 @@ else {
                    <section class="login_content" style="padding:5px;">
                       <div class="eh">Add User </div>
                        <?php $attributes = array('class'=>'form-horizontal login_d');
-                        echo form_open('welcome/add_user',$attributes);
+                        echo form_open('users/add_user',$attributes);
                         if(isset($error_message)){
                             echo "<div class='alert alert-danger'>";
                             echo $error_message;
@@ -78,12 +78,15 @@ else {
                           } 
                           echo validation_errors();?>
                         <div class="form-group">
+                         <label>Email: </label>
                             <input type="email" class="form-control" name="email" placeholder="Email" required="" value="<?php echo isset($add_email)?$add_email:'';?>"/>
                         </div>
                         <div class="form-group">
+                             <label>Username: </label>
                             <input type="text" class="form-control" name="username" placeholder="Username" required="" value="<?php echo isset($add_username)?$add_username:'';?>"/>
                         </div>
                         <div class="form-group">
+                             <label>User Type: </label>
                             <select name="type" style="width: 100%;">
                                 <option value="" selected="">..Type..</option>
                                 <option value="1">Administrator</option>
@@ -92,6 +95,7 @@ else {
                         </select>
                         </div>
                        <div class="form-group">
+                             <label>Password: </label>
                             <input type="password" class="form-control" name="password" placeholder="Password" required="" value=""/>
                         </div>
                         <div class="form-group">                       

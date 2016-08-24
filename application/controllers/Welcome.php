@@ -13,73 +13,6 @@ class Welcome extends CI_Controller {
 public function index(){
 		$this->load->view('welcome_message');
 	}
-public function login(){
-		$this->load->view('login');	
-	}
-public function registration(){
-		$this->load->view('register');	
-	}
-public function users(){
-        $data['user_data'] = $this->login_database->read('1');
-	     if($data['user_data'] != false) {
-		   $this->load->view('users',$data);
-		  } 
-	     else {
-		   $data = array(
-		   'error_message' => 'No users found ...'
-		  );
-		  $this->load->view('users', $data);
-		}
-	}
-	// Validate and store registration data in database
-public function add_user() {
- // Check validation for user input in SignUp form
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
-	 if($this->form_validation->run() == FALSE) {
-		  $this->load->view('register');
-		} 
-	 else {
-		$data = array(
-		'username' => $this->input->post('username'),
-		'email' => $this->input->post('email'),
-		'password' => md5($this->input->post('password')),
-        'created' => date('Y-m-d H:i:s'),
-        'status' => '1',
-        'level' => $this->input->post('type')
-		);
-		$result = $this->login_database->registration_insert($data);
-	  if($result == 'registered') {
-	    $this->session->set_flashdata('success_register','Registration Successful ...');
-        redirect("welcome/users");
-		} 
-	 else {
-		$data['error_message'] = $result;
-        $data['add_username'] = $this->input->post('username');
-        $data['add_email'] = $this->input->post('email');
-		$this->load->view('register', $data);
-		  }
-		}
-	}
-public function delete_user($user) {
-	 if(!isset($user)) {
-		  redirect("welcome/users");
-		} 
-	 else {
-		$result = $this->login_database->delete_user($user);
-	  if($result == true) {
-	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
-        redirect("welcome/users");
-		} 
-	  else {
-		$this->session->set_flashdata('fail_delete','Unable to delete ...');
-        redirect("welcome/users");
-		  }
-		}
-	}
-
-// Check for user login process
 public function dashboard(){
      if(isset($this->session->userdata['logged_in'])){
           $this->load->view('dashboard');
@@ -141,18 +74,5 @@ public function update(){
 		$this->load->view('dashboard', $data);
 		}
    }
-// Logout 
-public function logout() {
-// Removing session data
-		$sess_array = array(
-		'username' => '',
-        'password' => '',
-        'email' => '',
-        'user_level' => ''
-		);
-		$this->session->unset_userdata('logged_in', $sess_array);
-		$data['logout_message'] = 'Successfully Logged Out';
-		$this->load->view('login',$data);
-		}
    }
 ?>

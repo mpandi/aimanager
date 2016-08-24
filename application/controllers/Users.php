@@ -22,6 +22,9 @@ public function index(){
 		  $this->load->view('users', $data);
 		}
 	}
+public function registration(){
+		$this->load->view('register');	
+	}
 	// Validate and store registration data in database
 public function add_user() {
  // Check validation for user input in SignUp form
@@ -132,18 +135,5 @@ public function update(){
 		$this->load->view('dashboard', $data);
 		}
    }
-// Logout 
-public function logout() {
-// Removing session data
-		$sess_array = array(
-		'username' => '',
-        'password' => '',
-        'email' => '',
-        'user_level' => ''
-		);
-		$this->session->unset_userdata('logged_in', $sess_array);
-		$data['logout_message'] = 'Successfully Logged Out';
-		$this->load->view('login',$data);
-		}
    }
 ?>
