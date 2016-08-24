@@ -117,11 +117,11 @@ else {
                         </tr>
                          <tr>
                            <td><label>Graph Details: </label></td>
-                           <td><a href="<?php echo $service_data[0]['cpe_graph'];?>">View Graph</a></td>
+                           <td><a href="<?php echo $service_data[0]['cpe_graph'];?>" target="_blank">View Graph</a></td>
                         </tr>
                         <?php if($level == 1){ ?>
                         <tr><td></td>                      
-                        <td><a href="<?php echo base_url();?>services/update_service/<?php echo $service_data[0]['id'];?>" title="view" style="padding-left: 5px; color: green;">Edit <i class="fa fa-eye" style="color: green;"></i></a></td>
+                        <td><a href="<?php echo base_url();?>services/update_service/<?php echo $service_data[0]['id'];?>" title="edit" style="padding-left: 5px; color: green;">Edit <i class="fa fa-pencil" style="color: green;"></i></a></td>
                         </tr> 
                         <?php } ?>
                        </table>

@@ -46,7 +46,7 @@ public function add_user() {
 		$result = $this->login_database->registration_insert($data);
 	  if($result == 'registered') {
 	    $this->session->set_flashdata('success_register','Registration Successful ...');
-        redirect("welcome/users");
+        redirect("users/");
 		} 
 	 else {
 		$data['error_message'] = $result;
@@ -58,13 +58,13 @@ public function add_user() {
 	}
 public function delete_user($user) {
 	 if(!isset($user)) {
-		  redirect("welcome/users");
+		  redirect("users/");
 		} 
 	 else {
 		$result = $this->login_database->delete_user($user);
 	  if($result == true) {
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
-        redirect("welcome/users");
+        redirect("users/");
 		} 
 	  else {
 		$this->session->set_flashdata('fail_delete','Unable to delete ...');
