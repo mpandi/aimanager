@@ -38,6 +38,7 @@ public function add() {
 	 else {
 		$data = array(
 		'name_' => $this->input->post('customer_name'),
+        'email' => $this->input->post('customer_email'),
 		'address' => $this->input->post('address'),
 		'billing_contact_name' => $this->input->post('billing_contact_name'),
         'billing_contact_phone' => $this->input->post('billing_contact_phone'),
@@ -53,6 +54,7 @@ public function add() {
 	 else {
 		$data['error_message'] = $result;
         $data['add_name'] = $this->input->post('customer_name');
+        $data['add_email'] = $this->input->post('customer_email');
         $data['add_address'] = $this->input->post('address');
         $data['billing_contact_name'] = $this->input->post('billing_contact_name');
         $data['billing_contact_phone'] = $this->input->post('billing_contact_phone');
@@ -107,6 +109,7 @@ public function update(){
 	    $id = $this->input->post('customer_id');
 		$data = array(
 		'name_' => $this->input->post('customer_name'),
+        'email' => $this->input->post('customer_email'),
 		'address' => $this->input->post('address'),
 		'billing_contact_name' => $this->input->post('billing_contact_name'),
         'billing_contact_phone' => $this->input->post('billing_contact_phone'),

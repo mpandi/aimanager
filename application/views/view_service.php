@@ -116,12 +116,8 @@ else {
                           <td><?php echo $service_data[0]['grace_period'];?> days</td>
                         </tr>
                          <tr>
-                          <td><label>CODE: </label></td>
-                          <td><?php echo $service_data[0]['execution_code'];?></td>
-                        </tr>
-                         <tr>
                            <td><label>Graph Details: </label></td>
-                           <td><?php echo $service_data[0]['cpe_graph'];?></td>
+                           <td><a href="<?php echo $service_data[0]['cpe_graph'];?>">View Graph</a></td>
                         </tr>
                         <?php if($level == 1){ ?>
                         <tr><td></td>                      

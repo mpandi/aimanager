@@ -74,28 +74,30 @@ else {
                        <div class="row-fluid">                                                                                         
                                 <div class="span1"><strong>Delete</strong></div>
                                 <div class="span2"><strong>Customer</strong></div>
-                                <div class="span2">Service Location</div>
+                                <div class="span1">Service Location</div>
                                 <div class="span1">Service Type</div>
                                 <div class="span1">Billing Cycle</div>
                                 <div class="span2">Billing Start Date</div>
-                                <div class="span3">Remaining days</div>
+                                <div class="span2">Expiry Date</div>
+                                <div class="span2">Remaining days</div>
                             </div>                                                
                         <?php foreach ($services_data as $value){ 
                             if($i%2 == 0) $style="background-color:#eee;";
                                   else $style="background-color:#fff;";
                                   $id = $value['id'];
                                   $start_date = $value['created'];
-                                  $rem = strtotime($value['created'])+($value['billing_cycle']*30*86400)+($value['grace_period']*86400)-time();
+                                  $expiry_date = $value['expiry_date'];
+                                  $billing_cycle = $value['billing_cycle']*30; //convert into days
+                                  $rem = strtotime($value['expiry_date'])+($value['grace_period']*86400)-time();
                                   $rema = floor($rem/86400);
-                                  $width = floor(($rema/365)*100).'%';
-                                  if($rem == 0) $rema = 0.9;
-                                  if($rem > 10){
+                                  $width = floor(($rema/10)*100);
+                                  if($width > '66'){
                                     $level = 'high';                                    
                                   }
-                                  elseif($rem < 10 && $rem > 3){
+                                  elseif($width < '66' && $width > '33'){
                                     $level = 'medium';
                                   }
-                                  elseif($rem < 3){
+                                 else {
                                     $level = 'low';
                                   }
                             ?>
@@ -107,7 +109,7 @@ else {
                                         <a href="view_service/<?php echo $id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
                                       </div>
                                       <div class="span2"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
-                                      <div class="span2"><?php echo $value['location'];?></div>
+                                      <div class="span1"><?php echo $value['location'];?></div>
                                       <div class="span1">
                                       <?php if($value['service_type']=='1'){
                                          echo "<span style=\"color: #8FC412; \">Internet</span>";
@@ -127,11 +129,12 @@ else {
                                       else echo "<span style=\"color: #8FC412; \">Annual</span>";
                                       ?></div>
                                       <div class="span2"><?php echo $start_date;?></div>
-                                      <div class="span3" style="padding-top: 5px;">
+                                      <div class="span2"><?php echo $expiry_date;?></div>
+                                      <div class="span2" style="padding-top: 5px;">
                                          <div class="row-fluid">
                                          <div id="battery" class="span7">
-                                            <div class="battery-level <?php echo $level;?>" style="width: <?php echo $width;?>;"></div></div>
-                                         <div class="span3" style="padding-bottom: 2px; color: black; float: left;"><?php echo $rema;?> days</div></div>
+                                            <div class="battery-level <?php echo $level;?>" style="width: <?php echo $width.'%';?>;"></div></div>
+                                         <div class="span5" style="padding-bottom: 2px; color: black; float: left;"><?php echo $rema;?> days</div></div>
                                       </div>
                                    </div>
                                     <?php $i++; } } ?>

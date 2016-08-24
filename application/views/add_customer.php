@@ -82,6 +82,10 @@ else {
                             <input type="text" class="form-control" name="customer_name" placeholder="Name" required="" value="<?php echo isset($add_name)?$add_name:'';?>"/>
                         </div>
                         <div class="form-group" style="padding-top: 10px;">
+                            <label>Customer Email: </label>
+                            <input type="email" class="form-control" name="customer_email" placeholder="Email" value="<?php echo isset($add_email)?$add_email:'';?>"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;">
                             <label>Customer Address: </label>
                             <input type="text" class="form-control" name="address" placeholder="Address" required="" value="<?php echo isset($add_address)?$add_address:'';?>"/>
                         </div>
