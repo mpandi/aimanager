@@ -79,9 +79,11 @@ else {
                         <div class="form-group" style="padding-top: 5px;">
                          <label>Service Type: </label>
                             <select name="service_type" style="width: 100%;">
-                                <option value="" selected="">..Service Type..</option>
-                                <option value="1">Internet</option>
-                                <option value="2">VPN</option>
+                             <option value="" selected="">..Service Type..</option>
+                              <?php if(isset($types_data)){
+                                   foreach ($types_data as $value){ ?>
+                              <option value="<?php echo $value['id'];?>"><?php echo $value['type_'];?></option>
+                              <?php } } ?>
                             </select>
                         </div>
                          <div class="form-group" style="padding-top: 5px;">

@@ -25,6 +25,7 @@ public function index(){
 	}
 public function add_service(){
       $data['customers_data'] = $this->customers_database->read();
+      $data['types_data'] = $this->services_database->get_types();
 	     if($data['customers_data'] != false) {
 		   $this->load->view('add_service',$data);
 		  } 
@@ -33,6 +34,21 @@ public function add_service(){
 		   'error_message' => 'No customers have been set ...'
 		  );
 		  $this->load->view('add_service', $data);
+		}
+	}
+public function add_type(){
+		  $this->load->view('add_service_type');
+	}
+public function service_types(){
+      $data['types_data'] = $this->services_database->get_types();
+	     if($data['types_data'] != false) {
+		   $this->load->view('service_types',$data);
+		  } 
+	     else {
+		   $data = array(
+		   'error_message' => 'No service types have been set ...'
+		  );
+		  $this->load->view('service_types', $data);
 		}
 	}
 	// Validate and store registration data in database
@@ -80,6 +96,21 @@ public function add() {
 		  }
 		}
 	}
+public function add_() {
+		$data = array(
+		'type_' => $this->input->post('type_')
+		);
+		$result = $this->services_database->insert_type($data);
+	  if($result == 'added') {
+	    $this->session->set_flashdata('success_register','Service Type addition Successful ...');
+        redirect("services/service_types");
+		} 
+	 else {
+		$data['error_message'] = $result;
+        $data['add_type'] = $this->input->post('type_');
+		$this->load->view('service_types', $data);
+		  }
+	}
 public function delete_service($id) {
 	 if(!isset($id)) {
 		  redirect("services/");
@@ -93,6 +124,22 @@ public function delete_service($id) {
 	  else {
 		$this->session->set_flashdata('fail_delete','Unable to delete ...');
         redirect("services/");
+		  }
+		}
+	}
+public function delete_service_type($id) {
+	 if(!isset($id)) {
+		  redirect("services/service_types");
+		} 
+	 else {
+		$result = $this->services_database->delete_service_type($id);
+	  if($result == true) {
+	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
+        redirect("services/service_types");
+		} 
+	  else {
+		$this->session->set_flashdata('fail_delete','Unable to delete ...');
+        redirect("services/service_types");
 		  }
 		}
 	}

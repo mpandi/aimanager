@@ -70,7 +70,7 @@ else {
                          <label>Customer Name: </label>
                             <input type="hidden" name="service_id" value="<?php echo $service_data[0]['id'];?>"/>
                             <select name="customer" style="width: 100%;">
-                                <option value="<?php echo $service_data[0]['id'];?>" selected=""><?php echo $this->customers_database->get_customer($service_data[0]['customer_id']);?></option>
+                                <option value="<?php echo $service_data[0]['customer_id'];?>" selected=""><?php echo $this->customers_database->get_customer($service_data[0]['customer_id']);?></option>
                                 <?php 
                                  $customers = $this->customers_database->read();
                                  foreach ($customers as $value){ ?>
@@ -85,7 +85,7 @@ else {
                         <div class="form-group">
                          <label>Service Type: </label>
                             <select name="service_type" style="width: 100%;">
-                                <option value="<?php echo $service_data[0]['service_type'];?>" selected="">..Service Type..</option>
+                                <option value="<?php echo $service_data[0]['service_type'];?>" selected=""><?php echo $this->customers_database->get_customer($service_data[0]['service_type']);?></option>
                                 <option value="1">Internet</option>
                                 <option value="2">VPN</option>
                             </select>

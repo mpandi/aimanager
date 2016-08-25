@@ -37,15 +37,12 @@ else {
         </nav>
     	<!--end nav -->
     </header>
-    <!--end header -->
-    <!--begin home_wrapper -->
     <section id="home_wrapper" class="home-wrapper">
         <!--begin container-->
         <div class="container"> 
             <!--begin row-->
-            <div class="row margin-bottom-30">
-                <!--begin col-md-6-->
-                <div class="col-md-4 padding-top-20">                                
+            <div class="row margin">
+                <div class="col-md-4 padding-top-10">                                
                     <h1 class="home-title wow fadeIn" data-wow-delay="0.5s">Users</h1>                   
                     <p class="home-subtitle wow fadeIn" data-wow-delay="1s">
                        View all users, their emails, levels and account statuses.<br/>
@@ -53,9 +50,7 @@ else {
                     </p>
                     <a href="registration" class="btn scrool wow fadeIn">Add User</a>                             
                 </div>
-                <!--end col-md-6-->     
-                <!--begin col-md-6-->
-                <div class="col-md-8 wow slideInRight" data-wow-delay="2.25s">
+                <div class="col-md-8 wow slideInRight">
                    <section class="login_content" style="padding:5px;">
                    <?php 
                    $flashfail = $this->session->flashdata('fail_delete');
