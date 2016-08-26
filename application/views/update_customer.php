@@ -83,8 +83,12 @@ else {
                             <input type="text" class="form-control" name="customer_name" placeholder="Name" required="" value="<?php echo isset($add_name)?$add_name:$customer_data[0]['name_'];?>"/>
                         </div>
                         <div class="form-group">
-                            <label>Customer Email: </label>
-                            <input type="email" class="form-control" name="customer_email" placeholder="Email" value="<?php echo isset($add_email)?$add_email:$customer_data[0]['email'];?>"/>
+                            <label>Billing Contact Email: </label>
+                            <input type="email" class="form-control" name="billing_email" placeholder="Email" value="<?php echo isset($add_email)?$add_email:$customer_data[0]['billing_contact_email'];?>"/>
+                        </div>
+                         <div class="form-group">
+                            <label>Technical Contact Email: </label>
+                            <input type="email" class="form-control" name="technical_email" placeholder="Email" value="<?php echo isset($add_temail)?$add_temail:$customer_data[0]['technical_contact_email'];?>"/>
                         </div>
                         <div class="form-group">
                            <label>Customer Address: </label>

@@ -109,7 +109,8 @@ public function update(){
 	    $id = $this->input->post('customer_id');
 		$data = array(
 		'name_' => $this->input->post('customer_name'),
-        'email' => $this->input->post('customer_email'),
+        'billing_contact_email' => $this->input->post('billing_email'),
+        'technical_contact_email' => $this->input->post('technical_email'),
 		'address' => $this->input->post('address'),
 		'billing_contact_name' => $this->input->post('billing_contact_name'),
         'billing_contact_phone' => $this->input->post('billing_contact_phone'),
@@ -119,7 +120,7 @@ public function update(){
 		$result = $this->customers_database->update($id,$data);
 	  if($result){
 	    $this->session->set_flashdata('success_update','Customer update successful ...');
-        redirect("/customers/");
+        redirect("customers/");
 		} 
 	  else {
 		$data['error_message'] = "Update failed ...";
