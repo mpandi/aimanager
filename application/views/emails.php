@@ -24,15 +24,15 @@ else {
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
                         <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
-                        <li><a href="<?php echo base_url(); ?>emails/">Email Form</a></li>
-                         <?php } ?>
-                         <li>
-                            <a href="<?php echo base_url(); ?>customers/" class="active dropdown-toggle" data-toggle="dropdown">Customers
+                        <li>
+                            <a href="<?php echo base_url(); ?>emailsForm/" class="active dropdown-toggle" data-toggle="dropdown">Email Form
                             <span class="caret" style="margin-top: 0px;"></span></a>
                             <ul class="dropdown-menu">
-                              <li><a href="add_customer">Add Customer</a></li>
+                              <li><a href="add_email">Update Email Data</a></li>
                             </ul>
                          </li>
+                         <?php } ?>
+                         <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
                         <li><a href="<?php echo base_url(); ?>services/">Services</a></li>
                         <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
                         <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
@@ -73,37 +73,20 @@ else {
                               echo $flashnocu;
                               echo $flashupdate;
                               echo "</div>";
-                             } ?>
-                       <table id="example" class="table table-striped responsive-utilities jambo_table">
-                        <thead>
-                            <tr class="headings">                                              
-                                <th>Action</th>
-                                <th>Customer</th>
-                                <th>Address</th>
-                                <th>Billing Contact Name</th>
-                                <th>Billing Contact Phone</th>
-                                <th>Technical Contact Name</th>
-                                <th>Technical Contact phone</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($customers_data as $value){
+                             } }
+                        if(isset($emails_data)){
+                        foreach ($emails_data as $value){
                                   $id = $value['id'];?>
-                                    <tr class="even pointer">
-                                      <td class=" "> 
-                                        <a href="delete_customer/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
-                                        <a href="update_customer/<?php echo $id;?>" title="update" style="padding-left: 5px;"><i class="fa fa-pencil" style="color: green;"></i></a></td>
-                                      <td class=" "><?php echo $value['name_'];?></td>
-                                      <td><?php echo $value['address'];?></td>
-                                      <td class=" "><?php echo $value['billing_contact_name'];?></td>
-                                      <td class=" "><?php echo $value['billing_contact_phone'];?></td>
-                                      <td class=" "><?php echo $value['technical_contact_name'];?></td>
-                                      <td class=" "><?php echo $value['technical_contact_phone'];?></td>
-                                    </tr>
-                                    <?php } ?>
-                                </tbody>
-                    </table>
-                    <?php } ?>
+                                  <div class="receive_message"><h4>Billing Expiry Email</h4>
+                                  <?php echo $value['billing_expiry'];?>
+                                  </div>
+                                  <div class="post_message"><h4>End of Billing Email</h4>
+                                  <?php echo $value['end_billing'];?>
+                                  </div>
+                                  <div class="receive_message"><h4>Grace Period Expiry Email</h4>
+                                  <?php echo $value['grace_period_expiry'];?>
+                                  </div> 
+                                    <?php } } ?>
                 </section>
                 </div>
                 <!--end col-md-6-->    

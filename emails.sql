@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2016 at 04:38 AM
+-- Generation Time: Aug 26, 2016 at 07:54 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -23,30 +23,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `service_types`
+-- Table structure for table `emails`
 --
 
-CREATE TABLE `service_types` (
+CREATE TABLE `emails` (
   `id` int(11) NOT NULL,
-  `type_` varchar(50) NOT NULL
+  `billing_expiry` text NOT NULL,
+  `end_billing` text NOT NULL,
+  `grace_period_expiry` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `service_types`
+-- Dumping data for table `emails`
 --
 
-INSERT INTO `service_types` (`id`, `type_`) VALUES
-(1, 'Networking'),
-(2, 'Internet');
+INSERT INTO `emails` (`id`, `billing_expiry`, `end_billing`, `grace_period_expiry`) VALUES
+(1, 'test billing expiry update', 'end of billing expiry date iupdate', 'end of grace period update');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `service_types`
+-- Indexes for table `emails`
 --
-ALTER TABLE `service_types`
+ALTER TABLE `emails`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54,10 +55,10 @@ ALTER TABLE `service_types`
 --
 
 --
--- AUTO_INCREMENT for table `service_types`
+-- AUTO_INCREMENT for table `emails`
 --
-ALTER TABLE `service_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `emails`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

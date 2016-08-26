@@ -13,6 +13,14 @@ ul li, ol li{
 ul li i{
 	vertical-align: middle;
 }
+.receive_message{
+    background-color: #F0FFFF;
+    border-bottom: 1px solid #555;
+}
+.post_message{
+    background-color: white;
+    border-bottom: 1px solid #555;
+}
 label{
     font-weight: bold;
 }
@@ -56,7 +64,6 @@ table{
 h1,
 h2,
 h3,
-h4,
 h5,
 h6 {
   font-family: 'Roboto', sans-serif;
