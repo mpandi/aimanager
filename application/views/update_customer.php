@@ -84,11 +84,11 @@ else {
                         </div>
                         <div class="form-group">
                             <label>Billing Contact Email: </label>
-                            <input type="email" class="form-control" name="billing_email" placeholder="Email" value="<?php echo isset($add_email)?$add_email:$customer_data[0]['billing_contact_email'];?>"/>
+                            <input type="email" class="form-control" name="billing_email" placeholder="Email" required="" value="<?php echo isset($add_email)?$add_email:$customer_data[0]['billing_contact_email'];?>"/>
                         </div>
                          <div class="form-group">
                             <label>Technical Contact Email: </label>
-                            <input type="email" class="form-control" name="technical_email" placeholder="Email" value="<?php echo isset($add_temail)?$add_temail:$customer_data[0]['technical_contact_email'];?>"/>
+                            <input type="email" class="form-control" name="technical_email" placeholder="Email" required="" value="<?php echo isset($add_temail)?$add_temail:$customer_data[0]['technical_contact_email'];?>"/>
                         </div>
                         <div class="form-group">
                            <label>Customer Address: </label>

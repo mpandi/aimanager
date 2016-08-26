@@ -38,7 +38,8 @@ public function add() {
 	 else {
 		$data = array(
 		'name_' => $this->input->post('customer_name'),
-        'email' => $this->input->post('customer_email'),
+        'billing_contact_email' => $this->input->post('billing_email'),
+        'technical_contact_email' => $this->input->post('technical_email'),
 		'address' => $this->input->post('address'),
 		'billing_contact_name' => $this->input->post('billing_contact_name'),
         'billing_contact_phone' => $this->input->post('billing_contact_phone'),
@@ -49,7 +50,7 @@ public function add() {
 		$result = $this->customers_database->registration_insert($data);
 	  if($result == 'registered') {
 	    $this->session->set_flashdata('success_register','Customer addition Successful ...');
-        redirect("/customers/");
+        redirect("customers/");
 		} 
 	 else {
 		$data['error_message'] = $result;
@@ -96,6 +97,7 @@ public function update_customer($id){
 		}
 	}
 public function update(){ 
+        $id = $this->input->post('customer_id');
         $this->form_validation->set_rules('customer_name', 'Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('billing_contact_name', 'Billing Name', 'trim|required|xss_clean');
@@ -103,10 +105,10 @@ public function update(){
  	    $this->form_validation->set_rules('technical_contact_name', 'Technical Name', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('technical_contact_phone', 'Technical Phone', 'trim|required|xss_clean');
      if($this->form_validation->run() == FALSE) {
+         
 		  $this->load->view('update_customer');
 		} 
 	 else {
-	    $id = $this->input->post('customer_id');
 		$data = array(
 		'name_' => $this->input->post('customer_name'),
         'billing_contact_email' => $this->input->post('billing_email'),
@@ -123,6 +125,7 @@ public function update(){
         redirect("customers/");
 		} 
 	  else {
+        $data['customer_data'] = $this->customers_database->fetch_customer($id);
 		$data['error_message'] = "Update failed ...";
         $data['add_name'] = $this->input->post('customer_name');
         $data['add_address'] = $this->input->post('address');
