@@ -26,6 +26,7 @@ else {
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
                         <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
+                        <li><a href="<?php echo base_url(); ?>emailsForm/">Email Form</a></li>
                          <?php } ?>
                         <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
                          <li>
