@@ -91,14 +91,14 @@ else {
                                   $billing_cycle = $value['billing_cycle']*30; //convert into days
                                   $rem = strtotime($value['expiry_date'])-time();
                                   $rema = floor($rem/86400);
-                                  $total = $rema+$value['grace_period'];
+                                  $total = $rema;
                                   $width = floor(($total/$billing_cycle)*100);
                                   if($width > 100) $width = '100';
                                   if($width < 0) $width = '5';
-                                  if($width > '66'){
+                                  if($width > '50'){
                                     $level = 'high';                                    
                                   }
-                                  elseif($width < '66' && $width > '33'){
+                                  elseif($width < '50' && $width > '10'){
                                     $level = 'medium';
                                   }
                                  else {
