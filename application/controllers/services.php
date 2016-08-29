@@ -55,21 +55,22 @@ public function search(){
       $filter = $this->input->post('filter');
       $search_value = $this->input->post('search_value');
       if($filter == 'customer'){
-        $search = 'complaint_id';
+        $search = 'customer_id';
+        $search_value = $this->customers_database->get_customer_from_name($search_value);
       }
       elseif($filter == 'expired'){
-        $search = 'complaint_id';
+        $search = 'expired';
       }
       else $search = 'type';
-      $data['messages_data'] = $this->messages_database->search($search,$search_value);
-       if($data['messages_data'] != false) {
-		   $this->load->view('complaints',$data);
+      $data['services_data'] = $this->services_database->search($search,$search_value);
+       if($data['services_data'] != false) {
+		   $this->load->view('services',$data);
 		  } 
 	     else {
 		   $data = array(
 		   'error_message' => 'No results ...'
 		  );
-		  $this->load->view('complaints', $data);
+		  $this->load->view('services', $data);
 		}
 	}
 public function add() {

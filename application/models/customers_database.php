@@ -21,6 +21,16 @@ public function get_customer($id){
     }
     else return "No name";
 }
+public function get_customer_from_name($name){
+    $this->db->select('id');
+    $this->db->where("name_ LIKE '$name'");
+    $query = $this->db->get('customers');
+    if($query->num_rows() > 0){
+        $data = $query->result_array();
+        return $data[0]['id'];
+    }
+    else return "nothing";
+}
 public function fetch_customer($id){
     $this->db->where('id', $id);
     $query = $this->db->get('customers');

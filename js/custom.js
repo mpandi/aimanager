@@ -30,5 +30,8 @@ $("#datepicker3").datepicker({dateFormat: 'yy-mm-dd',
     else if(value =='type'){
         $("input#new_value").attr('placeholder','Enter Service Type');
     }
+    else if(value =='expired'){
+        $("input#new_value").val('expired');
+    }
  });
 });

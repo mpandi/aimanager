@@ -48,16 +48,19 @@ public function read() {
   }
 }
 public function search($search,$value) {
-   $this->db->select('id,from_,complaint_id,employee_code,station,designation,assigned_to,COUNT(complaint_id) as total');
- if($search == 'phone'){
-     $this->db->where('from_', $value);
+   $this->db->select('*');
+ if($search == 'customer_id'){
+     $this->db->where('customer_id', $value);
    }
+ elseif($search == 'type'){
+    $this->db->where("service_type LIKE '$value'");
+ }
  else{
-    $this->db->where('complaint_id', $value);
+    $date = date("Y-m-d H:i:s",time());
+    $this->db->where("expiry_date < '$date'");
  }
   $this->db->order_by("id", "asc");
-  $this->db->group_by('complaint_id');
-  $query = $this->db->get('messages');
+  $query = $this->db->get('services');
   
   if ($query->num_rows() > 0) {
      return $query->result_array();
