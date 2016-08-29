@@ -22,5 +22,13 @@ $("#datepicker2").datepicker({dateFormat: 'yy-mm-dd',
 $("#datepicker3").datepicker({dateFormat: 'yy-mm-dd',
                              changeMonth: true,
                              changeYear: true});
-
+ $("form > select[name=filter]").change(function(){
+    var value = $("form > select[name=filter]").val();
+    if(value =='customer'){
+        $("input#new_value").attr('placeholder','Enter Customer Name');
+    }
+    else if(value =='type'){
+        $("input#new_value").attr('placeholder','Enter Service Type');
+    }
+ });
 });

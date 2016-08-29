@@ -51,7 +51,27 @@ public function service_types(){
 		  $this->load->view('service_types', $data);
 		}
 	}
-	// Validate and store registration data in database
+public function search(){ 
+      $filter = $this->input->post('filter');
+      $search_value = $this->input->post('search_value');
+      if($filter == 'customer'){
+        $search = 'complaint_id';
+      }
+      elseif($filter == 'expired'){
+        $search = 'complaint_id';
+      }
+      else $search = 'type';
+      $data['messages_data'] = $this->messages_database->search($search,$search_value);
+       if($data['messages_data'] != false) {
+		   $this->load->view('complaints',$data);
+		  } 
+	     else {
+		   $data = array(
+		   'error_message' => 'No results ...'
+		  );
+		  $this->load->view('complaints', $data);
+		}
+	}
 public function add() {
 		$this->form_validation->set_rules('customer', 'Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('location', 'Location', 'trim|required|xss_clean');

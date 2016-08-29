@@ -47,6 +47,24 @@ public function read() {
      return false;
   }
 }
+public function search($search,$value) {
+   $this->db->select('id,from_,complaint_id,employee_code,station,designation,assigned_to,COUNT(complaint_id) as total');
+ if($search == 'phone'){
+     $this->db->where('from_', $value);
+   }
+ else{
+    $this->db->where('complaint_id', $value);
+ }
+  $this->db->order_by("id", "asc");
+  $this->db->group_by('complaint_id');
+  $query = $this->db->get('messages');
+  
+  if ($query->num_rows() > 0) {
+     return $query->result_array();
+  } else {
+     return false;
+  }
+}
 public function get_types() {
   $this->db->order_by("id", "asc");
   $query = $this->db->get('service_types');

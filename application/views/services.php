@@ -81,6 +81,7 @@ else {
                                     <option value="all" selected="">..select option..</option>
                                     <option value="customer">Customer</option>
                                     <option value="type">Service Type</option>
+                                    <option value="expired">Expired</option>
                                  </select>
                             <input type="text" name="search_value" value="" placeholder="" id="new_value" style="width: 40%; margin: 0;"/>
                             <input type="submit" name="filt" value="Filter" style="margin-top: 2px;" />        
