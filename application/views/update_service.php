@@ -90,15 +90,30 @@ else {
                         <div class="form-group">
                          <label>Service Type: </label>
                             <select name="service_type" style="width: 100%;">
-                                <option value="<?php echo $service_data[0]['service_type'];?>" selected=""><?php echo $this->customers_database->get_customer($service_data[0]['service_type']);?></option>
-                                <option value="1">Internet</option>
-                                <option value="2">VPN</option>
+                                <option value="<?php echo $service_data[0]['service_type'];?>" selected=""><?php echo $service_data[0]['service_type'];?></option>
+                                <?php 
+                                $types_data = $this->services_database->get_types();
+                                if(isset($types_data)){
+                                   foreach ($types_data as $value){ ?>
+                                <option value="<?php echo $value['type_'];?>"><?php echo $value['type_'];?></option>
+                                <?php } } ?>
                             </select>
                         </div>
                          <div class="form-group">
                          <label>Billing Cycle: </label>
                             <select name="billing_cycle" style="width: 100%;">
-                                <option value="<?php echo $service_data[0]['billing_cycle'];?>" selected="">..Billing Cycle..</option>
+                                <option value="<?php echo $service_data[0]['billing_cycle'];?>" selected=""><?php if($service_data[0]['billing_cycle']=='1'){
+                                         echo "Monthly";
+                                         }
+                                      elseif($service_data[0]['billing_cycle']=='3'){
+                                         echo "Quarterly";
+                                         }
+                                      elseif($service_data[0]['billing_cycle']=='12'){
+                                         echo "Annual";
+                                         }
+                                      else echo "No Billing";
+                                      ?></option>
+                                <option value="0">No Billing</option>
                                 <option value="1">Monthly</option>
                                 <option value="3">Quarterly</option>
                                 <option value="12">Annual</option>

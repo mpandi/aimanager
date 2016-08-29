@@ -94,6 +94,7 @@ else {
                                 <option value="1">Monthly</option>
                                 <option value="3">Quarterly</option>
                                 <option value="12">Annual</option>
+                                <option value="0">No Billing</option>
                             </select>
                          </div>
                          <div class="form-group" style="padding-top: 5px;">

@@ -72,7 +72,21 @@ else {
                               echo $flashupdate;
                               echo "</div>";
                              } } 
-                    if(isset($services_data)){ ?>
+                    if(isset($services_data)){ 
+                    if($level == '1'){ ?>
+                      <div class="row-fluid">
+                       <form action="<?php echo base_url(); ?>services/search" method="POST" class="span6 offset3">
+                           <span class="add-on" style="color: black; font-weight: bolder;">Filter By</span>
+                                <select name="filter" class="select">
+                                    <option value="all" selected="">..select option..</option>
+                                    <option value="customer">Customer</option>
+                                    <option value="type">Service Type</option>
+                                 </select>
+                            <input type="text" name="search_value" value="" placeholder="" id="new_value" style="width: 40%; margin: 0;"/>
+                            <input type="submit" name="filt" value="Filter" style="margin-top: 2px;" />        
+                           </form>
+                      </div>
+                      <?php } ?>
                        <div class="row-fluid">                                                                                         
                                 <div class="span1"><b>Action</b></div>
                                 <div class="span2"><b>Customer</b></div>
@@ -91,8 +105,24 @@ else {
                                   $billing_cycle = $value['billing_cycle']*30; //convert into days
                                   $rem = strtotime($value['expiry_date'])-time();
                                   $rema = floor($rem/86400);
-                                  $total = $rema;
-                                  $width = floor(($total/$billing_cycle)*100);
+                                  $remain = '';
+                                  if($billing_cycle > 0 && $rema > 0){
+                                       $remain .= $rema." days";
+                                       }
+                                  elseif($billing_cycle > 0 && $rema < 0){
+                                    $rema = '1';
+                                    $remain .= '<span style="color:red;">Expired</span>';
+                                  }
+                                  elseif($billing_cycle == 0 && $rema < 0){
+                                    $billing_cycle = '1';
+                                    $rema = '1';                                    
+                                  } 
+                                   elseif($billing_cycle == 0 && $rema > 0){
+                                    $remain .= $rema." days";
+                                    $billing_cycle = '1';
+                                                      
+                                  } 
+                                  $width = floor(($rema/$billing_cycle)*100);
                                   if($width > 100) $width = '100';
                                   if($width < 0) $width = '5';
                                   if($width > '50'){
@@ -104,8 +134,7 @@ else {
                                  else {
                                     $level = 'low';
                                   }
-                                  if($rema < 0) $rema = '<span style="color:red;">Expired</span>';
-                                  else $rema = $rema." days";
+                                  
                             ?>
                             <div class="row-fluid" style="<?php echo $style; ?>">                                  
                                       <div class="span1"> 
@@ -133,14 +162,17 @@ else {
                                       elseif($value['billing_cycle']=='3'){
                                          echo "<span style=\"color: black; \">Quarterly</span>";
                                          }
-                                      else echo "<span style=\"color: #8FC412; \">Annual</span>";
+                                      elseif($value['billing_cycle']=='12'){
+                                         echo "<span style=\"color: #8FC412; \">Annual</span>";
+                                         }
+                                      else echo "<span style=\"color: darkblue; \">Not Billed</span>";
                                       ?></div>
                                       <div class="span2"><?php echo $expiry_date;?></div>
                                       <div class="span2" style="padding-top: 5px;"><?php if($value['status'] == '1'){ ?>
                                          <div class="row-fluid">
                                          <div id="battery" class="span7">
                                             <div class="battery-level <?php echo $level;?>" style="width: <?php echo $width.'%';?>;"></div></div>
-                                         <div class="span5" style="padding-bottom: 2px; color: black; float: left;"><?php echo $rema;?></div></div>
+                                         <div class="span5" style="padding-bottom: 2px; color: black; float: left;"><?php echo $remain;?></div></div>
                                       <?php } else{
                                         echo "<span style='color:red;'>Suspended</span>";} ?>
                                       </div>
