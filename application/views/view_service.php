@@ -70,14 +70,12 @@ else {
                             <td><?php echo isset($add_location)?$add_location:$service_data[0]['location'];?></td>
                         </tr>
                         <tr>
+                          <td><label>Location Number: </label></td>
+                          <td><?php echo $service_data[0]['location_number'];?> </td>
+                        </tr>
+                        <tr>
                            <td><label>Service Type: </label></td>
-                           <td><?php if($service_data[0]['service_type']=='1'){
-                                         echo "<span style=\"color: #8FC412; \">Internet</span>";
-                                         }
-                                     elseif($service_data[0]['service_type']=='2'){
-                                         echo "<span style=\"color: black; \">VPN</span>";
-                                         }
-                                      ?></td>
+                           <td><?php echo $service_data[0]['service_type'];?></td>
                         </tr>
                         <tr>
                          <td><label>Billing Cycle: </label></td>
@@ -115,6 +113,14 @@ else {
                         <tr>
                           <td><label>Grace Period: </label></td>
                           <td><?php echo $service_data[0]['grace_period'];?> days</td>
+                        </tr>
+                        <tr>
+                          <td><label>Invoice Date: </label></td>
+                          <td><?php echo $service_data[0]['invoice_date'];?></td>
+                        </tr>
+                        <tr>
+                          <td><label>Invoice Link: </label></td>
+                          <td><a href="<?php echo base_url().'invoices/'.$service_data[0]['invoice_link'];?>" target="_blank"><?php echo $service_data[0]['invoice_link']?></a></td>
                         </tr>
                          <tr>
                            <td><label>Graph Details: </label></td>

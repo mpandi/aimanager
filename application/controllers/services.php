@@ -67,6 +67,9 @@ public function add() {
 	 else {
 		$data = array(
 		'location' => $this->input->post('location'),
+        'location_number' => str_pad(mt_rand(1,9999),4,'0',STR_PAD_LEFT),
+        'invoice_date' => $this->input->post('invoicedate'),
+        'invoice_link' => $this->input->post('invoicelink'),
 		'customer_id' => $this->input->post('customer'),
 		'billing_cycle' => $this->input->post('billing_cycle'),
         'network_details' => '',
@@ -88,6 +91,8 @@ public function add() {
         $data['add_location'] = $this->input->post('location');
         $data['add_billing_start_date'] = $this->input->post('startdate');
         $data['add_ips'] = $this->input->post('ips');
+        $data['add_date'] = $this->input->post('invoice_date');
+        $data['add_link'] = $this->input->post('invoice_link');
         $data['add_graph'] = $this->input->post('cpegraph');
         $data['add_billing_expiry_date'] = $this->input->post('expirydate');
         $data['add_cpemac'] = $this->input->post('cpemac');
@@ -123,6 +128,40 @@ public function delete_service($id) {
 		} 
 	  else {
 		$this->session->set_flashdata('fail_delete','Unable to delete ...');
+        redirect("services/");
+		  }
+		}
+	}
+public function disable_service($id) {
+	 if(!isset($id)) {
+		  redirect("services/");
+		} 
+	 else {
+	   	$data['status'] = '0';
+		$result = $this->services_database->disable($id,$data);
+	  if($result == true) {
+	    $this->session->set_flashdata('success_delete','Update Successful ...');
+        redirect("services/");
+		} 
+	  else {
+		$this->session->set_flashdata('fail_delete','Unable to update ...');
+        redirect("services/");
+		  }
+		}
+	}
+public function enable_service($id) {
+	 if(!isset($id)) {
+		  redirect("services/");
+		} 
+	 else {
+	   	$data['status'] = '1';
+		$result = $this->services_database->disable($id,$data);
+	  if($result == true) {
+	    $this->session->set_flashdata('success_delete','Update Successful ...');
+        redirect("services/");
+		} 
+	  else {
+		$this->session->set_flashdata('fail_delete','Unable to update ...');
         redirect("services/");
 		  }
 		}
@@ -189,6 +228,9 @@ public function update(){
 	    $id = $this->input->post('service_id');
 		$data = array(
 		'location' => $this->input->post('location'),
+        'location_number' => $this->input->post('location_number'),
+        'invoice_date' => $this->input->post('invoicedate'),
+        'invoice_link' => $this->input->post('invoicelink'),
 		'customer_id' => $this->input->post('customer'),
 		'billing_cycle' => $this->input->post('billing_cycle'),
         'service_type' => $this->input->post('service_type'),

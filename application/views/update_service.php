@@ -83,6 +83,10 @@ else {
                         <label>Service Location: </label>
                             <input type="text" name="location" class="form-control" placeholder="Location" required="" value="<?php echo isset($add_location)?$add_location:$service_data[0]['location'];?>"/>
                         </div>
+                        <div class="form-group" style="padding-top: 5px;">
+                          <label>Location Number: </label>
+                            <input type="text" class="form-control" name="location_number" placeholder="Location Number" required="" value="<?php echo isset($add_location_number)?$add_location_number:$service_data[0]['location_number'];?>"/>
+                        </div>
                         <div class="form-group">
                          <label>Service Type: </label>
                             <select name="service_type" style="width: 100%;">
@@ -121,6 +125,14 @@ else {
                          <div class="form-group">
                           <label>AP CONNECTED: </label>
                             <input type="text" name="apconnected" class="form-control" placeholder="AP CONNECTED" required="" value="<?php echo isset($add_apconnected)?$add_apconnected:$service_data[0]['ap_connected'];?>"/>
+                        </div>
+                         <div class="form-group" style="padding-top: 5px;">
+                            <label>INVOICE DATE: </label>
+                            <input type="text" class="form-control" name="invoicedate" id="datepicker3" placeholder="Invoice Date" value="<?php echo isset($add_invoice)?$add_invoice:$service_data[0]['invoice_date'];?>"/>
+                        </div>
+                         <div class="form-group" style="padding-top: 5px;">
+                            <label>INVOICE LINK: </label>
+                            <input type="text" class="form-control" name="invoicelink" placeholder="Invoice Link" value="<?php echo isset($add_link)?$add_link:$service_data[0]['invoice_link'];?>"/>
                         </div>
                         <div class="form-group">
                           <label>Grace Period: </label>

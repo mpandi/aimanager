@@ -82,5 +82,13 @@ public function update($id,$data) {
  }
  else return false;
  }
+public function disable($id,$data) {
+ $this->db->where('id',$id);
+ $this->db->update('services',$data);
+ if($this->db->affected_rows() != 0){
+    return true;
+ }
+ else return false;
+ }
 }
 ?>

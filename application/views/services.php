@@ -74,13 +74,13 @@ else {
                              } } 
                     if(isset($services_data)){ ?>
                        <div class="row-fluid">                                                                                         
-                                <div class="span1"><strong>Delete</strong></div>
-                                <div class="span2"><strong>Customer</strong></div>
-                                <div class="span3">Service Location</div>
-                                <div class="span1">Service Type</div>
-                                <div class="span1">Billing Cycle</div>
-                                <div class="span2">Expiry Date</div>
-                                <div class="span2">Remaining days</div>
+                                <div class="span1"><b>Action</b></div>
+                                <div class="span2"><b>Customer</b></div>
+                                <div class="span3"><b>Service Location</b></div>
+                                <div class="span1"><b>Service Type</b></div>
+                                <div class="span1"><b>Billing Cycle</b></div>
+                                <div class="span2"><b>Expiry Date</b></div>
+                                <div class="span2"><b>Remaining days</b></div>
                             </div>                                                
                         <?php foreach ($services_data as $value){ 
                             if($i%2 == 0) $style="background-color:#eee;";
@@ -93,6 +93,8 @@ else {
                                   $rema = floor($rem/86400);
                                   $total = $rema+$value['grace_period'];
                                   $width = floor(($total/$billing_cycle)*100);
+                                  if($width > 100) $width = '100';
+                                  if($width < 0) $width = '5';
                                   if($width > '66'){
                                     $level = 'high';                                    
                                   }
@@ -102,17 +104,28 @@ else {
                                  else {
                                     $level = 'low';
                                   }
+                                  if($rema < 0) $rema = '<span style="color:red;">Expired</span>';
+                                  else $rema = $rema." days";
                             ?>
                             <div class="row-fluid" style="<?php echo $style; ?>">                                  
                                       <div class="span1"> 
                                        <?php if($this->session->userdata['logged_in']['user_level'] == 1){ ?>
                                         <a href="delete_service/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
-                                        <?php } ?>
+                                       <?php if($value['status'] == '1'){ ?>
+                                        <a href="disable_service/<?php echo $id;?>" title="disable" id="disable_event"><i class="fa fa-ban" style="color: red; padding-left: 5px;"></i></a>
+                                        <?php } else { ?>
+                                        <a href="enable_service/<?php echo $id;?>" title="enable" id=""><i class="fa fa-check-circle-o" style="color: blue; padding-left: 5px;"></i></a>
+                                        <?php }} ?>
                                         <a href="view_service/<?php echo $id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
                                       </div>
                                       <div class="span2"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
-                                      <div class="span3"><?php echo $value['location'];?></div>
-                                      <div class="span1"><?php echo $this->services_database->get_service($value['service_type']);?></div>
+                                      <div class="span3"><?php if($value['status'] == '0'){ ?>
+                                      <span style="color: silver;"><?php echo $value['location'];?></span>
+                                      <?php } else { 
+                                                echo $value['location'];
+                                                } ?>
+                                        </div>
+                                      <div class="span1"><?php echo $value['service_type'];?></div>
                                       <div class="span1"><?php 
                                       if($value['billing_cycle']=='1'){
                                          echo "<span style=\"color: #8FC412; \">Monthly</span>";
@@ -123,11 +136,13 @@ else {
                                       else echo "<span style=\"color: #8FC412; \">Annual</span>";
                                       ?></div>
                                       <div class="span2"><?php echo $expiry_date;?></div>
-                                      <div class="span2" style="padding-top: 5px;">
+                                      <div class="span2" style="padding-top: 5px;"><?php if($value['status'] == '1'){ ?>
                                          <div class="row-fluid">
                                          <div id="battery" class="span7">
                                             <div class="battery-level <?php echo $level;?>" style="width: <?php echo $width.'%';?>;"></div></div>
-                                         <div class="span5" style="padding-bottom: 2px; color: black; float: left;"><?php echo $rema;?> days</div></div>
+                                         <div class="span5" style="padding-bottom: 2px; color: black; float: left;"><?php echo $rema;?></div></div>
+                                      <?php } else{
+                                        echo "<span style='color:red;'>Suspended</span>";} ?>
                                       </div>
                                    </div>
                                     <?php $i++; } } ?>
