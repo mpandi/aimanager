@@ -45,26 +45,11 @@ else {
     <section id="home_wrapper" class="home-wrapper">
 
         <!--begin container-->
-        <div class="container"> 
+        <div class="container-fluid"> 
 
             <!--begin row-->
-            <div class="row margin-bottom-30">
-            
-                <!--begin col-md-6-->
-                <div class="col-md-6 padding-top-20">                                
-                    <h3 class="home-title">Update Customer</h3>                   
-                    <p class="home-subtitle wow fadeIn">
-                       View all customers, their emails, levels and account statuses.<br/>
-                        Also add or remove services.
-                    </p>
-                    <a href="<?php echo base_url(); ?>customers/add_customer" class="btn scrool wow fadeIn">Add Customer</a>                             
-                </div>
-                <!--end col-md-6-->
-            
-                <!--begin col-md-6-->
-                <div class="col-md-6 wow slideInRight">
-                   <section class="login_content" style="padding:5px;">
-                      <div class="eh">Update: <span style="color: black;"><?php echo $customer_data[0]['name_'];?></span> </div>
+            <div class="row-fluid login_content">
+                  <div class="eh">Update: <span style="color: black;"><?php echo $customer_data[0]['name_'];?></span> </div>
                        <?php $attributes = array('class'=>'form-horizontal login_d');
                         echo form_open('customers/update',$attributes);
                         if(isset($error_message)){
@@ -78,6 +63,7 @@ else {
                             echo "</div>";
                           } 
                           echo validation_errors();?>
+                       <div class="span4 offset2">
                         <div class="form-group">
                             <label>Customer Name: </label>
                             <input type="hidden" name="customer_id" value="<?php echo $customer_data[0]['id'];?>"/>
@@ -92,6 +78,16 @@ else {
                             <input type="email" class="form-control" name="technical_email" placeholder="Email" required="" value="<?php echo isset($add_temail)?$add_temail:$customer_data[0]['technical_contact_email'];?>"/>
                         </div>
                         <div class="form-group">
+                           <label>Username: </label>
+                           <input type="text" class="form-control" name="username" placeholder="Username" required="" value="<?php echo isset($add_username)?$add_username:$customer_data[0]['username'];?>"/>
+                        </div>
+                        <div class="form-group">
+                           <label>Password: </label>
+                           <input type="text" class="form-control" name="password" placeholder="Password" required="" value="<?php echo isset($add_password)?$add_password:$customer_data[0]['password'];?>"/>
+                        </div>
+                       </div>
+                       <div class="span4">
+                       <div class="form-group">
                            <label>Customer Address: </label>
                            <input type="text" class="form-control" name="address" placeholder="Address" required="" value="<?php echo isset($add_address)?$add_address:$customer_data[0]['address'];?>"/>
                         </div>
@@ -114,11 +110,9 @@ else {
                         <div class="form-group">                       
                         <input type="submit" class="btn btn-success" name="update" value="Update Customer" />
                         </div> 
-                   </div>
-                   <?php echo form_close(); ?>
-                </section>
+                   </div>                           
+                <?php echo form_close(); ?> 
                 </div>
-                <!--end col-md-6-->    
             </div>
             <!--end row-->
         </div>

@@ -1,10 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-if (isset($this->session->userdata['logged_in'])){
-    $username = $this->session->userdata['logged_in']['username'];
-    $email = $this->session->userdata['logged_in']['email'];
-    $password = $this->session->userdata['logged_in']['password'];
-    $level = $this->session->userdata['logged_in']['user_level'];
+if (isset($this->session->userdata['customer_logged_in'])){
+    $username = $this->session->userdata['customer_logged_in']['username'];
+    $email = $this->session->userdata['customer_logged_in']['email'];
+    $password = $this->session->userdata['customer_logged_in']['password'];
  include "header.php";
  } 
 else {
@@ -22,13 +21,8 @@ else {
                 <div>
                     <ul class="nav navbar-nav navbar-right">			      
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                        <?php if($level == 1){ ?>
-                        <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
-                        <li><a href="<?php echo base_url(); ?>emailsForm/">Email Form</a></li>
-                         <?php } ?>
-                        <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
-                        <li><a href="<?php echo base_url(); ?>services/">Services</a></li>
-                        <li><a href="dashboard" class="active">My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>customers/dashboard" class="active">My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>customers/services">My Services</a></li>
                         <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
                     </ul>
                 </div>
@@ -72,7 +66,7 @@ else {
                    <section class="login_content" style="padding:5px;">
                       <div class="eh">My Account</div>
                        <?php $attributes = array('class'=>'form-horizontal login_d');
-                        echo form_open('home/update',$attributes); 
+                        echo form_open('customers/update_details',$attributes); 
                             if(isset($error_message)){
                                     echo "<div class='alert alert-danger'>";
                                     echo $error_message;
@@ -84,7 +78,7 @@ else {
                                     echo "</div>";
                                  }  ?>
                             <div class="form-group">
-                            <label>Email Address</label>
+                            <label>Billing Email Address</label>
                             <input type="email" name="email" value="<?php echo $email; ?>" required="" class="form-control" placeholder="Enter Email"/></div>  
                             <div class="form-group">            
                             <label>Username</label>

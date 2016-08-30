@@ -38,7 +38,7 @@ public function dashboard(){
 		} 
 	else {
 		$data = array(
-		'error_message' => 'Invalid Username or Password'
+		'error_message' => 'Invalid Username or Password. If you are a customer please use customer portal to login'
 		);
 		$this->load->view('login', $data);
 		}

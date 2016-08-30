@@ -6,7 +6,12 @@ class Logout extends CI_Controller {
 		
     }
 public function index() {
-// Removing session data
+  if(isset($this->session->userdata['customer_logged_in'])){
+    $url = 'customers/login';
+   }
+  else{
+   $url = 'login/'; 
+  }
 		$sess_array = array(
 		'username' => '',
         'password' => '',
@@ -14,9 +19,10 @@ public function index() {
         'user_level' => ''
 		);
 		$this->session->unset_userdata('logged_in', $sess_array);
+        $this->session->unset_userdata('customer_logged_in', $sess_array);
 		$data['logout_message'] = 'Successfully Logged Out';
 		//$this->load->view('login',$data);
-        redirect('login/', 'refresh');
+        redirect($url, 'refresh');
 		}
    }
 ?>

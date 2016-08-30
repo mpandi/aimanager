@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-if(isset($this->session->userdata['logged_in'])){
-          redirect("home/dashboard");
+if(isset($this->session->userdata['customer_logged_in'])){
+          redirect("customers/dashboard");
         }   
  include 'header.php'; 
 ?>
@@ -17,7 +17,7 @@ if(isset($this->session->userdata['logged_in'])){
                 <div>
                     <ul class="nav navbar-nav navbar-right">			      
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                        <li><a href="<?php echo base_url(); ?>customers/login">Customer Portal</a></li>
+                        <li><a href="<?php echo base_url(); ?>customers/login" class="active">Customer Portal</a></li>
                         <li><a href="<?php echo base_url(); ?>login" class="active">Login</a></li>
                     </ul>
                 </div>
@@ -36,32 +36,13 @@ if(isset($this->session->userdata['logged_in'])){
     <section id="home_wrapper" class="home-wrapper">
 
         <!--begin container-->
-        <div class="container"> 
-
-            <!--begin row-->
-            <div class="row margin-bottom-30">
-            
-                <!--begin col-md-6-->
-                <div class="col-md-6 padding-top-20">
-                                
-                    <h1 class="home-title wow fadeIn">Customer Management System</h1>
-                    
-                    <p class="home-subtitle wow fadeIn" data-wow-delay="1s">
-                        Design &amp; style should always work toward making you look<br/>
-                        good &amp; feel good - without a lot of efforts - so you can<br/>
-                        always get on with the things that truly matter.
-                    </p>
-                    <a href="#" class="btn scrool wow fadeIn">Discover More!</a>
-                                
-                </div>
-                <!--end col-md-6-->
-            
-                <!--begin col-md-6-->
-                <div class="col-md-6 wow slideInRight" data-wow-delay="2.25s">
+        <div class="container-fluid"> 
+            <div class="row-fluid">
+                <div class="span6 offset3">
                    <section class="login_content" style="padding:5px;">
                       <div class="eh">Login </div>
                        <?php $attributes = array('class'=>'form-horizontal login_d');
-                        echo form_open('home/dashboard',$attributes);
+                        echo form_open('customers/dashboard',$attributes);
                         if(isset($error_message)){
                             echo "<div class='alert alert-danger'>";
                             echo $error_message;

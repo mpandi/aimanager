@@ -38,6 +38,14 @@ public function fetch_service($id){
     }
     else return false;
 }
+public function fetch_customer_services($id){
+    $this->db->where('customer_id', $id);
+    $query = $this->db->get('services');
+    if($query->num_rows() > 0){
+        return $query->result_array();
+    }
+    else return false;
+}
 public function read() {
   $this->db->order_by("id", "asc");
   $query = $this->db->get('services');

@@ -5,6 +5,7 @@ class Customers extends CI_Controller {
 		parent::__construct();
 		// Load database
         $this->load->model('customers_database');
+        $this->load->model('services_database');
 		// Load form helper library
         $this->load->helper('form');
         // Load form validation library
@@ -25,7 +26,31 @@ public function index(){
 public function add_customer(){
 		  $this->load->view('add_customer');
 	}
+public function login(){
+		  $this->load->view('customer_login');
+	}
+public function forgot(){
+          echo "forgot password";
+		  //$this->load->view('customer_login');
+	}
+public function services(){
+      $customer_id = $this->session->userdata['customer_logged_in']['customer_id'];
+       $data['services_data'] = $this->services_database->fetch_customer_services($customer_id);
+	     if($data['services_data'] != false) {
+		   $this->load->view('customer_services',$data);
+		  } 
+	     else {
+		   $data = array(
+		   'error_message' => 'No services have been set ...'
+		  );
+		  $this->load->view('customer_services', $data);
+		}
+	}
 public function add() {
+        $pass = $this->input->post('password');
+        $username = $this->input->post('username');
+        $billing_email = $this->input->post('billing_email');
+        $password = md5($pass);
 		$this->form_validation->set_rules('customer_name', 'Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('billing_contact_name', 'Billing Name', 'trim|required|xss_clean');
@@ -38,8 +63,10 @@ public function add() {
 	 else {
 		$data = array(
 		'name_' => $this->input->post('customer_name'),
-        'billing_contact_email' => $this->input->post('billing_email'),
+        'billing_contact_email' => $billing_email,
         'technical_contact_email' => $this->input->post('technical_email'),
+       	'username' => $username,
+        'password' => $password,
 		'address' => $this->input->post('address'),
 		'billing_contact_name' => $this->input->post('billing_contact_name'),
         'billing_contact_phone' => $this->input->post('billing_contact_phone'),
@@ -47,7 +74,7 @@ public function add() {
         'technical_contact_phone' => $this->input->post('technical_contact_phone'),
         'created' => date('Y-m-d H:i:s')
 		);
-		$result = $this->customers_database->registration_insert($data);
+		$result = $this->customers_database->registration_insert($username,$billing_email,$data);
 	  if($result == 'registered') {
 	    $this->session->set_flashdata('success_register','Customer addition Successful ...');
         redirect("customers/");
@@ -56,6 +83,8 @@ public function add() {
 		$data['error_message'] = $result;
         $data['add_name'] = $this->input->post('customer_name');
         $data['add_email'] = $this->input->post('customer_email');
+        $data['add_username'] = $this->input->post('username');
+        $data['add_password'] = $this->input->post('password');
         $data['add_address'] = $this->input->post('address');
         $data['billing_contact_name'] = $this->input->post('billing_contact_name');
         $data['billing_contact_phone'] = $this->input->post('billing_contact_phone');
@@ -98,6 +127,9 @@ public function update_customer($id){
 	}
 public function update(){ 
         $id = $this->input->post('customer_id');
+        $pass = $this->input->post('password');
+        $username = $this->input->post('username');
+        $password = md5($pass);
         $this->form_validation->set_rules('customer_name', 'Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('billing_contact_name', 'Billing Name', 'trim|required|xss_clean');
@@ -113,21 +145,27 @@ public function update(){
 		'name_' => $this->input->post('customer_name'),
         'billing_contact_email' => $this->input->post('billing_email'),
         'technical_contact_email' => $this->input->post('technical_email'),
-		'address' => $this->input->post('address'),
+		'username' => $username,
+        'password' => $password,
+        'address' => $this->input->post('address'),
 		'billing_contact_name' => $this->input->post('billing_contact_name'),
         'billing_contact_phone' => $this->input->post('billing_contact_phone'),
         'technical_contact_name' => $this->input->post('technical_contact_name'),
         'technical_contact_phone' => $this->input->post('technical_contact_phone')
 		);
-		$result = $this->customers_database->update($id,$data);
-	  if($result){
+		$result = $this->customers_database->update($id,$username,$data);
+	  if($result == 'success'){
 	    $this->session->set_flashdata('success_update','Customer update successful ...');
         redirect("customers/");
 		} 
 	  else {
         $data['customer_data'] = $this->customers_database->fetch_customer($id);
-		$data['error_message'] = "Update failed ...";
+		$data['error_message'] = $result;
         $data['add_name'] = $this->input->post('customer_name');
+        $data['add_email'] = $this->input->post('billing_email');
+        $data['add_temail'] = $this->input->post('technical_email');
+        $data['add_username'] = $this->input->post('username');
+        $data['add_password'] = $this->input->post('password');
         $data['add_address'] = $this->input->post('address');
         $data['billing_contact_name'] = $this->input->post('billing_contact_name');
         $data['billing_contact_phone'] = $this->input->post('billing_contact_phone');
@@ -137,5 +175,66 @@ public function update(){
 		  }
 		}
 	}
+ // Check for customer login process
+public function dashboard(){
+     if(isset($this->session->userdata['customer_logged_in'])){
+          $this->load->view('customer_dashboard');
+        }
+     else{ 
+        $password = $this->input->post('password');
+        $data = array(
+		'username' => $this->input->post('username'),
+		'password' => $password
+		);
+		$result = $this->customers_database->login($data);
+	 if($result != false) {
+		$session_data = array(
+		'username' => $result[0]->username,
+        'password' => $password,
+        'customer_id' => $result[0]->id,
+		'email' => $result[0]->billing_contact_email
+		);
+		// Add user data in session
+		$this->session->set_userdata('customer_logged_in', $session_data);
+		$this->load->view('customer_dashboard');
+		} 
+	else {
+		$data = array(
+		'error_message' => 'Invalid Username or Password'
+		);
+		$this->load->view('customer_login', $data);
+		}
+     }
+   }
+public function update_details(){ 
+        $username = $this->input->post('username');
+        $email = $this->input->post('email');
+        $pass = $this->input->post('password');
+        $password = md5($pass);
+        $data = array(
+		'password' => $password,
+        'billing_contact_email' => $email
+		);
+    $result = $this->customers_database->update_details($username,$data);
+	 if($result != false) {
+		$session_data = array(
+		'username' => $username,
+        'email' => $email,
+        'password' => $pass
+		);
+		// Add user data in session
+		$this->session->set_userdata('customer_logged_in', $session_data);
+ 	    $data = array(
+		'success_message' => 'Information updated ...'
+		);
+		$this->load->view('customer_dashboard',$data);
+		} 
+	else {
+		$data = array(
+		'error_message' => 'Update failed ...'
+		);
+		$this->load->view('customer_dashboard', $data);
+		}
+     }
  }
 ?>

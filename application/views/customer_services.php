@@ -1,10 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-if(isset($this->session->userdata['logged_in'])) {
-    $username = $this->session->userdata['logged_in']['username'];
-    $email = $this->session->userdata['logged_in']['email'];
-    $password = $this->session->userdata['logged_in']['password'];
-    $level = $this->session->userdata['logged_in']['user_level'];
+if(isset($this->session->userdata['customer_logged_in'])){
+    $username = $this->session->userdata['customer_logged_in']['username'];
+    $email = $this->session->userdata['customer_logged_in']['email'];
+    $password = $this->session->userdata['customer_logged_in']['password'];
     $i = 0;
     $style = "";
  include "header.php";
@@ -22,22 +21,10 @@ else {
             <!--begin container -->
             <div class="container">              
                 <div>
-                    <ul class="nav navbar-nav navbar-right">			      
+                   <ul class="nav navbar-nav navbar-right">			      
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                        <?php if($level == 1){ ?>
-                        <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
-                        <li><a href="<?php echo base_url(); ?>emailsForm/">Email Form</a></li>
-                         <?php } ?>
-                        <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
-                        <li>
-                            <a href="<?php echo base_url(); ?>services/" class="active dropdown-toggle" data-toggle="dropdown">Services
-                            <span class="caret" style="margin-top: 0px;"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="add_service">Add Service</a></li>
-                              <li><a href="service_types">Service Types</a></li>
-                            </ul>
-                         </li>
-                        <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>customers/dashboard">My Account</a></li>
+                        <li><a href="<?php echo base_url(); ?>customers/services" class="active">My Services</a></li>
                         <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
                     </ul>
                 </div>
@@ -72,27 +59,13 @@ else {
                               echo $flashupdate;
                               echo "</div>";
                              } } 
-                    if(isset($services_data)){ 
-                    if($level == '1'){ ?>
-                      <div class="row-fluid">
-                       <form action="<?php echo base_url(); ?>services/search" method="POST" class="span6 offset3">
-                           <span class="add-on" style="color: black; font-weight: bolder;">Filter By</span>
-                                <select name="filter" class="select">
-                                    <option value="all" selected="">..select option..</option>
-                                    <option value="customer">Customer</option>
-                                    <option value="type">Service Type</option>
-                                    <option value="expired">Expired</option>
-                                 </select>
-                            <input type="text" name="search_value" value="" placeholder="" id="new_value" style="width: 40%; margin: 0;"/>
-                            <input type="submit" name="filt" value="Filter" style="margin-top: 2px;" />        
-                           </form>
-                      </div>
-                      <?php } ?>
+                    if(isset($services_data)){ ?>
                        <div class="row-fluid">                                                                                         
-                                <div class="span1"><b>Action</b></div>
-                                <div class="span2"><b>Customer</b></div>
-                                <div class="span2"><b>Service Location</b></div>
+                                
+                                <div class="span3"><b>Service Location</b></div>
                                 <div class="span2"><b>Service Type</b></div>
+                                <div class="span1"><b>IP Address</b></div>
+                                <div class="span1"><b>AP Connected</b></div>
                                 <div class="span1"><b>Billing Cycle</b></div>
                                 <div class="span1"><b>Expiry Date</b></div>
                                 <div class="span3"><b>Remaining days</b></div>
@@ -140,24 +113,15 @@ else {
                                   
                             ?>
                             <div class="row-fluid" style="<?php echo $style; ?>">                                  
-                                      <div class="span1"> 
-                                       <?php if($this->session->userdata['logged_in']['user_level'] == 1){ ?>
-                                        <a href="delete_service/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
-                                       <?php if($value['status'] == '1'){ ?>
-                                        <a href="disable_service/<?php echo $id;?>" title="disable" id="disable_event"><i class="fa fa-ban" style="color: red; padding-left: 5px;"></i></a>
-                                        <?php } else { ?>
-                                        <a href="enable_service/<?php echo $id;?>" title="enable" id=""><i class="fa fa-check-circle-o" style="color: blue; padding-left: 5px;"></i></a>
-                                        <?php }} ?>
-                                        <a href="view_service/<?php echo $id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
-                                      </div>
-                                      <div class="span2"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
-                                      <div class="span2"><?php if($value['status'] == '0'){ ?>
+                                      <div class="span3"><?php if($value['status'] == '0'){ ?>
                                       <span style="color: silver;"><?php echo $value['location'];?></span>
                                       <?php } else { 
                                                 echo $value['location'];
                                                 } ?>
                                         </div>
                                       <div class="span2"><?php echo $value['service_type'];?></div>
+                                      <div class="span1"><?php echo $value['ip_addresses'];?></div>
+                                      <div class="span1"><?php echo $value['ap_connected'];?></div>
                                       <div class="span1"><?php 
                                       if($value['billing_cycle']=='1'){
                                          echo "<span style=\"color: #8FC412; \">Monthly</span>";

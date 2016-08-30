@@ -14,6 +14,7 @@ include 'header.php';
                 <div>
                     <ul class="nav navbar-nav navbar-right">			      
                         <li><a href="<?php echo base_url(); ?>" class="active">Home</a></li>
+                        <li><a href="<?php echo base_url(); ?>customers/login">Customer Portal</a></li>
                         <li><a href="<?php echo base_url(); ?>/login">Login</a></li>
                     </ul>
                 </div>

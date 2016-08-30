@@ -45,25 +45,10 @@ else {
     <section id="home_wrapper" class="home-wrapper">
 
         <!--begin container-->
-        <div class="container"> 
+        <div class="container-fluid"> 
 
             <!--begin row-->
-            <div class="row margin-bottom-10">
-            
-                <!--begin col-md-6-->
-                <div class="col-md-6 padding-top-10">                                
-                    <h3 class="home-title" data-wow-delay="0.5s">Add Customer</h3>                   
-                    <p class="home-subtitle wow fadeIn" data-wow-delay="1s">
-                       View all customers, their emails, levels and account statuses.<br/>
-                        Also add or remove services.
-                    </p>
-                    <a href="<?php echo base_url(); ?>customers/" class="btn scrool wow fadeIn" data-wow-delay="1.75s">Customers</a>                             
-                </div>
-                <!--end col-md-6-->
-            
-                <!--begin col-md-6-->
-                <div class="col-md-6 wow slideInRight">
-                   <section class="login_content" style="padding:5px;">
+            <div class="row-fluid login_content">
                       <div class="eh">Add Customer </div>
                        <?php $attributes = array('class'=>'form-horizontal login_d');
                         echo form_open('customers/add',$attributes);
@@ -78,6 +63,7 @@ else {
                             echo "</div>";
                           } 
                           echo validation_errors();?>
+                        <div class="span4 offset2">
                         <div class="form-group" style="padding-top: 10px;">
                             <label>Customer Name: </label>
                             <input type="text" class="form-control" name="customer_name" placeholder="Name" required="" value="<?php echo isset($add_name)?$add_name:'';?>"/>
@@ -90,6 +76,16 @@ else {
                             <label>Technical Contact Email: </label>
                             <input type="email" class="form-control" name="technical_email" placeholder="Email" required="" value="<?php echo isset($add_temail)?$add_temail:'';?>"/>
                         </div>
+                        <div class="form-group">
+                           <label>Username: </label>
+                           <input type="text" class="form-control" name="username" placeholder="Username" required="" value="<?php echo isset($add_username)?$add_username:'';?>"/>
+                        </div>
+                        <div class="form-group">
+                           <label>Password: </label>
+                           <input type="text" class="form-control" name="password" placeholder="Password" required="" value="<?php echo isset($add_password)?$add_password:'';?>"/>
+                        </div>
+                       </div>
+                       <div class="span4">
                         <div class="form-group" style="padding-top: 10px;">
                             <label>Customer Address: </label>
                             <input type="text" class="form-control" name="address" placeholder="Address" required="" value="<?php echo isset($add_address)?$add_address:'';?>"/>
@@ -114,11 +110,9 @@ else {
                         <div class="form-group">                       
                             <input type="submit" class="btn btn-success" name="add" value="Add Customer" />
                         </div> 
-                   </div>
-                   <?php echo form_close(); ?>
-                </section>
+                     </div>
+                   <?php echo form_close(); ?> 
                 </div>
-                <!--end col-md-6-->    
             </div>
             <!--end row-->
         </div>
