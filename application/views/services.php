@@ -174,9 +174,10 @@ else {
                                       <div class="span1"><?php echo $expiry_date;?></div>
                                       <div class="span3" style="padding-top: 5px;"><?php if($value['status'] == '1'){ ?>
                                          <div class="row-fluid">
-                                         <div id="battery" class="span7">
+                                         <div id="battery" class="span6">
                                             <div class="battery-level <?php echo $level;?>" style="width: <?php echo $width.'%';?>;"></div></div>
-                                         <div class="span5" style="padding-bottom: 2px; color: black; float: left;"><?php echo $remain;?></div></div>
+                                         <div class="span6" style="padding-bottom: 2px; color: black; float: left;"><?php echo $remain;?></div>
+                                         </div>
                                       <?php } else{
                                         echo "<span style='color:red;'>Suspended</span>";} ?>
                                       </div>
