@@ -1,10 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-if (isset($this->session->userdata['logged_in'])) {
+if (isset($this->session->userdata['logged_in'])){
     $username = $this->session->userdata['logged_in']['username'];
     $email = $this->session->userdata['logged_in']['email'];
     $password = $this->session->userdata['logged_in']['password'];
     $level = $this->session->userdata['logged_in']['user_level'];
+    if($level != '1'){
+         redirect('login/', 'refresh');
+    }
  include "header.php";
  } 
 else {
@@ -24,25 +27,29 @@ else {
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <?php if($level == 1){ ?>
                         <li><a href="<?php echo base_url(); ?>users/">Users</a></li>
-                       <li><a href="<?php echo base_url(); ?>emailsForm/">Email Form</a></li>
-                         <?php } ?>
-                         <li>
-                            <a href="<?php echo base_url(); ?>customers/" class="active dropdown-toggle" data-toggle="dropdown">Customers
+                        <li><a href="<?php echo base_url(); ?>emailsForm/">Email Form</a></li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>invoices/" class="active dropdown-toggle" data-toggle="dropdown">Invoices
                             <span class="caret" style="margin-top: 0px;"></span></a>
                             <ul class="dropdown-menu">
-                              <li><a href="add_customer">Add Customer</a></li>
+                              <li><a href="add_invoice">Add Invoice</a></li>
                             </ul>
                          </li>
+                         <?php } ?>
+                        <li><a href="<?php echo base_url(); ?>customers/">Customers</a></li>
                         <li><a href="<?php echo base_url(); ?>services/">Services</a></li>
-                        <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
+                        <li><a href="dashboard">My Account</a></li>
                         <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
                     </ul>
                 </div>
-                <!--end navbar -->                      
+                <!--end navbar -->
+                                    
             </div>
-    		<!--end container --> 
+    		<!--end container -->
+            
         </nav>
     	<!--end nav -->
+        
     </header>
     <section id="home_wrapper" class="home-wrapper">
         <!--begin container-->
@@ -76,27 +83,21 @@ else {
                         <thead>
                             <tr class="headings">                                              
                                 <th>Action</th>
-                                <th>Customer</th>
-                                <th>Address</th>
-                                <th>Billing Contact Name</th>
-                                <th>Billing Contact Phone</th>
-                                <th>Technical Contact Name</th>
-                                <th>Technical Contact phone</th>
+                                <th>Service Location</th>
+                                <th>Invoice Date</th>
+                                <th>Invoice Link</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($customers_data as $value){
+                        <?php foreach ($invoices_data as $value){
                                   $id = $value['id'];?>
                                     <tr class="even pointer">
-                                      <td class=" "> 
-                                        <a href="delete_customer/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
-                                        <a href="update_customer/<?php echo $id;?>" title="update" style="padding-left: 5px;"><i class="fa fa-pencil" style="color: green;"></i></a></td>
-                                      <td class=" "><?php echo $value['name_'];?></td>
-                                      <td><?php echo $value['address'];?></td>
-                                      <td class=" "><?php echo $value['billing_contact_name'];?></td>
-                                      <td class=" "><?php echo $value['billing_contact_phone'];?></td>
-                                      <td class=" "><?php echo $value['technical_contact_name'];?></td>
-                                      <td class=" "><?php echo $value['technical_contact_phone'];?></td>
+                                      <td class=""> 
+                                        <a href="delete_invoice/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
+                                        <a href="update_invoice/<?php echo $id;?>" title="update" style="padding-left: 5px;"><i class="fa fa-pencil" style="color: green;"></i></a></td>
+                                      <td class=" "><?php echo $this->services_database->get_service_location($value['service']);?></td>
+                                      <td class=" "><?php echo $value['invoice_date'];?></td>
+                                      <td class=" "><a href="<?php echo base_url().'invoices/'.$value['invoice_link'];?>"><?php echo $value['invoice_link'];?></a></td>                                     
                                     </tr>
                                     <?php } ?>
                                 </tbody>

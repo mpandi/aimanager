@@ -120,14 +120,6 @@ else {
                             <input type="text" class="form-control" name="apconnected" placeholder="AP CONNECTED" required="" value="<?php echo isset($add_apconnected)?$add_apconnected:'';?>"/>
                         </div>
                          <div class="form-group" style="padding-top: 5px;">
-                            <label>INVOICE DATE: </label>
-                            <input type="text" class="form-control" name="invoicedate" id="datepicker3" placeholder="Invoice Date" value="<?php echo isset($add_date)?$add_date:'';?>"/>
-                        </div>
-                         <div class="form-group" style="padding-top: 5px;">
-                            <label>INVOICE LINK: </label>
-                            <input type="text" class="form-control" name="invoicelink" placeholder="Invoice Link" value="<?php echo isset($add_link)?$add_link:'';?>"/>
-                        </div>
-                         <div class="form-group" style="padding-top: 5px;">
                             <label>Graph Details: </label>
                             <input type="text" class="form-control" name="cpegraph" placeholder="CPE Graph" value="<?php echo isset($add_graph)?$add_graph:'';?>"/>
                         </div>

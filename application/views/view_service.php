@@ -117,14 +117,6 @@ else {
                           <td><label>Grace Period: </label></td>
                           <td><?php echo $service_data[0]['grace_period'];?> days</td>
                         </tr>
-                        <tr>
-                          <td><label>Invoice Date: </label></td>
-                          <td><?php echo $service_data[0]['invoice_date'];?></td>
-                        </tr>
-                        <tr>
-                          <td><label>Invoice Link: </label></td>
-                          <td><a href="<?php echo base_url().'invoices/'.$service_data[0]['invoice_link'];?>" target="_blank"><?php echo $service_data[0]['invoice_link']?></a></td>
-                        </tr>
                          <tr>
                            <td><label>Graph Details: </label></td>
                            <td><a href="<?php echo $service_data[0]['cpe_graph'];?>" target="_blank">View Graph</a></td>

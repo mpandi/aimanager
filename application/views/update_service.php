@@ -141,14 +141,6 @@ else {
                           <label>AP CONNECTED: </label>
                             <input type="text" name="apconnected" class="form-control" placeholder="AP CONNECTED" required="" value="<?php echo isset($add_apconnected)?$add_apconnected:$service_data[0]['ap_connected'];?>"/>
                         </div>
-                         <div class="form-group" style="padding-top: 5px;">
-                            <label>INVOICE DATE: </label>
-                            <input type="text" class="form-control" name="invoicedate" id="datepicker3" placeholder="Invoice Date" value="<?php echo isset($add_invoice)?$add_invoice:$service_data[0]['invoice_date'];?>"/>
-                        </div>
-                         <div class="form-group" style="padding-top: 5px;">
-                            <label>INVOICE LINK: </label>
-                            <input type="text" class="form-control" name="invoicelink" placeholder="Invoice Link" value="<?php echo isset($add_link)?$add_link:$service_data[0]['invoice_link'];?>"/>
-                        </div>
                         <div class="form-group">
                           <label>Grace Period: </label>
                             <input type="number" name="graceperiod" class="form-control" placeholder="Grace Period" value="<?php echo isset($add_graceperiod)?$add_graceperiod:$service_data[0]['grace_period'];?>"/>

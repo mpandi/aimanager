@@ -30,6 +30,16 @@ public function get_service($id){
     }
     else return "Unknown";
 }
+public function get_service_location($id){
+    $this->db->select('location');
+    $this->db->where('id', $id);
+    $query = $this->db->get('services');
+    if($query->num_rows() > 0){
+        $data = $query->result_array();
+        return $data[0]['location'];
+    }
+    else return "Unknown";
+}
 public function fetch_service($id){
     $this->db->where('id', $id);
     $query = $this->db->get('services');
