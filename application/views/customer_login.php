@@ -18,7 +18,7 @@ if(isset($this->session->userdata['customer_logged_in'])){
                     <ul class="nav navbar-nav navbar-right">			      
                         <li><a href="<?php echo base_url(); ?>">Home</a></li>
                         <li><a href="<?php echo base_url(); ?>customers/login" class="active">Customer Portal</a></li>
-                        <li><a href="<?php echo base_url(); ?>login" class="active">Login</a></li>
+                        <li><a href="<?php echo base_url(); ?>login">Login</a></li>
                     </ul>
                 </div>
                 <!--end navbar -->

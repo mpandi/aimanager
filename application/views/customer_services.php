@@ -113,7 +113,9 @@ else {
                                   
                             ?>
                             <div class="row-fluid" style="<?php echo $style; ?>">                                  
-                                      <div class="span3"><?php if($value['status'] == '0'){ ?>
+                                      <div class="span3">
+                                      <a href="view_service/<?php echo $id;?>" title="view invoices" style="padding-right: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
+                                      <?php if($value['status'] == '0'){ ?>
                                       <span style="color: silver;"><?php echo $value['location'];?></span>
                                       <?php } else { 
                                                 echo $value['location'];

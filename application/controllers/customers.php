@@ -6,6 +6,7 @@ class Customers extends CI_Controller {
 		// Load database
         $this->load->model('customers_database');
         $this->load->model('services_database');
+        $this->load->model('invoices_database');
 		// Load form helper library
         $this->load->helper('form');
         // Load form validation library
@@ -206,6 +207,21 @@ public function dashboard(){
 		}
      }
    }
+public function view_service($id){ 
+     if(!isset($id)) {
+		  redirect("customers/services");
+		} 
+	 else {
+		$data['service_data'] = $this->services_database->fetch_service($id);
+	    if($data['service_data'] != false) {
+          $this->load->view('view_customer_service', $data);
+		} 
+	  else {
+		$this->session->set_flashdata('nonexistent','Nothing found ...');
+        redirect("customers/services");
+		  }
+		}
+	}
 public function update_details(){ 
         $username = $this->input->post('username');
         $email = $this->input->post('email');

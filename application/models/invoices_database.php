@@ -44,6 +44,14 @@ public function fetch_invoice($id){
     }
     else return false;
 }
+public function fetch_from_service_id($id){
+    $this->db->where('service', $id);
+    $query = $this->db->get('invoices');
+    if($query->num_rows() > 0){
+        return $query->result_array();
+    }
+    else return false;
+}
 private function check_invoice($location_id,$date){
     $this->db->where("service = '$location_id' AND invoice_date = '$date'");
     $query = $this->db->get('invoices');

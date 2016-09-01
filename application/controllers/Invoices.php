@@ -6,6 +6,7 @@ class Invoices extends CI_Controller {
 		// Load database
         $this->load->model('services_database');
         $this->load->model('invoices_database');
+        $this->load->model('customers_database');
 		// Load form helper library
         $this->load->helper('form');
         // Load form validation library
