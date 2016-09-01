@@ -79,12 +79,21 @@ else {
                                 <?php } ?>
                             </select>
                         </div>
-                       <div class="form-group" style="padding-top: 5px;">
-                            <label>INVOICE DATE: </label>
-                            <input type="text" class="form-control" name="invoicedate" id="datepicker3" placeholder="Invoice Date" value="<?php echo isset($add_date)?$add_date:$invoices_data[0]['invoice_date'];?>"/>
+                        <div class="form-group" style="padding-top: 5px;">
+                         <label>Customer Name: </label>
+                            <select name="customer" style="width: 100%;">
+                                <option value="<?php echo $invoices_data[0]['customer_id'];?>" selected=""><?php echo $this->customers_database->get_customer($invoices_data[0]['customer_id']);?></option>
+                                <?php foreach ($this->customers_database->read() as $value){ ?>
+                                <option value="<?php echo $value['id'];?>"><?php echo $value['name_'];?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                       </div>
                       <div class="span5 offset1">   
+                          <div class="form-group" style="padding-top: 5px;">
+                            <label>INVOICE DATE: </label>
+                            <input type="text" class="form-control" name="invoicedate" id="datepicker3" placeholder="Invoice Date" value="<?php echo isset($add_date)?$add_date:$invoices_data[0]['invoice_date'];?>"/>
+                         </div>
                          <div class="form-group" style="padding-top: 5px;">
                             <label>INVOICE LINK: </label>
                             <input type="text" class="form-control" name="invoicelink" placeholder="Invoice Link" value="<?php echo isset($add_link)?$add_link:$invoices_data[0]['invoice_link'];?>"/>

@@ -2,8 +2,8 @@
 Class Invoices_Database extends CI_Model {
 
 // Insert registration data in database
-public function insert($service,$date,$data) {
-    if($this->check_invoice($service,$date) == true) {
+public function insert($service,$customer,$date,$data) {
+    if($this->check_invoice($service,$customer,$date) == true) {
       return "Invoice already entered";
     }
     else{
@@ -52,8 +52,8 @@ public function fetch_from_service_id($id){
     }
     else return false;
 }
-private function check_invoice($location_id,$date){
-    $this->db->where("service = '$location_id' AND invoice_date = '$date'");
+private function check_invoice($location_id,$cus_id,$date){
+    $this->db->where("service = '$location_id' AND (invoice_date = '$date' AND customer_id = '$cus_id')");
     $query = $this->db->get('invoices');
     if($query->num_rows() > 0){
         return true;

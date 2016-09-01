@@ -30,6 +30,7 @@ public function add_invoice(){
 public function add() {	
         $service = $this->input->post('service');
         $date = $this->input->post('invoicedate');
+        $customer = $this->input->post('customer');
 		$this->form_validation->set_rules('service', 'Service', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('invoicedate', 'Date', 'trim|required|xss_clean');
         $this->form_validation->set_rules('invoicelink', 'Link', 'trim|required|xss_clean');
@@ -41,8 +42,9 @@ public function add() {
         'invoice_date' => $date,
         'invoice_link' => $this->input->post('invoicelink'),
 		'service' => $service,
+        'customer_id' => $customer
 		);
-		$result = $this->invoices_database->insert($service,$date,$data);
+		$result = $this->invoices_database->insert($service,$customer,$date,$data);
 	  if($result == 'added') {
 	    $this->session->set_flashdata('success_register','Invoice addition Successful ...');
         redirect("invoices/");
@@ -74,6 +76,7 @@ public function update(){
         $id = $this->input->post('invoice_id');
         $service = $this->input->post('service');
         $date = $this->input->post('invoicedate');
+        $customer = $this->input->post('customer');
         $this->form_validation->set_rules('service', 'Service', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('invoicedate', 'Date', 'trim|required|xss_clean');
         $this->form_validation->set_rules('invoicelink', 'Link', 'trim|required|xss_clean');
@@ -86,6 +89,7 @@ public function update(){
         'invoice_date' => $date,
         'invoice_link' => $this->input->post('invoicelink'),
 		'service' => $service,
+        'customer_id' => $customer
 		);
 		$result = $this->invoices_database->update($id,$data);
 	  if($result == 'success'){
