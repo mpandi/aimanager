@@ -74,18 +74,21 @@ else {
                             <select name="service" style="width: 100%;">
                                 <option value="<?php echo $invoices_data[0]['service'];?>" selected=""><?php echo $this->services_database->get_service_location($invoices_data[0]['service']);?></option>
                                 <?php $services_data = $this->services_database->read();
+                                  if(is_array($services_data)){
                                    foreach ($services_data as $value){ ?>
                                 <option value="<?php echo $value['id'];?>"><?php echo $value['location'];?></option>
-                                <?php } ?>
+                                <?php } } else echo "no services"; ?>
                             </select>
                         </div>
                         <div class="form-group" style="padding-top: 5px;">
                          <label>Customer Name: </label>
                             <select name="customer" style="width: 100%;">
                                 <option value="<?php echo $invoices_data[0]['customer_id'];?>" selected=""><?php echo $this->customers_database->get_customer($invoices_data[0]['customer_id']);?></option>
-                                <?php foreach ($this->customers_database->read() as $value){ ?>
-                                <option value="<?php echo $value['id'];?>"><?php echo $value['name_'];?></option>
-                                <?php } ?>
+                                <?php $customers_data = $this->customers_database->read();
+                                if(is_array($customers_data)){
+                                 foreach ($customers_data as $value){ ?>
+                                  <option value="<?php echo $value['id'];?>"><?php echo $value['name_'];?></option>
+                                  <?php } } else echo "no customers"; ?>
                             </select>
                         </div>
                       </div>

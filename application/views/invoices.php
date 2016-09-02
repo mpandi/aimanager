@@ -90,7 +90,8 @@ else {
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($invoices_data as $value){
+                        <?php if(is_array($invoices_data)){
+                        foreach ($invoices_data as $value){
                                   $id = $value['id'];?>
                                     <tr class="even pointer">
                                       <td class=""> 
@@ -101,7 +102,7 @@ else {
                                       <td class=" "><?php echo $value['invoice_date'];?></td>
                                       <td class=" "><a href="<?php echo base_url().'invoices/'.$value['invoice_link'];?>"><?php echo $value['invoice_link'];?></a></td>                                     
                                     </tr>
-                                    <?php } ?>
+                                    <?php } } ?>
                                 </tbody>
                     </table>
                     <?php } ?>
