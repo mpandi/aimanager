@@ -12,7 +12,7 @@ class Services extends CI_Controller {
         $this->load->library('form_validation');
     }
 public function index(){
-        $data['services_data'] = $this->services_database->read();
+        $data['services_data'] = $this->services_database->read_all();
 	     if($data['services_data'] != false) {
 		   $this->load->view('services',$data);
 		  } 
@@ -21,6 +21,18 @@ public function index(){
 		   'error_message' => 'No services have been set ...'
 		  );
 		  $this->load->view('services', $data);
+		}
+	}
+public function view_($id){
+        $data['services_data'] = $this->services_database->read_them($id);
+	     if($data['services_data'] != false) {
+		   $this->load->view('services2',$data);
+		  } 
+	     else {
+		   $data = array(
+		   'error_message' => 'No services have been set ...'
+		  );
+		  $this->load->view('services2', $data);
 		}
 	}
 public function add_service(){
@@ -63,6 +75,22 @@ public function search(){
       }
       else $search = 'type';
       $data['services_data'] = $this->services_database->search($search,$search_value);
+       if($data['services_data'] != false) {
+		   $this->load->view('services',$data);
+		  } 
+	     else {
+		   $data = array(
+		   'error_message' => 'No results ...'
+		  );
+		  $this->load->view('services', $data);
+		}
+	}
+public function search_(){ 
+      $filter = $this->input->post('filter');
+      $search_value = $this->input->post('search_value');
+      $search = 'customer_id';
+      $search_value = $this->customers_database->get_customer_from_name($search_value);
+      $data['services_data'] = $this->services_database->search_($search,$search_value);
        if($data['services_data'] != false) {
 		   $this->load->view('services',$data);
 		  } 
@@ -141,6 +169,22 @@ public function delete_service($id) {
 		} 
 	 else {
 		$result = $this->services_database->delete_service($id);
+	  if($result == true) {
+	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
+        redirect("services/");
+		} 
+	  else {
+		$this->session->set_flashdata('fail_delete','Unable to delete ...');
+        redirect("services/");
+		  }
+		}
+	}
+public function delete_cus_services($id) {
+	 if(!isset($id)) {
+		  redirect("services/");
+		} 
+	 else {
+		$result = $this->services_database->delete_cus_services($id);
 	  if($result == true) {
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
         redirect("services/");

@@ -53,7 +53,7 @@ else {
     <section id="home_wrapper" class="home-wrapper">
         <!--begin container-->
         <div class="container-fluid"> 
-                   <section class="login_content" style="padding:5px; font-size: 0.9em;">
+                   <section class="span7 offset3 login_content" style="padding:5px; font-size: 0.9em;">
                    <?php 
                    $flashfail = $this->session->flashdata('fail_delete');
                    if(isset($error_message) || isset($flashfail)){
@@ -76,13 +76,11 @@ else {
                     if(isset($services_data)){ 
                     if($level == '1'){ ?>
                       <div class="row-fluid">
-                       <form action="<?php echo base_url(); ?>services/search" method="POST" class="span6 offset3">
+                       <form action="<?php echo base_url(); ?>services/search_" method="POST" class="">
                            <span class="add-on" style="color: black; font-weight: bolder;">Filter By</span>
                                 <select name="filter" class="select">
                                     <option value="all" selected="">..select option..</option>
                                     <option value="customer">Customer</option>
-                                    <option value="type">Service Type</option>
-                                    <option value="expired">Expired</option>
                                  </select>
                             <input type="text" name="search_value" value="" placeholder="" id="new_value" style="width: 40%; margin: 0;"/>
                             <input type="submit" name="filt" value="Filter" style="margin-top: 2px;" />        
@@ -90,97 +88,30 @@ else {
                       </div>
                       <?php } ?>
                        <div class="row-fluid">                                                                                         
-                                <div class="span1"><b>Action</b></div>
-                                <div class="span2"><b>Customer</b></div>
-                                <div class="span2"><b>Service Location</b></div>
-                                <div class="span2"><b>Service Type</b></div>
-                                <div class="span1"><b>Billing Cycle</b></div>
-                                <div class="span1"><b>Expiry Date</b></div>
-                                <div class="span3"><b>Remaining days</b></div>
+                                <div class="span3"><b>Action</b></div>
+                                <div class="span5"><b>Customer</b></div>
+                                <div class="span2"><b>Total Services</b></div>
                             </div>                                                
                         <?php foreach ($services_data as $value){ 
                             if($i%2 == 0) $style="background-color:#eee;";
                                   else $style="background-color:#fff;";
                                   $id = $value['id'];
-                                  $start_date = $value['created'];
-                                  $expiry_date = date('Y-m-d',strtotime($value['expiry_date']));
-                                  $billing_cycle = $value['billing_cycle']*30; //convert into days
-                                  $rem = strtotime($value['expiry_date'])-time();
-                                  $rema = floor($rem/86400);
-                                  $remain = '';
-                                  if($billing_cycle > 0 && $rema > 0){
-                                       $remain .= $rema." days";
-                                       }
-                                  elseif($billing_cycle > 0 && $rema < 0.1){
-                                    $rema = '1';
-                                    $over = time()-strtotime($value['expiry_date']);
-                                    $overdue = floor($over/86400);
-                                    $remain .= "<span style='color:red;'>Overdue $overdue days</span>";
-                                  }
-                                  elseif($billing_cycle == 0 && $rema < 0.1){
-                                    $billing_cycle = '1';
-                                    $rema = '1';                                    
-                                  } 
-                                   elseif($billing_cycle == 0 && $rema > 0){
-                                    $remain .= $rema." days";
-                                    $billing_cycle = '1';
-                                                      
-                                  } 
-                                  $width = floor(($rema/$billing_cycle)*100);
-                                  if($width > 100) $width = '100';
-                                  if($width < 0) $width = '5';
-                                  if($width > '50'){
-                                    $level = 'high';                                    
-                                  }
-                                  elseif($width < '50' && $width > '10'){
-                                    $level = 'medium';
-                                  }
-                                 else {
-                                    $level = 'low';
-                                  }
+                                  $cus_id = $value['customer_id'];
+                                  
                                   
                             ?>
                             <div class="row-fluid" style="<?php echo $style; ?>">                                  
-                                      <div class="span1"> 
+                                      <div class="span3"> 
                                        <?php if($this->session->userdata['logged_in']['user_level'] == 1){ ?>
-                                        <a href="delete_service/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
-                                       <?php if($value['status'] == '1'){ ?>
-                                        <a href="disable_service/<?php echo $id;?>" title="disable" id="disable_event"><i class="fa fa-ban" style="color: red; padding-left: 5px;"></i></a>
-                                        <?php } else { ?>
-                                        <a href="enable_service/<?php echo $id;?>" title="enable" id=""><i class="fa fa-check-circle-o" style="color: blue; padding-left: 5px;"></i></a>
-                                        <?php }} ?>
-                                        <a href="view_service/<?php echo $id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
+                                        <a href="delete_cus_services/<?php echo $cus_id;?>" title="delete all his services" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
+                                        <?php } ?>
+                                        <a href="view_/<?php echo $cus_id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
                                       </div>
-                                      <div class="span2"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
-                                      <div class="span2"><?php if($value['status'] == '0'){ ?>
-                                      <span style="color: silver;"><?php echo $value['location'];?></span>
-                                      <?php } else { 
-                                                echo $value['location'];
-                                                } ?>
-                                        </div>
-                                      <div class="span2"><?php echo $value['service_type'];?></div>
-                                      <div class="span1"><?php 
-                                      if($value['billing_cycle']=='1'){
-                                         echo "<span style=\"color: #8FC412; \">Monthly</span>";
-                                         }
-                                      elseif($value['billing_cycle']=='3'){
-                                         echo "<span style=\"color: black; \">Quarterly</span>";
-                                         }
-                                      elseif($value['billing_cycle']=='12'){
-                                         echo "<span style=\"color: #8FC412; \">Annual</span>";
-                                         }
-                                      else echo "<span style=\"color: darkblue; \">Not Billed</span>";
-                                      ?></div>
-                                      <div class="span1"><?php echo $expiry_date;?></div>
-                                      <div class="span3" style="padding-top: 5px;"><?php if($value['status'] == '1'){ ?>
-                                         <div class="row-fluid">
-                                         <div id="battery" class="span6">
-                                            <div class="battery-level <?php echo $level;?>" style="width: <?php echo $width.'%';?>;"></div></div>
-                                         <div class="span6" style="padding-bottom: 2px; color: black; float: left;"><?php echo $remain;?></div>
-                                         </div>
-                                      <?php } else{
-                                        echo "<span style='color:red;'>Suspended</span>";} ?>
-                                      </div>
+                                      <div class="span5"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
+                                      
+                                      <div class="span2"><?php echo $value['total'];?></div>
+                                      
+                                      
                                    </div>
                                     <?php $i++; } } ?>
                 </section>

@@ -1,6 +1,5 @@
 <?php
 Class Services_Database extends CI_Model {
-
 // Insert registration data in database
 public function registration_insert($data) {
     $this->db->insert('services',$data);
@@ -76,8 +75,31 @@ public function fetch_customer_services($id){
     }
     else return false;
 }
-public function read() {
+public function read_all() {
+  $this->db->select('*,COUNT(customer_id) as total');
   $this->db->order_by("id", "asc");
+  $this->db->group_by('customer_id');
+  $query = $this->db->get('services');
+  if ($query->num_rows() > 0) {
+     return $query->result_array();
+  } else {
+     return false;
+  }
+}
+public function search_($search,$value) {
+  $this->db->select('*,COUNT(customer_id) as total');
+  $this->db->where('customer_id', $value);
+  $this->db->group_by('customer_id');
+  $query = $this->db->get('services');
+  if ($query->num_rows() > 0) {
+     return $query->result_array();
+  } else {
+     return false;
+  }
+}
+public function read_them($value) {
+  $this->db->order_by("id", "desc");
+  $this->db->where('customer_id', $value);
   $query = $this->db->get('services');
   if ($query->num_rows() > 0) {
      return $query->result_array();
@@ -127,6 +149,15 @@ public function get_types() {
 }
 public function delete_service($id){
    $this->db->where('id', $id);
+   $this->db->delete('services'); 
+  if($this->db->affected_rows() > 0) {
+     return true;
+  } else {
+     return false;
+  }
+}
+public function delete_cus_services($id){
+   $this->db->where('customer_id', $id);
    $this->db->delete('services'); 
   if($this->db->affected_rows() > 0) {
      return true;
