@@ -50,6 +50,16 @@ public function get_service_location($id){
     }
     else return "Unknown";
 }
+public function get_service_location_number($id){
+    $this->db->select('location_number');
+    $this->db->where('id', $id);
+    $query = $this->db->get('services');
+    if($query->num_rows() > 0){
+        $data = $query->result_array();
+        return $data[0]['location_number'];
+    }
+    else return "Unknown";
+}
 public function fetch_service($id){
     $this->db->where('id', $id);
     $query = $this->db->get('services');
@@ -68,6 +78,16 @@ public function fetch_customer_services($id){
 }
 public function read() {
   $this->db->order_by("id", "asc");
+  $query = $this->db->get('services');
+  if ($query->num_rows() > 0) {
+     return $query->result_array();
+  } else {
+     return false;
+  }
+}
+public function read_5() {
+  $this->db->order_by("id", "asc");
+  $this->db->limit(5);
   $query = $this->db->get('services');
   if ($query->num_rows() > 0) {
      return $query->result_array();

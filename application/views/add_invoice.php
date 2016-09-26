@@ -67,19 +67,8 @@ else {
                             echo "</div>";
                           } 
                           echo validation_errors();?>  
-                      <div class="span5">                    
-                        <div class="form-group" style="padding-top: 5px;">
-                         <label>Service: </label>
-                            <select name="service" style="width: 100%;">
-                                <option value="" selected="">..Service..</option>
-                                <?php $services_data = $this->services_database->read();
-                                  if(is_array($services_data)){
-                                   foreach ($services_data as $value){ ?>
-                                <option value="<?php echo $value['id'];?>"><?php echo $value['location'];?></option>
-                                <?php } } else echo "no services"; ?>
-                            </select>
-                        </div>
-                        <div class="form-group" style="padding-top: 5px;">
+                      <div class="span5">
+                         <div class="form-group" style="padding-top: 5px;">
                          <label>Customer Name: </label>
                             <select name="customer" style="width: 100%;">
                                 <option value="" selected="">..Customer..</option>
@@ -89,7 +78,19 @@ else {
                                 <option value="<?php echo $value['id'];?>"><?php echo $value['name_'];?></option>
                                 <?php } } else echo "no customers"; ?>
                             </select>
-                        </div>                       
+                        </div>                        
+                        <div class="form-group" style="padding-top: 5px;">
+                         <label>Service: </label>
+                            <select name="service" style="width: 100%;">
+                                <option value="" selected="">..Service..</option>
+                                <?php $services_data = $this->services_database->read_5();
+                                  if(is_array($services_data)){
+                                   foreach ($services_data as $value){ ?>
+                                <option value="<?php echo $value['id'];?>"><?php echo $value['location'];?></option>
+                                <?php } } else echo "no services"; ?>
+                            </select>
+                        </div>
+                                          
                       </div>
                       <div class="span5 offset1"> 
                          <div class="form-group" style="padding-top: 5px;">

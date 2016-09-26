@@ -31,7 +31,7 @@ public function get_customer($id){
 }
 public function get_customer_from_name($name){
     $this->db->select('id');
-    $this->db->where("name_ LIKE '$name'");
+    $this->db->where("name_ LIKE '%$name%'");
     $query = $this->db->get('customers');
     if($query->num_rows() > 0){
         $data = $query->result_array();

@@ -96,6 +96,7 @@ public function add() {
 		}
 	}
 public function delete_customer($id) {
+     $user_id = $this->session->userdata['logged_in']['username'];
 	 if(!isset($id)) {
 		  redirect("customers/");
 		} 
@@ -103,6 +104,9 @@ public function delete_customer($id) {
 		$result = $this->customers_database->delete($id);
 	  if($result == true) {
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
+        //send email to admin
+        $headers = "From: changes@ainetworks.sl"."\r\n";
+        mail('aethomas@ainetworks.sl',"Customer Deletion","Customer Deleted by $user_id",$headers); 
         redirect("customers/");
 		} 
 	  else {
@@ -156,7 +160,11 @@ public function update(){
 		);
 		$result = $this->customers_database->update($id,$username,$data);
 	  if($result == 'success'){
+	    $user_id = $this->session->userdata['logged_in']['username'];
 	    $this->session->set_flashdata('success_update','Customer update successful ...');
+        //send email to admin
+        $headers = "From: changes@ainetworks.sl"."\r\n";
+        mail('aethomas@ainetworks.sl',"Customer Update","Customer with username $username updated by $user_id",$headers); 
         redirect("customers/");
 		} 
 	  else {

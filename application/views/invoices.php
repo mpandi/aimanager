@@ -83,8 +83,9 @@ else {
                         <thead>
                             <tr class="headings">                                              
                                 <th>Action</th>
-                                <th>Service Location</th>
-                                 <th>Customer</th>
+                                <th>Customer</th>
+                                <th>Service Loc. No.</th>
+                                <th>Service Location</th> 
                                 <th>Invoice Date</th>
                                 <th>Invoice Link</th>
                             </tr>
@@ -97,8 +98,10 @@ else {
                                       <td class=""> 
                                         <a href="delete_invoice/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
                                         <a href="update_invoice/<?php echo $id;?>" title="update" style="padding-left: 5px;"><i class="fa fa-pencil" style="color: green;"></i></a></td>
-                                      <td class=" "><?php echo $this->services_database->get_service_location($value['service']);?></td>
                                       <td class=" "><?php echo $this->customers_database->get_customer($value['customer_id']);?></td>
+                                      <td class=" "><?php echo $this->services_database->get_service_location_number($value['service']);?></td>
+                                      <td class=" "><?php echo $this->services_database->get_service_location($value['service']);?></td>
+                                      
                                       <td class=" "><?php echo $value['invoice_date'];?></td>
                                       <td class=" "><a href="<?php echo base_url().'invoices/'.$value['invoice_link'];?>"><?php echo $value['invoice_link'];?></a></td>                                     
                                     </tr>
