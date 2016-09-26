@@ -77,7 +77,7 @@ public function login($data) {
   }
   }
 public function read() {
-  $this->db->order_by("id", "asc");
+  $this->db->order_by("name_", "asc");
   $query = $this->db->get('customers');
   if ($query->num_rows() > 0) {
      return $query->result_array();
