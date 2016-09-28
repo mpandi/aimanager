@@ -142,13 +142,13 @@ else {
                             <div class="row-fluid" style="<?php echo $style; ?>">                                  
                                       <div class="span1"> 
                                        <?php if($this->session->userdata['logged_in']['user_level'] == 1){ ?>
-                                        <a href="delete_service/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
+                                        <a href="<?php echo base_url(); ?>services/delete_service/<?php echo $id;?>" title="delete" id="delete_event"><i class="fa fa-trash-o" style="color: red;"></i></a>
                                        <?php if($value['status'] == '1'){ ?>
-                                        <a href="disable_service/<?php echo $id;?>" title="disable" id="disable_event"><i class="fa fa-ban" style="color: red; padding-left: 5px;"></i></a>
+                                        <a href="<?php echo base_url(); ?>services/disable_service/<?php echo $id;?>" title="disable" id="disable_event"><i class="fa fa-ban" style="color: red; padding-left: 5px;"></i></a>
                                         <?php } else { ?>
-                                        <a href="enable_service/<?php echo $id;?>" title="enable" id=""><i class="fa fa-check-circle-o" style="color: blue; padding-left: 5px;"></i></a>
+                                        <a href="<?php echo base_url(); ?>services/enable_service/<?php echo $id;?>" title="enable" id=""><i class="fa fa-check-circle-o" style="color: blue; padding-left: 5px;"></i></a>
                                         <?php }} ?>
-                                        <a href="view_service/<?php echo $id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
+                                        <a href="<?php echo base_url(); ?>services/view_service/<?php echo $id;?>" title="view" style="padding-left: 5px;"><i class="fa fa-eye" style="color: green;"></i></a>
                                       </div>
                                       <div class="span2"><?php echo $this->customers_database->get_customer($value['customer_id']);?></div>
                                       <div class="span2"><?php if($value['status'] == '0'){ ?>
