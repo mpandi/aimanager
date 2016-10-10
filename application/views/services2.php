@@ -34,8 +34,8 @@ else {
                             <a href="<?php echo base_url(); ?>services/" class="active dropdown-toggle" data-toggle="dropdown">Services
                             <span class="caret" style="margin-top: 0px;"></span></a>
                             <ul class="dropdown-menu">
-                              <li><a href="add_service">Add Service</a></li>
-                              <li><a href="service_types">Service Types</a></li>
+                              <li><a href="<?php echo base_url(); ?>services/add_service">Add Service</a></li>
+                              <li><a href="<?php echo base_url(); ?>services/service_types">Service Types</a></li>
                             </ul>
                          </li>
                         <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
@@ -164,6 +164,9 @@ else {
                                          }
                                       elseif($value['billing_cycle']=='3'){
                                          echo "<span style=\"color: black; \">Quarterly</span>";
+                                         }
+                                      elseif($value['billing_cycle']=='6'){
+                                         echo "<span style=\"color: black; \">Semi Annual</span>";
                                          }
                                       elseif($value['billing_cycle']=='12'){
                                          echo "<span style=\"color: #8FC412; \">Annual</span>";

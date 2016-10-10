@@ -93,6 +93,7 @@ else {
                                 <option value="" selected="">..Billing Cycle..</option>
                                 <option value="1">Monthly</option>
                                 <option value="3">Quarterly</option>
+                                <option value="6">Semi Annual</option>
                                 <option value="12">Annual</option>
                                 <option value="0">No Billing</option>
                             </select>
