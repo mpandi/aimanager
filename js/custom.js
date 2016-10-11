@@ -34,4 +34,10 @@ $("#datepicker3").datepicker({dateFormat: 'yy-mm-dd',
         $("input#new_value").val('expired');
     }
  });
+ $("form#searchForm").change(function(){
+    var value = $("form > select[name=filter]").val();
+    if(value == 'expired'){
+        $("form#searchForm").submit();
+    }
+ });
 });
