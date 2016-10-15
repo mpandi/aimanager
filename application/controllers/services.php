@@ -66,27 +66,24 @@ public function service_types(){
 public function search(){ 
       $filter = $this->input->post('filter');
       $search_value = $this->input->post('search_value');
-      if($filter == 'customer'){
-        $search = 'customer_id';
-        $search_value = $this->customers_database->get_customer_from_name($search_value);
-      }
-      elseif($filter == 'expired'){
+      if($filter == 'expired'){
         $search = 'expired';
+        $search_value = "none";
       }
       else $search = 'type';
       $data['services_data'] = $this->services_database->search($search,$search_value);
        if($data['services_data'] != false) {
-		   $this->load->view('services',$data);
+		   $this->load->view('services2',$data);
 		  } 
 	     else {
 		   $data = array(
-		   'error_message' => 'No results ...'
+		   'error_message' => 'No results Found ...'
 		  );
-		  $this->load->view('services', $data);
+		  $this->load->view('services2', $data);
 		}
 	}
 public function search_(){ 
-      $filter = $this->input->post('filter');
+      $filter = $this->input->post('filt');
       $search_value = $this->input->post('search_value');
       $search = 'customer_id';
       $search_value = $this->customers_database->get_customer_from_name($search_value);

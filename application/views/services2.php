@@ -76,14 +76,14 @@ else {
                     if(isset($services_data)){ 
                     if($level == '1'){ ?>
                       <div class="row-fluid">
-                       <form action="<?php echo base_url(); ?>services/search" method="POST" class="span6 offset3">
+                       <form action="<?php echo base_url(); ?>services/search" method="POST" class="span6 offset3" id="searchForm_">
                            <span class="add-on" style="color: black; font-weight: bolder;">Filter By</span>
                                 <select name="filter" class="select">
                                     <option value="all" selected="">..select option..</option>
                                     <option value="type">Service Type</option>
                                     <option value="expired">Expired</option>
                                  </select>
-                            <input type="text" name="search_value" value="" placeholder="" id="new_value" style="width: 40%; margin: 0;"/>
+                            <input type="text" name="search_value" value="" placeholder="" id="new_value" style="width: 40%; margin: 0; color: black;"/>
                             <input type="submit" name="filt" value="Filter" style="margin-top: 2px;" />        
                            </form>
                       </div>

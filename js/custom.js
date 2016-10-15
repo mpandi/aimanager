@@ -1,5 +1,14 @@
 $(document).ready(function(){
-	$('a#delete_event').click(function(e){
+ $("form#searchForm_").change(function(){
+    var new_value = $("form > select[name=filter]").val();
+    if(new_value =='type'){
+        $("input#new_value").attr('placeholder','Enter Service Type');
+    }
+    else if(new_value == 'expired'){
+        $("form#searchForm_").submit();
+    }
+ });
+ $('a#delete_event').click(function(e){
 	     var host = $(this).attr('href');
 	      e.preventDefault();
             swal({title: "Are you sure?",   text: "This action is unrecoverable!",   
@@ -22,22 +31,4 @@ $("#datepicker2").datepicker({dateFormat: 'yy-mm-dd',
 $("#datepicker3").datepicker({dateFormat: 'yy-mm-dd',
                              changeMonth: true,
                              changeYear: true});
- $("form > select[name=filter]").change(function(){
-    var value = $("form > select[name=filter]").val();
-    if(value =='customer'){
-        $("input#new_value").attr('placeholder','Enter Customer Name');
-    }
-    else if(value =='type'){
-        $("input#new_value").attr('placeholder','Enter Service Type');
-    }
-    else if(value =='expired'){
-        $("input#new_value").val('expired');
-    }
- });
- $("form#searchForm").change(function(){
-    var value = $("form > select[name=filter]").val();
-    if(value == 'expired'){
-        $("form#searchForm").submit();
-    }
- });
 });
