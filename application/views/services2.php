@@ -80,6 +80,7 @@ else {
                            <span class="add-on" style="color: black; font-weight: bolder;">Filter By</span>
                                 <select name="filter" class="select">
                                     <option value="all" selected="">..select option..</option>
+                                    <option value="customer">Customer Name</option>
                                     <option value="type">Service Type</option>
                                     <option value="expired">Expired</option>
                                  </select>

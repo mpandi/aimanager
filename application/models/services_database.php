@@ -119,14 +119,16 @@ public function read_5() {
 }
 public function search($search,$value) {
    $this->db->select('*');
- if($search == 'none'){
+ if($search == 'expired'){
     $date = date("Y-m-d H:i:s",time());
     $this->db->where("expiry_date < '$date'");
  }
  elseif($search == 'type'){
     $this->db->where("service_type LIKE '$value'");
  }
- 
+ elseif($search == 'customer'){
+    $this->db->where('customer_id', $value);
+ }
   $this->db->order_by("id", "asc");
   $query = $this->db->get('services');
   

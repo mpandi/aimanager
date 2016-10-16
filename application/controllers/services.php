@@ -70,6 +70,10 @@ public function search(){
         $search = 'expired';
         $search_value = "none";
       }
+      elseif($filter == 'customer'){
+        $search = 'customer';
+        $search_value  = $this->customers_database->get_customer_from_name($search_value);
+      }
       else $search = 'type';
       $data['services_data'] = $this->services_database->search($search,$search_value);
        if($data['services_data'] != false) {

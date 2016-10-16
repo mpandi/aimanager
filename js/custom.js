@@ -4,6 +4,9 @@ $(document).ready(function(){
     if(new_value =='type'){
         $("input#new_value").attr('placeholder','Enter Service Type');
     }
+    if(new_value =='customer'){
+        $("input#new_value").attr('placeholder','Enter Customer Name');
+    }
     else if(new_value == 'expired'){
         $("form#searchForm_").submit();
     }
