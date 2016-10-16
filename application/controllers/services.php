@@ -238,6 +238,10 @@ public function delete_service_type($id) {
 		$result = $this->services_database->delete_service_type($id);
 	  if($result == true) {
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
+        $username = $this->session->userdata['logged_in']['username'];
+	    $message = "Service with id $id deleted by $username";
+        $headers = "From: changes@ainetworks.sl"."\r\n";
+        mail('aethomas@ainetworks.sl',"Service Deletion",$message,$headers);
         redirect("services/service_types");
 		} 
 	  else {
@@ -290,6 +294,7 @@ public function update(){
 		} 
 	 else {
 	    $id = $this->input->post('service_id');
+        $lnumber = $this->input->post('location_number');
 		$data = array(
 		'location' => $this->input->post('location'),
         'location_number' => $this->input->post('location_number'),
@@ -308,6 +313,10 @@ public function update(){
 		);
 		$result = $this->services_database->update($id,$data);
 	  if($result) {
+	    $username = $this->session->userdata['logged_in']['username'];
+	    $message = "Service with location number $lnumber updated by $username";
+	    $headers = "From: aethomas@ainetworks.sl"."\r\n";
+        mail('aethomas@ainetworks.sl',"Service Update",$message,$headers);  //send email
 	    $this->session->set_flashdata('success_update','Service update successful ...');
         redirect("services/");
 		} 
