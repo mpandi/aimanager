@@ -32,7 +32,7 @@ else {
                             <a href="<?php echo base_url(); ?>invoices/" class="active dropdown-toggle" data-toggle="dropdown">Invoices
                             <span class="caret" style="margin-top: 0px;"></span></a>
                             <ul class="dropdown-menu">
-                              <li><a href="add_invoice">Add Invoice</a></li>
+                              <li><a href="add_invoice/0">Add Invoice</a></li>
                             </ul>
                          </li>
                          <?php } ?>

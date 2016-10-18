@@ -11,6 +11,7 @@ class Customers extends CI_Controller {
         $this->load->helper('form');
         // Load form validation library
         $this->load->library('form_validation');
+        $this->load->library('email');
     }
 public function index(){
         $data['customers_data'] = $this->customers_database->read();
@@ -102,12 +103,14 @@ public function delete_customer($id) {
 	 else {
 		$result = $this->customers_database->delete($id);
 	  if($result == true) {
-	    $username = $this->session->userdata['logged_in']['username'];
-	    $message = "Customer with id $id deleted by $username";
+	    $user_id = $this->session->userdata['logged_in']['username'];
+	    $subject = "Customer with id $id deleted by $user_id";
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
-        //send email to admin
-        $headers = "From: changes@ainetworks.sl"."\r\n";
-        mail('aethomas@ainetworks.sl',"Customer Deletion",$message,$headers); 
+        $body = "<p>User $user_id deleted customer with id $id.</p>";
+        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
+        ->subject($subject)
+        ->message($body)
+        ->send();
         redirect("customers/");
 		} 
 	  else {
@@ -142,8 +145,7 @@ public function update(){
  	    $this->form_validation->set_rules('billing_contact_phone', 'Billing Phone', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('technical_contact_name', 'Technical Name', 'trim|required|xss_clean');
  	    $this->form_validation->set_rules('technical_contact_phone', 'Technical Phone', 'trim|required|xss_clean');
-     if($this->form_validation->run() == FALSE) {
-         
+     if($this->form_validation->run() == FALSE) {        
 		  $this->load->view('update_customer');
 		} 
 	 else {
@@ -162,10 +164,13 @@ public function update(){
 		$result = $this->customers_database->update($id,$username,$data);
 	  if($result == 'success'){
 	    $user_id = $this->session->userdata['logged_in']['username'];
-	    $this->session->set_flashdata('success_update','Customer update successful ...');
-        //send email to admin
-        $headers = "From: changes@ainetworks.sl"."\r\n";
-        mail('aethomas@ainetworks.sl',"Customer Update","Customer with username $username updated by $user_id",$headers); 
+        $subject = 'Customer Update';
+        $body = "<p>User $user_id updated customer with username $username.</p>";
+        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
+        ->subject($subject)
+        ->message($body)
+        ->send();
+	    $this->session->set_flashdata('success_update',"Customer update successful");
         redirect("customers/");
 		} 
 	  else {

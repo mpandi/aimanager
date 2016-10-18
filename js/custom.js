@@ -11,6 +11,12 @@ $(document).ready(function(){
         $("form#searchForm_").submit();
     }
  });
+ $("select#customer").change(function(){
+    var customer = $("select[name=customer]").val();
+    var pathparts = location.pathname.split('/');
+    var host = location.origin+'/'+pathparts[1].trim('/')+'/invoices/add_invoice/'+customer;
+    window.location.href = host;
+ });
  $('a#delete_event').click(function(e){
 	     var host = $(this).attr('href');
 	      e.preventDefault();

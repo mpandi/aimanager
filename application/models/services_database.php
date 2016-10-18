@@ -109,7 +109,7 @@ public function read_them($value) {
 }
 public function read_5() {
   $this->db->order_by("id", "asc");
-  $this->db->limit(5);
+  $this->db->limit(15);
   $query = $this->db->get('services');
   if ($query->num_rows() > 0) {
      return $query->result_array();

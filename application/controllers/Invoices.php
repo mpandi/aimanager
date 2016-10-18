@@ -11,6 +11,7 @@ class Invoices extends CI_Controller {
         $this->load->helper('form');
         // Load form validation library
         $this->load->library('form_validation');
+        $this->load->library('email');
     }
 public function index(){
         $data['invoices_data'] = $this->invoices_database->read();
@@ -24,8 +25,9 @@ public function index(){
 		  $this->load->view('invoices', $data);
 		}
 	}
-public function add_invoice(){
-		  $this->load->view('add_invoice');
+public function add_invoice($customer){
+          $data['customer'] = $customer;
+		  $this->load->view('add_invoice',$data);
 	}
 public function add() {	
         $service = $this->input->post('service');
@@ -93,6 +95,13 @@ public function update(){
 		);
 		$result = $this->invoices_database->update($id,$data);
 	  if($result == 'success'){
+	    $username = $this->session->userdata['logged_in']['username'];
+        $subject = 'Invoice Update';
+        $body = "<p>User $username updated invoice for service with id $id.</p>";
+        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
+        ->subject($subject)
+        ->message($body)
+        ->send();
 	    $this->session->set_flashdata('success_update','Invoice update successful ...');
         redirect("invoices/");
 		} 
@@ -111,6 +120,13 @@ public function delete_invoice($id) {
 	 else {
 		$result = $this->invoices_database->delete($id);
 	  if($result == true) {
+        $username = $this->session->userdata['logged_in']['username'];
+	    $subject = "Invoice with id $id deleted by $username";
+        $body = "<p>User $username deleted invoice with id $id.</p>";
+        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
+        ->subject($subject)
+        ->message($body)
+        ->send();
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
         redirect("invoices/");
 		} 

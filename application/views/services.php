@@ -34,6 +34,7 @@ else {
                             <a href="<?php echo base_url(); ?>services/" class="active dropdown-toggle" data-toggle="dropdown">Services
                             <span class="caret" style="margin-top: 0px;"></span></a>
                             <ul class="dropdown-menu">
+                              <li><a href="<?php echo base_url(); ?>services/">All Services</a></li>
                               <li><a href="add_service">Add Service</a></li>
                               <li><a href="service_types">Service Types</a></li>
                             </ul>

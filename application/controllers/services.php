@@ -10,6 +10,7 @@ class Services extends CI_Controller {
         $this->load->helper('form');
         // Load form validation library
         $this->load->library('form_validation');
+        $this->load->library('email');
     }
 public function index(){
         $data['services_data'] = $this->services_database->read_all();
@@ -239,9 +240,12 @@ public function delete_service_type($id) {
 	  if($result == true) {
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
         $username = $this->session->userdata['logged_in']['username'];
-	    $message = "Service with id $id deleted by $username";
-        $headers = "From: changes@ainetworks.sl"."\r\n";
-        mail('aethomas@ainetworks.sl',"Service Deletion",$message,$headers);
+	    $subject = "Service with id $id deleted by $username";
+        $body = "<p>User $username deleted service with id $id.</p>";
+        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
+        ->subject($subject)
+        ->message($body)
+        ->send();
         redirect("services/service_types");
 		} 
 	  else {
@@ -314,9 +318,12 @@ public function update(){
 		$result = $this->services_database->update($id,$data);
 	  if($result) {
 	    $username = $this->session->userdata['logged_in']['username'];
-	    $message = "Service with location number $lnumber updated by $username";
-	    $headers = "From: aethomas@ainetworks.sl"."\r\n";
-        mail('aethomas@ainetworks.sl',"Service Update",$message,$headers);  //send email
+        $subject = 'Service Update';
+        $body = "<p>User $username updated service with id $id.</p>";
+        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
+        ->subject($subject)
+        ->message($body)
+        ->send();
 	    $this->session->set_flashdata('success_update','Service update successful ...');
         redirect("services/");
 		} 
