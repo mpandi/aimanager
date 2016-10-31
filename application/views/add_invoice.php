@@ -71,7 +71,7 @@ else {
                          <div class="form-group" style="padding-top: 5px;">
                          <label>Customer Name: </label>
                             <select name="customer" style="width: 100%;" id="customer">
-                                <option value="" selected="">..Customer..</option>
+                                <option value="<?php echo !empty($customer)?$customer:"";?>" selected=""><?php echo !empty($customer)?$this->customers_database->get_customer($customer):"..Customer..";?></option>
                                 <?php $customers_data = $this->customers_database->read();
                                 if(is_array($customers_data)){
                                 foreach ($customers_data as $value){ ?>

@@ -51,6 +51,7 @@ public function services(){
 public function add() {
         $pass = $this->input->post('password');
         $username = $this->input->post('username');
+        $name_ = $this->input->post('customer_name');
         $billing_email = $this->input->post('billing_email');
         $password = md5($pass);
 		$this->form_validation->set_rules('customer_name', 'Name', 'trim|required|xss_clean');
@@ -79,6 +80,13 @@ public function add() {
 		$result = $this->customers_database->registration_insert($username,$billing_email,$data);
 	  if($result == 'registered') {
 	    $this->session->set_flashdata('success_register','Customer addition Successful ...');
+        $user_id = $this->session->userdata['logged_in']['username'];
+	    $subject = "Customer with name $name_ added by $user_id";
+        $body = "<p>User $user_id added customer with name $name_ and contact email $billing_email.</p>";
+        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
+        ->subject($subject)
+        ->message($body)
+        ->send();
         redirect("customers/");
 		} 
 	 else {

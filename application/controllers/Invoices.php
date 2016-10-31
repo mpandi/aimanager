@@ -49,6 +49,13 @@ public function add() {
 		$result = $this->invoices_database->insert($service,$customer,$date,$data);
 	  if($result == 'added') {
 	    $this->session->set_flashdata('success_register','Invoice addition Successful ...');
+         $username = $this->session->userdata['logged_in']['username'];
+        $subject = 'Invoice Addition';
+        $body = "<p>User $username added invoice for service with id $service and customer with id $customer.</p>";
+        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
+        ->subject($subject)
+        ->message($body)
+        ->send();
         redirect("invoices/");
 		} 
 	 else {

@@ -117,6 +117,15 @@ public function read_5() {
      return false;
   }
 }
+public function read() {
+  $this->db->order_by("id", "asc");
+  $query = $this->db->get('services');
+  if ($query->num_rows() > 0) {
+     return $query->result_array();
+  } else {
+     return false;
+  }
+}
 public function search($search,$value) {
    $this->db->select('*');
  if($search == 'expired'){
