@@ -6,11 +6,11 @@ class Services extends CI_Controller {
 		// Load database
 		$this->load->model('services_database');
         $this->load->model('customers_database');
+        $this->load->model('logs_database');
 		// Load form helper library
         $this->load->helper('form');
         // Load form validation library
         $this->load->library('form_validation');
-        $this->load->library('email');
     }
 public function index(){
         $data['services_data'] = $this->services_database->read_all();
@@ -116,12 +116,14 @@ public function add() {
 		  $this->load->view('add_service');
 		} 
 	 else {
+        $customer = $this->input->post('customer');
+        $location = str_pad(mt_rand(1,9999),4,'0',STR_PAD_LEFT);
 		$data = array(
 		'location' => $this->input->post('location'),
-        'location_number' => str_pad(mt_rand(1,9999),4,'0',STR_PAD_LEFT),
+        'location_number' => $location,
         'invoice_date' => '',
         'invoice_link' => '',
-		'customer_id' => $this->input->post('customer'),
+		'customer_id' => $customer,
 		'billing_cycle' => $this->input->post('billing_cycle'),
         'network_details' => '',
         'service_type' => $this->input->post('service_type'),
@@ -134,6 +136,16 @@ public function add() {
 		);
 		$result = $this->services_database->registration_insert($data);
 	  if($result == 'registered') {
+	    $username = $this->session->userdata['logged_in']['username'];
+        $subject = 'Service Addition';
+        $body = "Added service with location $location and customer of id $customer";
+	    $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
 	    $this->session->set_flashdata('success_register','Service addition Successful ...');
         redirect("services/");
 		} 
@@ -151,11 +163,22 @@ public function add() {
 		}
 	}
 public function add_() {
+        $type_ = $this->input->post('type_');
 		$data = array(
-		'type_' => $this->input->post('type_')
+		'type_' => $type_
 		);
 		$result = $this->services_database->insert_type($data);
 	  if($result == 'added') {
+	    $username = $this->session->userdata['logged_in']['username'];
+        $subject = 'Service Type Addition';
+        $body = "Added service type $type_";
+	    $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
 	    $this->session->set_flashdata('success_register','Service Type addition Successful ...');
         redirect("services/service_types");
 		} 
@@ -172,6 +195,16 @@ public function delete_service($id) {
 	 else {
 		$result = $this->services_database->delete_service($id);
 	  if($result == true) {
+	    $username = $this->session->userdata['logged_in']['username'];
+        $subject = 'Service Deletion';
+        $body = "Deleted service of id $id";
+	    $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
         redirect("services/");
 		} 
@@ -188,6 +221,16 @@ public function delete_cus_services($id) {
 	 else {
 		$result = $this->services_database->delete_cus_services($id);
 	  if($result == true) {
+	    $username = $this->session->userdata['logged_in']['username'];
+        $subject = 'Customer Service Deletion';
+        $body = "Customer service deletion of id $id";
+	    $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
         redirect("services/");
 		} 
@@ -240,12 +283,15 @@ public function delete_service_type($id) {
 	  if($result == true) {
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
         $username = $this->session->userdata['logged_in']['username'];
-	    $subject = "Service with id $id deleted by $username";
-        $body = "<p>User $username deleted service with id $id.</p>";
-        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
-        ->subject($subject)
-        ->message($body)
-        ->send();
+        $subject = 'Service Type Deletion';
+        $body = "Deleted service type of id $id";
+	    $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
         redirect("services/service_types");
 		} 
 	  else {

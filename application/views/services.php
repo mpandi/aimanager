@@ -39,6 +39,7 @@ else {
                               <li><a href="service_types">Service Types</a></li>
                             </ul>
                          </li>
+                         <li><a href="<?php echo base_url(); ?>logs/">Logs</a></li>
                         <li><a href="<?php echo base_url(); ?>home/dashboard">My Account</a></li>
                         <li><a href="<?php echo base_url(); ?>logout/">Logout</a></li>
                     </ul>

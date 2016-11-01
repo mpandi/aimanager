@@ -7,11 +7,11 @@ class Invoices extends CI_Controller {
         $this->load->model('services_database');
         $this->load->model('invoices_database');
         $this->load->model('customers_database');
+        $this->load->model('logs_database');
 		// Load form helper library
         $this->load->helper('form');
         // Load form validation library
         $this->load->library('form_validation');
-        $this->load->library('email');
     }
 public function index(){
         $data['invoices_data'] = $this->invoices_database->read();
@@ -48,14 +48,17 @@ public function add() {
 		);
 		$result = $this->invoices_database->insert($service,$customer,$date,$data);
 	  if($result == 'added') {
-	    $this->session->set_flashdata('success_register','Invoice addition Successful ...');
-         $username = $this->session->userdata['logged_in']['username'];
+        $username = $this->session->userdata['logged_in']['username'];
         $subject = 'Invoice Addition';
-        $body = "<p>User $username added invoice for service with id $service and customer with id $customer.</p>";
-        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
-        ->subject($subject)
-        ->message($body)
-        ->send();
+        $body = "Invoice addition for service with id $service and customer of id $customer";
+	    $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
+	    $this->session->set_flashdata('success_register','Invoice addition Successful ...');
         redirect("invoices/");
 		} 
 	 else {
@@ -104,11 +107,14 @@ public function update(){
 	  if($result == 'success'){
 	    $username = $this->session->userdata['logged_in']['username'];
         $subject = 'Invoice Update';
-        $body = "<p>User $username updated invoice for service with id $id.</p>";
-        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
-        ->subject($subject)
-        ->message($body)
-        ->send();
+        $body = "Updated invoice for service of id ($id)";
+        $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
 	    $this->session->set_flashdata('success_update','Invoice update successful ...');
         redirect("invoices/");
 		} 
@@ -128,12 +134,15 @@ public function delete_invoice($id) {
 		$result = $this->invoices_database->delete($id);
 	  if($result == true) {
         $username = $this->session->userdata['logged_in']['username'];
-	    $subject = "Invoice with id $id deleted by $username";
-        $body = "<p>User $username deleted invoice with id $id.</p>";
-        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
-        ->subject($subject)
-        ->message($body)
-        ->send();
+	    $subject = "Invoice deletion";
+        $body = "Invoice with of ($id) deleted by $username";
+        $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
         redirect("invoices/");
 		} 

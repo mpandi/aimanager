@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2016 at 10:18 PM
+-- Generation Time: Nov 01, 2016 at 09:58 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -23,34 +23,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invoices`
+-- Table structure for table `logs`
 --
 
-CREATE TABLE `invoices` (
+CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
-  `invoice_date` date NOT NULL,
-  `invoice_link` text NOT NULL,
-  `service` int(11) NOT NULL
+  `userid` text NOT NULL,
+  `subject` text NOT NULL,
+  `message` text NOT NULL,
+  `date_` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `invoices`
---
-
-INSERT INTO `invoices` (`id`, `invoice_date`, `invoice_link`, `service`) VALUES
-(2, '2016-08-12', 'ertyuiopqwert', 8),
-(3, '2016-08-15', 'qwwertombom oo0tyn9', 9),
-(4, '2016-08-15', 'wertyuio', 16),
-(5, '2016-08-30', 'dsfghjkl;', 19);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `invoices`
+-- Indexes for table `logs`
 --
-ALTER TABLE `invoices`
+ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -58,10 +49,10 @@ ALTER TABLE `invoices`
 --
 
 --
--- AUTO_INCREMENT for table `invoices`
+-- AUTO_INCREMENT for table `logs`
 --
-ALTER TABLE `invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

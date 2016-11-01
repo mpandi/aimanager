@@ -7,11 +7,11 @@ class Customers extends CI_Controller {
         $this->load->model('customers_database');
         $this->load->model('services_database');
         $this->load->model('invoices_database');
+        $this->load->model('logs_database');
 		// Load form helper library
         $this->load->helper('form');
         // Load form validation library
         $this->load->library('form_validation');
-        $this->load->library('email');
     }
 public function index(){
         $data['customers_data'] = $this->customers_database->read();
@@ -80,13 +80,16 @@ public function add() {
 		$result = $this->customers_database->registration_insert($username,$billing_email,$data);
 	  if($result == 'registered') {
 	    $this->session->set_flashdata('success_register','Customer addition Successful ...');
-        $user_id = $this->session->userdata['logged_in']['username'];
-	    $subject = "Customer with name $name_ added by $user_id";
-        $body = "<p>User $user_id added customer with name $name_ and contact email $billing_email.</p>";
-        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
-        ->subject($subject)
-        ->message($body)
-        ->send();
+        $username = $this->session->userdata['logged_in']['username'];
+        $subject = 'Customer Addition';
+        $body = "Added customer with name $name_ and contact email $billing_email";
+	    $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
         redirect("customers/");
 		} 
 	 else {
@@ -111,14 +114,17 @@ public function delete_customer($id) {
 	 else {
 		$result = $this->customers_database->delete($id);
 	  if($result == true) {
-	    $user_id = $this->session->userdata['logged_in']['username'];
-	    $subject = "Customer with id $id deleted by $user_id";
 	    $this->session->set_flashdata('success_delete','Deletion Successful ...');
-        $body = "<p>User $user_id deleted customer with id $id.</p>";
-        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
-        ->subject($subject)
-        ->message($body)
-        ->send();
+        $username = $this->session->userdata['logged_in']['username'];
+        $subject = 'Customer Deletion';
+        $body = "Deleted customer of id $id";
+	    $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
         redirect("customers/");
 		} 
 	  else {
@@ -171,13 +177,16 @@ public function update(){
 		);
 		$result = $this->customers_database->update($id,$username,$data);
 	  if($result == 'success'){
-	    $user_id = $this->session->userdata['logged_in']['username'];
+	    $username = $this->session->userdata['logged_in']['username'];
         $subject = 'Customer Update';
-        $body = "<p>User $user_id updated customer with username $username.</p>";
-        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
-        ->subject($subject)
-        ->message($body)
-        ->send();
+        $body = "Updated customer of id ($id)";
+        $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
 	    $this->session->set_flashdata('success_update',"Customer update successful");
         redirect("customers/");
 		} 
