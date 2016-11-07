@@ -117,28 +117,34 @@ public function add() {
 		} 
 	 else {
         $customer = $this->input->post('customer');
-        $location = str_pad(mt_rand(1,9999),4,'0',STR_PAD_LEFT);
+        $lnumber = str_pad(mt_rand(1,9999),4,'0',STR_PAD_LEFT);
+        $customer_ = $this->customers_database->get_customer($service_data[0][$customer]);
+        $location = $this->input->post('location');
+        $billing_cycle = $this->input->post('billing_cycle');
+        $service_type = $this->input->post('service_type');
+        $cpemac = $this->input->post('cpemac');
+        $expiry = $this->input->post('expirydate');
 		$data = array(
-		'location' => $this->input->post('location'),
-        'location_number' => $location,
+		'location' => $location,
+        'location_number' => $lnumber,
         'invoice_date' => '',
         'invoice_link' => '',
 		'customer_id' => $customer,
-		'billing_cycle' => $this->input->post('billing_cycle'),
+		'billing_cycle' => $billing_cycle,
         'network_details' => '',
-        'service_type' => $this->input->post('service_type'),
+        'service_type' => $service_type,
         'ip_addresses' => $this->input->post('ips'),
-        'cpe_mac' => $this->input->post('cpemac'),
+        'cpe_mac' => $cpemac,
         'ap_connected' => $this->input->post('apconnected'),
         'cpe_graph' => $this->input->post('cpegraph'),
         'created' => $this->input->post('startdate'),
-        'expiry_date' => $this->input->post('expirydate')
+        'expiry_date' => $expiry
 		);
 		$result = $this->services_database->registration_insert($data);
 	  if($result == 'registered') {
 	    $username = $this->session->userdata['logged_in']['username'];
         $subject = 'Service Addition';
-        $body = "Added service with location $location and customer of id $customer";
+        $body = "Location $location, location number $lnumber, customer $customer_, expiry $expiry, cpemac $cpemac, service type $service_type, billing cycle $billing_cycle";
 	    $log = array(
         'date_' => date("Y-m-d H:i:s",time()),
         'userid' => $username,
@@ -222,8 +228,9 @@ public function delete_cus_services($id) {
 		$result = $this->services_database->delete_cus_services($id);
 	  if($result == true) {
 	    $username = $this->session->userdata['logged_in']['username'];
-        $subject = 'Customer Service Deletion';
-        $body = "Customer service deletion of id $id";
+        $customer = $this->customers_database->get_customer($service_data[0][$id]);
+        $subject = 'Customer Services Deletion';
+        $body = "Deleted all services for customer $customer and customer id $id";
 	    $log = array(
         'date_' => date("Y-m-d H:i:s",time()),
         'userid' => $username,
@@ -345,37 +352,46 @@ public function update(){
 	 else {
 	    $id = $this->input->post('service_id');
         $lnumber = $this->input->post('location_number');
+        $customer_id = $this->input->post('customer');
+        $customer = $this->customers_database->get_customer($service_data[0][$customer_id]);
+        $billing_cycle = $this->input->post('billing_cycle');
+        $service_type = $this->input->post('service_type');
+        $cpemac = $this->input->post('cpemac');
+        $expiry = $this->input->post('expirydate');
 		$data = array(
 		'location' => $this->input->post('location'),
-        'location_number' => $this->input->post('location_number'),
+        'location_number' => $lnumber,
         'invoice_date' => '',
         'invoice_link' => '',
-		'customer_id' => $this->input->post('customer'),
-		'billing_cycle' => $this->input->post('billing_cycle'),
-        'service_type' => $this->input->post('service_type'),
+		'customer_id' => $customer_id,
+		'billing_cycle' => $billing_cycle,
+        'service_type' => $service_type,
         'ip_addresses' => $this->input->post('ips'),
-        'cpe_mac' => $this->input->post('cpemac'),
+        'cpe_mac' => $cpemac,
         'ap_connected' => $this->input->post('apconnected'),
         'cpe_graph' => $this->input->post('cpegraph'),
         'grace_period' => $this->input->post('graceperiod'),
         'created' => $this->input->post('startdate'),
-        'expiry_date' => $this->input->post('expirydate')
+        'expiry_date' => $expiry
 		);
 		$result = $this->services_database->update($id,$data);
-	  if($result) {
+	  if($result){
 	    $username = $this->session->userdata['logged_in']['username'];
         $subject = 'Service Update';
-        $body = "<p>User $username updated service with id $id.</p>";
-        $result = $this->email->from('managerain@gmail.com')->to('aethomas@ainetworks.sl')
-        ->subject($subject)
-        ->message($body)
-        ->send();
+        $body = "Expiry $expiry, location number $lnumber, customer $customer, billing cycle $billing_cycle, service type $service_type, cpemac $cpemac";
+	    $log = array(
+        'date_' => date("Y-m-d H:i:s",time()),
+        'userid' => $username,
+		'subject' => $subject,
+        'message' => $body
+		);
+        $result_ = $this->logs_database->insert($log);
 	    $this->session->set_flashdata('success_update','Service update successful ...');
         redirect("services/");
 		} 
 	 else {
-		$data['error_message'] = 'Update failed ...';
-		$this->load->view('update_service', $data);
+        $this->session->set_flashdata('flash_fail','Update failed ...');
+        redirect("services/view_service/$id");
 		  }
 		}
    }

@@ -85,7 +85,7 @@ else {
                                       elseif($service_data[0]['billing_cycle']=='3'){
                                          echo "<span style=\"color: black; \">Quarterly</span>";
                                          }
-                                      elseif($value['billing_cycle']=='6'){
+                                      elseif($service_data[0]['billing_cycle']=='6'){
                                          echo "<span style=\"color: black; \">Semi Annual</span>";
                                          }
                                       elseif($service_data[0]['billing_cycle']=='12'){

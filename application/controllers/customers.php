@@ -64,28 +64,34 @@ public function add() {
 		  $this->load->view('add_customer');
 		} 
 	 else {
+	    $address = $this->input->post('address');
+        $billing_contact_name = $this->input->post('billing_contact_name');
+        $billing_contact_phone = $this->input->post('billing_contact_phone');
+        $technical_contact_name = $this->input->post('technical_contact_name');
+        $technical_contact_phone = $this->input->post('technical_contact_phone');
 		$data = array(
 		'name_' => $this->input->post('customer_name'),
         'billing_contact_email' => $billing_email,
         'technical_contact_email' => $this->input->post('technical_email'),
        	'username' => $username,
         'password' => $password,
-		'address' => $this->input->post('address'),
-		'billing_contact_name' => $this->input->post('billing_contact_name'),
-        'billing_contact_phone' => $this->input->post('billing_contact_phone'),
-        'technical_contact_name' => $this->input->post('technical_contact_name'),
-        'technical_contact_phone' => $this->input->post('technical_contact_phone'),
+		'address' => $address,
+		'billing_contact_name' => $billing_contact_name,
+        'billing_contact_phone' => $billing_contact_phone,
+        'technical_contact_name' => $technical_contact_name,
+        'technical_contact_phone' => $technical_contact_phone,
         'created' => date('Y-m-d H:i:s')
 		);
 		$result = $this->customers_database->registration_insert($username,$billing_email,$data);
-	  if($result == 'registered') {
+	  if($result == 'registered'){
 	    $this->session->set_flashdata('success_register','Customer addition Successful ...');
-        $username = $this->session->userdata['logged_in']['username'];
+        $userid = $this->session->userdata['logged_in']['username'];
         $subject = 'Customer Addition';
-        $body = "Added customer with name $name_ and contact email $billing_email";
+        $body = "Name $name_,contact email $billing_email, username $username, password $pass, address $address, billing contact name $billing_contact_name,billing contact phone $billing_contact_phone,
+        technical contact name $technical_contact_name,technical contact phone $technical_contact_phone";
 	    $log = array(
         'date_' => date("Y-m-d H:i:s",time()),
-        'userid' => $username,
+        'userid' => $userid,
 		'subject' => $subject,
         'message' => $body
 		);
@@ -163,26 +169,35 @@ public function update(){
 		  $this->load->view('update_customer');
 		} 
 	 else {
+	    $name = $this->input->post('customer_name');
+        $address = $this->input->post('address');
+        $billing_email = $this->input->post('billing_email');
+        $technical_email = $this->input->post('technical_email');
+        $billing_contact_name = $this->input->post('billing_contact_name');
+        $billing_contact_phone = $this->input->post('billing_contact_phone');
+        $technical_contact_name = $this->input->post('technical_contact_name');
+        $technical_contact_phone = $this->input->post('technical_contact_phone');
 		$data = array(
-		'name_' => $this->input->post('customer_name'),
-        'billing_contact_email' => $this->input->post('billing_email'),
-        'technical_contact_email' => $this->input->post('technical_email'),
+		'name_' => $name,
+        'billing_contact_email' => $billing_email,
+        'technical_contact_email' => $technical_email,
 		'username' => $username,
         'password' => $password,
-        'address' => $this->input->post('address'),
-		'billing_contact_name' => $this->input->post('billing_contact_name'),
-        'billing_contact_phone' => $this->input->post('billing_contact_phone'),
-        'technical_contact_name' => $this->input->post('technical_contact_name'),
-        'technical_contact_phone' => $this->input->post('technical_contact_phone')
+        'address' => $address,
+		'billing_contact_name' => $billing_contact_name,
+        'billing_contact_phone' => $billing_contact_phone,
+        'technical_contact_name' => $technical_contact_name,
+        'technical_contact_phone' => $technical_contact_phone
 		);
 		$result = $this->customers_database->update($id,$username,$data);
 	  if($result == 'success'){
-	    $username = $this->session->userdata['logged_in']['username'];
+	    $userid = $this->session->userdata['logged_in']['username'];
         $subject = 'Customer Update';
-        $body = "Updated customer of id ($id)";
+        $body = "Customer $name ,username $username, password $pass, billing email $billing_email, technical email $technical_email, address $address, billing contact name $billing_contact_name,billing contact phone $billing_contact_phone,
+        technical contact name $technical_contact_name,technical contact phone $technical_contact_phone";
         $log = array(
         'date_' => date("Y-m-d H:i:s",time()),
-        'userid' => $username,
+        'userid' => $userid,
 		'subject' => $subject,
         'message' => $body
 		);

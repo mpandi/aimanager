@@ -55,9 +55,11 @@ else {
                       <div class="row-fluid">
                        <?php $attributes = array('class'=>'form-horizontal login_d');
                         echo form_open('services/update',$attributes);
-                        if(isset($error_message)){
+                         $flashfail = $this->session->flashdata('flash_fail');
+                        if(isset($error_message) || isset($flashfail)){
                             echo "<div class='alert alert-danger'>";
                             echo $error_message;
+                             echo $flashfail;
                             echo "</div>";
                             }
                         if(isset($success_message)){
